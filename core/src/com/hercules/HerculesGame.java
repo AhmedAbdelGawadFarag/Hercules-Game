@@ -23,6 +23,6 @@ public class HerculesGame extends Game {
 
     @Override
     public void dispose() {
-        batch.dispose();
+        super.dispose();
     }
 }
