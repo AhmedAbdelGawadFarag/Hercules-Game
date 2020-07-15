@@ -11,6 +11,8 @@ public abstract class GameCharacter{
     protected Sprite sprite;
     protected TextureRegion region;
     int currframe; //each char have multiframe
+    public boolean moveright = false;
+    public boolean moveleft = false;
 
     GameCharacter(TextureAtlas atlas) {
         this.atlas = atlas;
@@ -21,11 +23,15 @@ public abstract class GameCharacter{
 
     public void draw(SpriteBatch batch) {
         sprite.draw(batch);
+
     }
 
     abstract public  void Move();
     abstract void MoveRight();
     abstract void MoveLeft();
-
+    void stopMoving(){
+        currframe = 1;
+        this.sprite.setRegion(this.atlas.findRegion(String.format("00%d", currframe)));
+    }
 
 }
