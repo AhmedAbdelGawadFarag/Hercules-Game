@@ -18,7 +18,7 @@ public class Hercules extends ApplicationAdapter {
 
     @Override
     public void create() {
-
+        Gdx.graphics.setWindowedMode(1024,400);
         batch = new SpriteBatch();
         m = new MainCharacter(new TextureAtlas(Gdx.files.internal("MainCharacter.atlas")));
 
@@ -31,6 +31,8 @@ public class Hercules extends ApplicationAdapter {
         batch.begin();
 
         m.Move();
+        m.attack();
+
         m.draw(batch);
 
 

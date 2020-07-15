@@ -26,6 +26,7 @@ public abstract class GameCharacter{
 
     }
 
+    abstract public void attack();
     abstract public  void Move();
     abstract void MoveRight();
     abstract void MoveLeft();
