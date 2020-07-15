@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class GameCharacter{
+public abstract class GameCharacter{
     protected TextureAtlas atlas;
     protected Sprite sprite;
     protected TextureRegion region;
@@ -22,6 +22,10 @@ public class GameCharacter{
     public void draw(SpriteBatch batch) {
         sprite.draw(batch);
     }
+
+    abstract public  void Move();
+    abstract void MoveRight();
+    abstract void MoveLeft();
 
 
 }

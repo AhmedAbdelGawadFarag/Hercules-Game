@@ -3,6 +3,7 @@ package com.hercules;
 import Characters.MainCharacter;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,8 +18,10 @@ public class Hercules extends ApplicationAdapter {
 
     @Override
     public void create() {
+
         batch = new SpriteBatch();
         m = new MainCharacter(new TextureAtlas(Gdx.files.internal("MainCharacter.atlas")));
+
     }
 
     @Override
@@ -26,7 +29,11 @@ public class Hercules extends ApplicationAdapter {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
+
+        m.Move();
         m.draw(batch);
+
+
         batch.end();
 
     }
