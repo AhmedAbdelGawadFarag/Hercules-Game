@@ -17,7 +17,8 @@ import  Characters.MainCharacter;
 public class HerculesGame extends Game {
     @Override
     public void create() {
-        Gdx.graphics.setWindowedMode(1024,400);
+        Gdx.graphics.setWindowedMode(1080,720);
+
         setScreen(new GamePlayScreen(this));
     }
 
