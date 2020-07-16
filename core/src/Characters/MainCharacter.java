@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.World;
 public class MainCharacter extends GameCharacter {
 
     UserINputs inputs;
-    Animation<TextureRegion> AttackingAnimation;
+    Animation<TextureRegion> Attacking1Animation;
     Animation<TextureRegion> Attack2Animation;
 
     float attackingElapsedTime = 0;
@@ -18,7 +18,7 @@ public class MainCharacter extends GameCharacter {
         super(world, atlas, x, y, width, height, speed);
         this.inputs = inputs;
 
-        AttackingAnimation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("attacking1"));
+        Attacking1Animation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("attacking1"));
         Attack2Animation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("secondAttack"));
 
     }
@@ -41,7 +41,7 @@ public class MainCharacter extends GameCharacter {
                 inputs.Stand();//make Character Stands
                 ResetFrame();
             }
-            PLayAttackingAnimation(dt);
+            PLayAttacking1Animation(dt);
 
         }
 
@@ -64,9 +64,9 @@ public class MainCharacter extends GameCharacter {
         body.setLinearVelocity(1, 0);
     }
 
-    public void PLayAttackingAnimation(float dt) {
+    public void PLayAttacking1Animation(float dt) {
         attackingElapsedTime += dt;
-        this.SetFrame(AttackingAnimation, false, attackingElapsedTime);
+        this.SetFrame(Attacking1Animation, false, attackingElapsedTime);
 
     }
 
