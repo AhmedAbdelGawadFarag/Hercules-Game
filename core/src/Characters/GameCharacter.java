@@ -1,32 +1,40 @@
 package Characters;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.physics.box2d.*;
 
 public abstract class GameCharacter {
     public World world;
     public Body body;
     TextureAtlas atlas;
+    TextureRegion currframe;
 
-    public GameCharacter(World world, TextureAtlas atlas, float x, float y,int width,int height) {
-        TextureRegion reg = (atlas.findRegion("running"));
+    Animation<TextureRegion> running;
+
+    float RunningElapsedTime = 0;
+    float speed;
+
+    public GameCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height, float speed) {
+        currframe = (atlas.findRegion("running"));
         this.atlas = atlas;
         this.world = world;
 
-        makeCharacter(x, y,width,height);
+        //animation
+        running = new Animation<TextureRegion>(1 / 30f, atlas.findRegions("running"));
 
-        Sprite temp = new Sprite(reg);
+        //making the character
+        makeCharacter(x, y, width, height);
+
+        Sprite temp = new Sprite(currframe);
         temp.setSize(width / 100f, height / 100f);
 
-
+        //set the sprite
         body.setUserData(temp);
 
+        this.speed = speed;
     }
 
-    public void makeCharacter(float x, float y,int width,int height) {//dynamic character
+    public void makeCharacter(float x, float y, int width, int height) {//dynamic character
         BodyDef def = new BodyDef();
         def.type = BodyDef.BodyType.DynamicBody;
 
@@ -48,13 +56,41 @@ public abstract class GameCharacter {
 
     }
 
+    public void PlayRunningAnimation(float dt) {
+
+        RunningElapsedTime += dt;
+        SetFrame(running, true);
+
+    }
+
+    public void SetFrame(Animation<TextureRegion> animation, boolean looping) {
+
+        currframe = animation.getKeyFrame(RunningElapsedTime, looping);
+        Sprite s = (Sprite) body.getUserData();
+        s.setRegion(currframe);
+
+    }
+
+    abstract void changeAnimation(float dt);
+
     public void update(SpriteBatch batch) {
+        //get currentframe
+
+
         Sprite sprite = (Sprite) body.getUserData();
 
         sprite.setPosition(body.getPosition().x - sprite.getWidth() / 2f, body.getPosition().y - sprite.getHeight() / 2f);
         sprite.draw(batch);
+
     }
 
+    public void ResetFrame() {
 
+        this.RunningElapsedTime = 0;
+       SetFrame(running,false);
+
+    }
+
+    public abstract void CharacterState(float dt);
 
 }
