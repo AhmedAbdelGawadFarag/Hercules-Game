@@ -4,12 +4,16 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.physics.box2d.*;
 
 public abstract class GameCharacter {
+
+    //world of the attributes
     public World world;
     public Body body;
+
+
     TextureAtlas atlas;
     TextureRegion currframe;
 
-    Animation<TextureRegion> running;
+    Animation<TextureRegion> RunningAnimation;
 
     float RunningElapsedTime = 0;
     float speed;
@@ -20,7 +24,7 @@ public abstract class GameCharacter {
         this.world = world;
 
         //animation
-        running = new Animation<TextureRegion>(1 / 30f, atlas.findRegions("running"));
+        RunningAnimation = new Animation<TextureRegion>(1 / 30f, atlas.findRegions("running"));
 
         //making the character
         makeCharacter(x, y, width, height);
@@ -59,19 +63,19 @@ public abstract class GameCharacter {
     public void PlayRunningAnimation(float dt) {
 
         RunningElapsedTime += dt;
-        SetFrame(running, true);
+        SetFrame(RunningAnimation, true,RunningElapsedTime);
 
     }
 
-    public void SetFrame(Animation<TextureRegion> animation, boolean looping) {
+    public void SetFrame(Animation<TextureRegion> animation, boolean looping,float elapsedTime) {
 
-        currframe = animation.getKeyFrame(RunningElapsedTime, looping);
+        currframe = animation.getKeyFrame(elapsedTime, looping);
         Sprite s = (Sprite) body.getUserData();
         s.setRegion(currframe);
 
     }
 
-    abstract void changeAnimation(float dt);
+
 
     public void update(SpriteBatch batch) {
         //get currentframe
@@ -86,8 +90,8 @@ public abstract class GameCharacter {
 
     public void ResetFrame() {
 
-        this.RunningElapsedTime = 0;
-       SetFrame(running,false);
+
+       SetFrame(RunningAnimation,false,RunningElapsedTime);
 
     }
 

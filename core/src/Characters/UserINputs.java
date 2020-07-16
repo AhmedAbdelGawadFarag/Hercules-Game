@@ -5,9 +5,10 @@ import com.badlogic.gdx.InputProcessor;
 
 
 public class UserINputs implements InputProcessor {
-    boolean running = false;
-    boolean standing = false;
-    boolean attacking = false;
+    protected boolean running = false;
+    protected boolean standing = false;
+    protected boolean attacking1 = false;
+    protected boolean attacking2 = false;
 
     public boolean isRunning() {
         return running;
@@ -16,7 +17,8 @@ public class UserINputs implements InputProcessor {
     public void Run() {
         this.running = true;
         this.standing = false;
-        this.attacking = false;
+        this.attacking1 = false;
+        this.attacking2 = false;
     }
 
     public boolean isStanding() {
@@ -26,17 +28,19 @@ public class UserINputs implements InputProcessor {
     public void Stand() {
         this.standing = true;
         this.running = false;
-        this.attacking = false;
+        this.attacking1 = false;
+        this.attacking2 = false;
     }
 
-    public boolean isAttacking() {
-        return attacking;
+    public boolean isAttacking1() {
+        return attacking1;
     }
 
-    public void Attack() {
-        this.attacking = true;
+    public void Attack1() {
+        this.attacking1 = true;
         this.standing = false;
         this.running = false;
+        this.attacking2 = false;
     }
 
     @Override
@@ -44,16 +48,33 @@ public class UserINputs implements InputProcessor {
         if (keycode == Input.Keys.RIGHT) {
             Run();
         }
-        if (keycode == Input.Keys.SPACE) {
-            Attack();
-        }
+
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        Stand();
+        if (keycode == Input.Keys.SPACE)
+            Attack1();
+
+        if (keycode == Input.Keys.A)
+            Attack2();
+
+        if (attacking1 != true && attacking2 != true)//if hero is not stillattacking
+            Stand();
+
         return false;
+    }
+
+    public boolean isAttacking2() {
+        return attacking2;
+    }
+
+    public void Attack2() {
+        this.attacking2 = true;
+        this.standing = false;
+        this.running = false;
+        this.attacking1 = false;
     }
 
     @Override
