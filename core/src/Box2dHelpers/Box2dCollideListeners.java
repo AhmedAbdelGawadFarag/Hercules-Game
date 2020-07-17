@@ -10,7 +10,7 @@ public class Box2dCollideListeners implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
-        System.out.println("hadasdasd");
+        System.out.println("HIT");
     }
 
     @Override
