@@ -11,6 +11,8 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
     Animation<TextureRegion> Attacking1Animation;
     Animation<TextureRegion> Attack2Animation;
 
+    boolean direction = false; //true = left , false = right
+
     float attackingElapsedTime = 0;
     float attacking2ElapsedTime = 0;
 
@@ -27,23 +29,26 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
     @Override
     public void CharacterState(float dt) {
         if (inputs.isRunningRight()) {
+            direction = false;
             MoveRight();
-            PlayRunningRightAnimation(dt);
+            PlayRunningRightAnimation(dt,direction);
         }
 
         if (inputs.isStanding()) {
             Stop();
             ResetElapsetTimes();
-            ResetFrame();
+            ResetFrame(direction);
+
         }
         if (inputs.isAttacking1()) {
+
             System.out.println("1");
             if (attackingElapsedTime >= 4 / 10f) {//check if the attack is finished or not
                 ResetElapsetTimes();
                 inputs.Stand();//make Character Stands
-                ResetFrame();
+                ResetFrame(direction);
             }
-            PLayAttacking1Animation(dt);
+            PLayAttacking1Animation(dt,direction);
 
         }
 
@@ -53,15 +58,16 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
             if (attacking2ElapsedTime >= 3 / 10f) {
                 ResetElapsetTimes();
                 inputs.Stand();
-                ResetFrame();
+                ResetFrame(direction);
             }
-            PlayAttacking2Animation(dt);
+            PlayAttacking2Animation(dt,direction);
 
         }
 
         if (inputs.isRunningleft()) {
+            direction = true;
             MoveLeft();
-            PlayRunningLeftAnimation(dt);
+            PlayRunningLeftAnimation(dt,direction);
 
         }
 
@@ -75,32 +81,31 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
 
     }
 
-    public void PlayRunningRightAnimation(float dt) {
+    public void PlayRunningRightAnimation(float dt,boolean reverse) {
 
         RunningElapsedTime += dt;
-        SetFrame(RunningAnimation, true, RunningElapsedTime,false);
+        SetFrame(RunningAnimation, true, RunningElapsedTime, reverse);
 
     }
 
-    public void PlayRunningLeftAnimation(float dt) {
+    public void PlayRunningLeftAnimation(float dt,boolean reverse) {
 
         RunningElapsedTime += dt;
-        SetFrame(RunningAnimation, true, RunningElapsedTime,true);
+        SetFrame(RunningAnimation, true, RunningElapsedTime, reverse);
 
     }
 
-    public void PLayAttacking1Animation(float dt) {
+    public void PLayAttacking1Animation(float dt,boolean reverse) {
         attackingElapsedTime += dt;
-        this.SetFrame(Attacking1Animation, false, attackingElapsedTime,false);
+        this.SetFrame(Attacking1Animation, false, attackingElapsedTime, reverse);
 
     }
 
-    public void PlayAttacking2Animation(float dt) {
+    public void PlayAttacking2Animation(float dt,boolean reverse) {
         attacking2ElapsedTime += dt;
-        this.SetFrame(Attack2Animation, false, attacking2ElapsedTime,false);
+        this.SetFrame(Attack2Animation, false, attacking2ElapsedTime, reverse);
 
     }
-
 
 
     private void ResetElapsetTimes() {

@@ -83,10 +83,10 @@ public abstract class GameCharacter {
 
     }
 
-    public void ResetFrame() {
+    public void ResetFrame(boolean reverse) {
 
 
-        SetFrame(RunningAnimation, false, RunningElapsedTime,false);
+        SetFrame(RunningAnimation, false, RunningElapsedTime,reverse);
 
     }
 
