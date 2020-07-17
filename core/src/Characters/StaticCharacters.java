@@ -20,8 +20,9 @@ public class StaticCharacters extends GameCharacter {
         Box2dCollisionList.MakeBodyCollideWith(body,Box2dCollisionList.BIT_CHARACTER);
 
 
+            Box2dCollisionList.GiveFriction(body,100);
 //        System.out.println(body.getFixtureList().get(0).getFilterData().categoryBits);
-        System.out.println(body.getFixtureList().get(0).getFilterData().maskBits);
+//        System.out.println(body.getFixtureList().get(0).getFilterData().maskBits);
 
     }
 
@@ -29,4 +30,7 @@ public class StaticCharacters extends GameCharacter {
     public void CharacterState(float dt) {
 
     }
+
+
+
 }

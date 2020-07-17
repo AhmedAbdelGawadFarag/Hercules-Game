@@ -1,6 +1,8 @@
 package Screen;
 
-import Box2dHelpers.*;
+import Box2dHelpers.Box2dCollideListeners;
+import Box2dHelpers.Box2dCollisionList;
+import Box2dHelpers.Box2dConversions;
 import Characters.GameCharacter;
 import Characters.MainCharacter;
 import Characters.StaticCharacters;
@@ -41,13 +43,8 @@ public class GamePlayScreen extends ScreenAdapter {
         BunchBag = new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 500, 400, 30, 60);
 
 
-
-
-
-
-
         cam = new OrthographicCamera(Box2dConversions.unitsToMetres(1280), Box2dConversions.unitsToMetres(960));
-        cam.translate(640/200f,480/200f);
+        cam.translate(640 / 200f, 480 / 200f);
 
 
         batch = new SpriteBatch();
@@ -83,14 +80,13 @@ public class GamePlayScreen extends ScreenAdapter {
         BunchBag.update(batch);
 
 
-
         batch.end();
 
         debug.render(world, cam.combined);
 
     }
 
-    public void MakeFloor(){
+    public void MakeFloor() {
 
         BodyDef def = new BodyDef();
         def.type = BodyDef.BodyType.StaticBody;
@@ -109,9 +105,10 @@ public class GamePlayScreen extends ScreenAdapter {
         FixtureDef fdef = new FixtureDef();
         fdef.shape = shape;
 
+
         Floor.createFixture(fdef);
 
-        Box2dCollisionList.GiveCollisonBitToBody(Floor,Box2dCollisionList.BIT_FLOOR);
+        Box2dCollisionList.GiveCollisonBitToBody(Floor, Box2dCollisionList.BIT_FLOOR);
 
     }
 

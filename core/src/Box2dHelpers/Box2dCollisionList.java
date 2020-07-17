@@ -41,7 +41,7 @@ public abstract class Box2dCollisionList {
 
         fdef.filter.maskBits = (f.getFilterData().maskBits);
 
-        if (fdef.filter.maskBits == -1)
+        if (fdef.filter.maskBits == -1)//if there is no colliders
             fdef.filter.maskBits = 0;
 
         fdef.filter.maskBits |= (short) bit;
@@ -52,5 +52,21 @@ public abstract class Box2dCollisionList {
 
     }
 
+    public static void GiveFriction(Body body,float val) {
+
+        Fixture f = body.getFixtureList().get(0);
+        FixtureDef fdef = new FixtureDef();
+
+        fdef.shape = f.getShape();
+
+        fdef.filter.categoryBits = f.getFilterData().categoryBits;
+
+        fdef.filter.maskBits = (f.getFilterData().maskBits);
+        fdef.friction = val;
+
+        body.createFixture(fdef);
+
+        body.destroyFixture(f);
+    }
 
 }
