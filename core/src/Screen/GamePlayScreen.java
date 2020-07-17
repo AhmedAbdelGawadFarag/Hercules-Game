@@ -38,12 +38,12 @@ public class GamePlayScreen extends ScreenAdapter {
         input = new UserINputs();
         Gdx.input.setInputProcessor(input);
 
-        car = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 20, 20, 30, 60, 1.45f, input);
-        BunchBag = new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 10, 30, 30, 60);
+        car = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 30, 60, 30, 60, 1.45f, input);
+        BunchBag = new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 100, 60, 30, 60);
 
 
         cam = new OrthographicCamera(Box2dConversions.unitsToMetres(1280), Box2dConversions.unitsToMetres(960));
-
+        cam.translate(640/200f,480/200f);
 
 
         batch = new SpriteBatch();
@@ -61,8 +61,8 @@ public class GamePlayScreen extends ScreenAdapter {
 
         batch.setProjectionMatrix(cam.combined);
 
-        CameraManager.LockOnTarger(cam, new Vector2(car.body.getPosition()));
-//        cam.update();
+//        CameraManager.LockOnTarger(cam, new Vector2(car.body.getPosition()));
+        cam.update();
 
 
         batch.begin();
