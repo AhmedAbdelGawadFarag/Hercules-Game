@@ -56,29 +56,29 @@ running
 running
   rotate: false
   xy: 436, 2
-  size: 25, 58
-  orig: 25, 58
+  size: 33, 57
+  orig: 33, 57
   offset: 0, 0
   index: 1
 running
   rotate: false
   xy: 498, 2
-  size: 33, 57
-  orig: 33, 57
+  size: 40, 57
+  orig: 40, 57
   offset: 0, 0
   index: 2
 running
   rotate: false
   xy: 560, 2
-  size: 40, 57
-  orig: 40, 57
+  size: 30, 58
+  orig: 30, 58
   offset: 0, 0
   index: 3
 running
   rotate: false
   xy: 622, 2
-  size: 30, 58
-  orig: 30, 58
+  size: 35, 57
+  orig: 35, 57
   offset: 0, 0
   index: 4
 running
@@ -88,31 +88,31 @@ running
   orig: 35, 57
   offset: 0, 0
   index: 5
-running
-  rotate: false
-  xy: 746, 2
-  size: 35, 57
-  orig: 35, 57
-  offset: 0, 0
-  index: 6
 secondAttack
   rotate: false
-  xy: 808, 2
+  xy: 746, 2
   size: 44, 63
   orig: 44, 63
   offset: 0, 0
   index: 0
 secondAttack
   rotate: false
-  xy: 870, 2
+  xy: 808, 2
   size: 44, 59
   orig: 44, 59
   offset: 0, 0
   index: 1
 secondAttack
   rotate: false
-  xy: 932, 2
+  xy: 870, 2
   size: 50, 52
   orig: 50, 52
   offset: 0, 0
   index: 2
+standing
+  rotate: false
+  xy: 932, 2
+  size: 25, 58
+  orig: 25, 58
+  offset: 0, 0
+  index: 0

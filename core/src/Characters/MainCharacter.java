@@ -10,6 +10,7 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
     UserINputs inputs;
     Animation<TextureRegion> Attacking1Animation;
     Animation<TextureRegion> Attack2Animation;
+    Animation<TextureRegion> RunningAnimation;
 
     boolean direction = false; //true = left , false = right
 
@@ -22,6 +23,7 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
         this.speed = speed;
         Attacking1Animation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("attacking1"));
         Attack2Animation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("secondAttack"));
+        RunningAnimation = new Animation<TextureRegion>(1/20f,atlas.findRegions("running"));
 
     }
 
@@ -84,26 +86,26 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
     public void PlayRunningRightAnimation(float dt,boolean reverse) {
 
         RunningElapsedTime += dt;
-        SetFrame(RunningAnimation, true, RunningElapsedTime, reverse);
+        SetFrameFromAnimation(RunningAnimation, true, RunningElapsedTime, reverse);
 
     }
 
     public void PlayRunningLeftAnimation(float dt,boolean reverse) {
 
         RunningElapsedTime += dt;
-        SetFrame(RunningAnimation, true, RunningElapsedTime, reverse);
+        SetFrameFromAnimation(RunningAnimation, true, RunningElapsedTime, reverse);
 
     }
 
     public void PLayAttacking1Animation(float dt,boolean reverse) {
         attackingElapsedTime += dt;
-        this.SetFrame(Attacking1Animation, false, attackingElapsedTime, reverse);
+        this.SetFrameFromAnimation(Attacking1Animation, false, attackingElapsedTime, reverse);
 
     }
 
     public void PlayAttacking2Animation(float dt,boolean reverse) {
         attacking2ElapsedTime += dt;
-        this.SetFrame(Attack2Animation, false, attacking2ElapsedTime, reverse);
+        this.SetFrameFromAnimation(Attack2Animation, false, attacking2ElapsedTime, reverse);
 
     }
 

@@ -11,20 +11,21 @@ public abstract class GameCharacter {
 
 
     TextureAtlas atlas;
+    //frames
     TextureRegion currframe;
 
-    Animation<TextureRegion> RunningAnimation;
 
     float RunningElapsedTime = 0;
     float speed;
 
     public GameCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height) {
-        currframe = (atlas.findRegion("running"));
+        currframe = atlas.findRegion("standing", 0);
+
         this.atlas = atlas;
         this.world = world;
 
         //animation
-        RunningAnimation = new Animation<TextureRegion>(1 / 15f, atlas.findRegions("running"));
+//        RunningAnimation = new Animation<TextureRegion>(1 / 15f, atlas.findRegions("running"));
 
         //making the character
         makeCharacter(x, y, width, height);
@@ -35,6 +36,9 @@ public abstract class GameCharacter {
         //set the sprite
         body.setUserData(temp);
     }
+
+
+
 
     public void makeCharacter(float x, float y, int width, int height) {//dynamic character
         BodyDef def = new BodyDef();
@@ -59,19 +63,21 @@ public abstract class GameCharacter {
     }
 
 
-    public void SetFrame(Animation<TextureRegion> animation, boolean looping, float elapsedTime, boolean ReverseFrame) {
+    public void SetFrameFromAnimation(Animation<TextureRegion> animation, boolean looping, float elapsedTime, boolean ReverseFrame) {
 
         currframe = animation.getKeyFrame(elapsedTime, looping);
-        Sprite s = (Sprite) body.getUserData();
-        s.setRegion(currframe);
-
-        if (ReverseFrame == true)//reverse
-            s.flip(true,false);
-
+        setSprite(currframe, ReverseFrame);
 
 
     }
 
+    public void setSprite(TextureRegion region, boolean reverse) {
+        Sprite s = (Sprite) body.getUserData();
+        s.setRegion(currframe);
+
+        if (reverse == true)//reverse
+            s.flip(true, false);
+    }
 
     public void update(SpriteBatch batch) {
         //get currentframe
@@ -85,9 +91,8 @@ public abstract class GameCharacter {
 
     public void ResetFrame(boolean reverse) {
 
-
-        SetFrame(RunningAnimation, false, RunningElapsedTime,reverse);
-
+        currframe = atlas.findRegion("standing", 0);
+        setSprite(currframe,reverse);
     }
 
     public abstract void CharacterState(float dt);

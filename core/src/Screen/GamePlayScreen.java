@@ -19,10 +19,13 @@ public class GamePlayScreen extends ScreenAdapter {
 
     private World world;
     private SpriteBatch batch;
-    private GameCharacter car;
     private Box2DDebugRenderer debug;
     private OrthographicCamera cam;
     private UserINputs input;
+
+
+    private GameCharacter car;
+
 
     public GamePlayScreen(HerculesGame game) {
         debug = new Box2DDebugRenderer(true, true, true, true, true, true);
@@ -32,7 +35,7 @@ public class GamePlayScreen extends ScreenAdapter {
         input = new UserINputs();
         Gdx.input.setInputProcessor(input);
 
-        car = new MainCharacter(world, new TextureAtlas("main.atlas"), 20, 20, 39, 75, 1.45f, input);
+        car = new MainCharacter(world, new TextureAtlas("MainCharacter/main.atlas"), 20, 20, 39, 75, 1.45f, input);
 
 
         cam = new OrthographicCamera(Box2dConversions.unitsToMetres(1280), Box2dConversions.unitsToMetres(960));
@@ -61,6 +64,7 @@ public class GamePlayScreen extends ScreenAdapter {
         car.update(batch);
         car.CharacterState(delta);
 
+//        bunchbag.update(batch);
 
         batch.end();
 
