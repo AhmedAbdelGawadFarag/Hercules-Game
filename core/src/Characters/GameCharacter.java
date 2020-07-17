@@ -1,6 +1,5 @@
 package Characters;
 
-import Box2dHelpers.Box2dCollisionList;
 import Box2dHelpers.Box2dConversions;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.physics.box2d.*;
@@ -33,11 +32,10 @@ public abstract class GameCharacter {
 
 
         Sprite temp = new Sprite(currframe);
-        temp.setSize((width) / (Box2dConversions.ppm/2f), (height) / (Box2dConversions.ppm/2f));
+        temp.setSize((width) / (Box2dConversions.ppm / 2f), (height) / (Box2dConversions.ppm / 2f));
 
         //set the sprite
         body.setUserData(temp);
-
 
 
     }
@@ -60,13 +58,8 @@ public abstract class GameCharacter {
 
         FixtureDef fdef = new FixtureDef();
         fdef.shape = shape;
-        fdef.filter.categoryBits = Box2dCollisionList.BIT_CHARACTER;
-        fdef.filter.maskBits = 0;
-
 
         body.createFixture(fdef);
-
-
 
 
     }

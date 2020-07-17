@@ -12,8 +12,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.hercules.HerculesGame;
 
 public class GamePlayScreen extends ScreenAdapter {
@@ -28,7 +27,7 @@ public class GamePlayScreen extends ScreenAdapter {
     private GameCharacter car;
     private GameCharacter BunchBag;
 
-
+    private Body Floor;
 
     public GamePlayScreen(HerculesGame game) {
         debug = new Box2DDebugRenderer(true, true, true, true, true, true);
@@ -39,7 +38,30 @@ public class GamePlayScreen extends ScreenAdapter {
         Gdx.input.setInputProcessor(input);
 
         car = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 400, 400, 30, 60, 1.45f, input);
-        BunchBag = new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 100, 60, 30, 60);
+        BunchBag = new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 500, 400, 30, 60);
+
+
+//        BodyDef def = new BodyDef();
+//        def.type = BodyDef.BodyType.StaticBody;
+//
+//        float zx = Box2dConversions.unitsToMetres(x);//convert x to meters
+//        float zy = Box2dConversions.unitsToMetres(y);// conver y to approprotaie meters
+//
+//        def.position.set(zx, zy);
+//
+//        body = world.createBody(def);
+//
+//        PolygonShape shape = new PolygonShape();
+//        shape.setAsBox(Box2dConversions.unitsToMetres(width), Box2dConversions.unitsToMetres(height));
+//
+//
+//        FixtureDef fdef = new FixtureDef();
+//        fdef.shape = shape;
+//
+//        body.createFixture(fdef);
+
+
+
 
 
         cam = new OrthographicCamera(Box2dConversions.unitsToMetres(1280), Box2dConversions.unitsToMetres(960));
@@ -48,6 +70,8 @@ public class GamePlayScreen extends ScreenAdapter {
 
         batch = new SpriteBatch();
 
+
+        world.setContactListener(new Box2dCollideListeners());
     }
 
     @Override

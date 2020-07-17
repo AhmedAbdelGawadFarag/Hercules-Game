@@ -1,12 +1,11 @@
 package Characters;
 
-import Box2dHelpers.Box2dConversions;
+import Box2dHelpers.Box2dCollisionList;
 import INPUTS.UserINputs;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class MainCharacter extends GameCharacter implements MovableCharacter {
@@ -21,7 +20,7 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
     float attackingElapsedTime = 0;
     float attacking2ElapsedTime = 0;
     float swordtime = 1.32f;
-    Body sword;
+
 
     public MainCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height, float speed, UserINputs inputs) {
         super(world, atlas, x, y, width, height);
@@ -30,25 +29,34 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
         Attacking1Animation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("attacking1"));
         Attack2Animation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("secondAttack"));
         RunningAnimation = new Animation<TextureRegion>(1 / 20f, atlas.findRegions("running"));
-        MakeSword();
+
+        Fixture f = body.getFixtureList().get(0);
+
+        Box2dCollisionList.GiveCollisonBitToBody(body, Box2dCollisionList.BIT_CHARACTER);
+
+//        Box2dCollisionList.MakeBodyCollideWith(body, Box2dCollisionList.);
+
 
     }
 
     public void MakeSword() {
+        Body sword;
         BodyDef def = new BodyDef();
         def.type = BodyDef.BodyType.DynamicBody;
-        def.position.set(body.getPosition());
+        def.position.set(body.getPosition().x + 40/200f, body.getPosition().y);
 
         sword = world.createBody(def);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(Box2dConversions.unitsToMetres(10), Box2dConversions.unitsToMetres(40), body.getLocalCenter(), 45);
+
+        shape.setAsBox(10 / 200f, 10 / 200f);
 
         FixtureDef fdef = new FixtureDef();
         fdef.shape = shape;
-
-
         sword.createFixture(fdef);
+
+        Box2dCollisionList.GiveCollisonBitToBody(sword, Box2dCollisionList.BIT_SWORD);
+        Box2dCollisionList.MakeBodyCollideWith(sword, Box2dCollisionList.BIT_STANDING_CHARACTER);
 
 
     }
@@ -59,6 +67,7 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
             direction = false;
             MoveRight();
             PlayRunningRightAnimation(dt, direction);
+
         }
 
         if (inputs.isStanding()) {
@@ -74,7 +83,7 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
                 ResetElapsetTimes();
                 inputs.Stand();//make Character Stands
                 ResetFrame(direction);
-                sword.setTransform(body.getPosition().x + 10 / 200f, body.getPosition().y - 20 / 200f, 1.32f);
+                this.MakeSword();
             }
 
             PLayAttacking1Animation(dt, direction);
@@ -107,6 +116,8 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
     private void Stop() {
 
         body.setLinearVelocity(0, 0);
+
+
 
     }
 
@@ -150,39 +161,14 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
     public void update(SpriteBatch batch) {
         super.update(batch);
 
-        sword.setTransform(body.getPosition().x, body.getPosition().y - 20 / 200f, 1.32f);
+//        sword.setLinearVelocity(1,0);
+//        sword.setTransform(body.getPosition().x + 100/200f, body.getPosition().y - 20 / 200f, 1.32f);
 
 
-        System.out.println(sword.getAngle());
-    }
-
-    public void rotateObject(Body body, float x1, float y1, float width1,
-                             float height1, float rotation, float PPM) {
-
-        float DEGTORAD = 0.0174532925199432957f;
-        // Top left corner of object
-        Vector2 pos = new Vector2((x1) / PPM, (y1 + height1) / PPM);
-        // angle of rotation in radians
-        float angle = DEGTORAD * (rotation);
-        // half of diagonal for rectangular object
-        float radius = (float) ((Math
-                .sqrt((width1 * width1 + height1 * height1))) / 2f) / PPM;
-        // Angle at diagonal of rectangular object
-        double theta = (Math.tanh(height1 / width1) * DEGTORAD);
-
-        // Finding new position if rotation was with respect to top-left corner of object.
-        // X=x+ radius*cos(theta-angle)+(h/2)cos(90+angle)
-        // Y= y+radius*sin(theta-angle)-(h/2)sin(90+angle)
-        pos = pos.add((float) (radius * Math.cos(-angle + theta)),
-                (float) (radius * Math.sin(-angle + theta))).add(
-                (float) ((height1 / PPM / 2) * Math.cos(90 * DEGTORAD
-                        + angle)),
-                (float) (-(height1 / PPM / 2) * Math.sin(90
-                        * DEGTORAD + angle)));
-        // transform the body
-        body.setTransform(pos, -angle);
+//        System.out.println(sword.getFixtureList().get(0).getFilterData().categoryBits + " " + sword.getFixtureList().get(0).getFilterData().maskBits);
 
     }
+
 
     @Override
     public void MoveRight() {
