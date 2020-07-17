@@ -35,7 +35,7 @@ public class GamePlayScreen extends ScreenAdapter {
         input = new UserINputs();
         Gdx.input.setInputProcessor(input);
 
-        car = new MainCharacter(world, new TextureAtlas("main.atlas"), 20, 20,39,75,0.7f,input);
+        car = new MainCharacter(world, new TextureAtlas("main.atlas"), 20, 20,39,75,0.5f,input);
 
 
         cam = new OrthographicCamera(Box2dConversions.unitsToMetres(600), Box2dConversions.unitsToMetres(500));

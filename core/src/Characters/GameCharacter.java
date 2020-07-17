@@ -18,7 +18,7 @@ public abstract class GameCharacter {
     float RunningElapsedTime = 0;
     float speed;
 
-    public GameCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height, float speed) {
+    public GameCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height) {
         currframe = (atlas.findRegion("running"));
         this.atlas = atlas;
         this.world = world;
@@ -34,8 +34,6 @@ public abstract class GameCharacter {
 
         //set the sprite
         body.setUserData(temp);
-
-        this.speed = speed;
     }
 
     public void makeCharacter(float x, float y, int width, int height) {//dynamic character
@@ -63,18 +61,17 @@ public abstract class GameCharacter {
     public void PlayRunningAnimation(float dt) {
 
         RunningElapsedTime += dt;
-        SetFrame(RunningAnimation, true,RunningElapsedTime);
+        SetFrame(RunningAnimation, true, RunningElapsedTime);
 
     }
 
-    public void SetFrame(Animation<TextureRegion> animation, boolean looping,float elapsedTime) {
+    public void SetFrame(Animation<TextureRegion> animation, boolean looping, float elapsedTime) {
 
         currframe = animation.getKeyFrame(elapsedTime, looping);
         Sprite s = (Sprite) body.getUserData();
         s.setRegion(currframe);
 
     }
-
 
 
     public void update(SpriteBatch batch) {
@@ -91,7 +88,7 @@ public abstract class GameCharacter {
     public void ResetFrame() {
 
 
-       SetFrame(RunningAnimation,false,RunningElapsedTime);
+        SetFrame(RunningAnimation, false, RunningElapsedTime);
 
     }
 

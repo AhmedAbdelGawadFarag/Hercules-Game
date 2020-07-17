@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class MainCharacter extends GameCharacter {
+public class MainCharacter extends GameCharacter implements MovableCharacter {
 
     UserINputs inputs;
     Animation<TextureRegion> Attacking1Animation;
@@ -15,9 +15,9 @@ public class MainCharacter extends GameCharacter {
     float attacking2ElapsedTime = 0;
 
     public MainCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height, float speed, UserINputs inputs) {
-        super(world, atlas, x, y, width, height, speed);
+        super(world, atlas, x, y, width, height);
         this.inputs = inputs;
-
+        this.speed = speed;
         Attacking1Animation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("attacking1"));
         Attack2Animation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("secondAttack"));
 
@@ -27,10 +27,12 @@ public class MainCharacter extends GameCharacter {
     @Override
     public void CharacterState(float dt) {
         if (inputs.isRunning()) {
+            Move();
             PlayRunningAnimation(dt);
         }
 
         if (inputs.isStanding()) {
+            Stop();
             ResetElapsetTimes();
             ResetFrame();
         }
@@ -48,7 +50,7 @@ public class MainCharacter extends GameCharacter {
         if (inputs.isAttacking2()) {
 
             System.out.println("2");
-            if (attacking2ElapsedTime >= 3/10f) {
+            if (attacking2ElapsedTime >= 3 / 10f) {
                 ResetElapsetTimes();
                 inputs.Stand();
                 ResetFrame();
@@ -60,8 +62,11 @@ public class MainCharacter extends GameCharacter {
 
     }
 
-    public void MoveRight() {
-        body.setLinearVelocity(1, 0);
+
+    private void Stop() {
+
+        body.setLinearVelocity(0, 0);
+
     }
 
     public void PLayAttacking1Animation(float dt) {
@@ -85,4 +90,8 @@ public class MainCharacter extends GameCharacter {
 
     }
 
+    @Override
+    public void Move() {
+        body.setLinearVelocity(speed,0);
+    }
 }
