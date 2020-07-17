@@ -1,5 +1,7 @@
 package Characters;
 
+import Box2dHelpers.Box2dCollisionList;
+import Box2dHelpers.Box2dConversions;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.physics.box2d.*;
 
@@ -55,6 +57,8 @@ public abstract class GameCharacter {
 
         FixtureDef fdef = new FixtureDef();
         fdef.shape = shape;
+        fdef.filter.categoryBits = Box2dCollisionList.BIT_CHARACTER;
+        fdef.filter.maskBits = 0;
 
         body.createFixture(fdef);
 
@@ -75,6 +79,8 @@ public abstract class GameCharacter {
 
         if (reverse == true)//reverse
             s.flip(true, false);
+
+
     }
 
     public void update(SpriteBatch batch) {
@@ -89,6 +95,7 @@ public abstract class GameCharacter {
 
 
     }
+
 
     public void ResetFrame(boolean reverse) {
 
