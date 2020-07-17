@@ -32,7 +32,7 @@ public class GamePlayScreen extends ScreenAdapter {
     public GamePlayScreen(HerculesGame game) {
         debug = new Box2DDebugRenderer(true, true, true, true, true, true);
 
-        world = new World(new Vector2(0, 0), true);
+        world = new World(new Vector2(0, -9.8f), true);
 
         input = new UserINputs();
         Gdx.input.setInputProcessor(input);
@@ -41,24 +41,6 @@ public class GamePlayScreen extends ScreenAdapter {
         BunchBag = new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 500, 400, 30, 60);
 
 
-//        BodyDef def = new BodyDef();
-//        def.type = BodyDef.BodyType.StaticBody;
-//
-//        float zx = Box2dConversions.unitsToMetres(x);//convert x to meters
-//        float zy = Box2dConversions.unitsToMetres(y);// conver y to approprotaie meters
-//
-//        def.position.set(zx, zy);
-//
-//        body = world.createBody(def);
-//
-//        PolygonShape shape = new PolygonShape();
-//        shape.setAsBox(Box2dConversions.unitsToMetres(width), Box2dConversions.unitsToMetres(height));
-//
-//
-//        FixtureDef fdef = new FixtureDef();
-//        fdef.shape = shape;
-//
-//        body.createFixture(fdef);
 
 
 
@@ -72,6 +54,9 @@ public class GamePlayScreen extends ScreenAdapter {
 
 
         world.setContactListener(new Box2dCollideListeners());
+
+
+        MakeFloor();
     }
 
     @Override
@@ -105,6 +90,30 @@ public class GamePlayScreen extends ScreenAdapter {
 
     }
 
+    public void MakeFloor(){
+
+        BodyDef def = new BodyDef();
+        def.type = BodyDef.BodyType.StaticBody;
+
+        float zx = Box2dConversions.unitsToMetres(300);//convert x to meters
+        float zy = Box2dConversions.unitsToMetres(200);// conver y to approprotaie meters
+
+        def.position.set(zx, zy);
+
+        Floor = world.createBody(def);
+
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(Box2dConversions.unitsToMetres(1000), Box2dConversions.unitsToMetres(20));
+
+
+        FixtureDef fdef = new FixtureDef();
+        fdef.shape = shape;
+
+        Floor.createFixture(fdef);
+
+        Box2dCollisionList.GiveCollisonBitToBody(Floor,Box2dCollisionList.BIT_FLOOR);
+
+    }
 
     @Override
     public void show() {

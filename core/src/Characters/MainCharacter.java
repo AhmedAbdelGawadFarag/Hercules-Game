@@ -57,7 +57,7 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
 
         Box2dCollisionList.GiveCollisonBitToBody(sword, Box2dCollisionList.BIT_SWORD);
         Box2dCollisionList.MakeBodyCollideWith(sword, Box2dCollisionList.BIT_STANDING_CHARACTER);
-
+        Box2dCollisionList.MakeBodyCollideWith(sword, Box2dCollisionList.BIT_FLOOR);
 
     }
 
@@ -78,7 +78,7 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
         }
         if (inputs.isAttacking1()) {
             swordtime += dt;
-            System.out.println("1");
+//            System.out.println("1");
             if (attackingElapsedTime >= 4 / 10f) {//check if the attack is finished or not
                 ResetElapsetTimes();
                 inputs.Stand();//make Character Stands
@@ -92,7 +92,7 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
 
         if (inputs.isAttacking2()) {
 
-            System.out.println("2");
+//            System.out.println("2");
             if (attacking2ElapsedTime >= 3 / 10f) {
                 ResetElapsetTimes();
                 inputs.Stand();
