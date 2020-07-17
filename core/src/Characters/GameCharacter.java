@@ -24,7 +24,7 @@ public abstract class GameCharacter {
         this.world = world;
 
         //animation
-        RunningAnimation = new Animation<TextureRegion>(1 / 30f, atlas.findRegions("running"));
+        RunningAnimation = new Animation<TextureRegion>(1 / 15f, atlas.findRegions("running"));
 
         //making the character
         makeCharacter(x, y, width, height);

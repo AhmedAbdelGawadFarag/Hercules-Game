@@ -15,14 +15,16 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.hercules.HerculesGame;
 
+import javax.swing.*;
+
 public class GamePlayScreen extends ScreenAdapter {
 
-    World world;
-    SpriteBatch batch;
-    GameCharacter car;
-    Box2DDebugRenderer debug;
-    OrthographicCamera cam;
-    UserINputs input;
+   private World world;
+   private SpriteBatch batch;
+   private GameCharacter car;
+   private Box2DDebugRenderer debug;
+   private OrthographicCamera cam;
+   private UserINputs input;
 
     public GamePlayScreen(HerculesGame game) {
         debug = new Box2DDebugRenderer(true, true, true, true, true, true);
@@ -32,12 +34,12 @@ public class GamePlayScreen extends ScreenAdapter {
         input = new UserINputs();
         Gdx.input.setInputProcessor(input);
 
-        car = new MainCharacter(world, new TextureAtlas("main.atlas"), 20, 20, 39, 75, 0.5f, input);
+        car = new MainCharacter(world, new TextureAtlas("main.atlas"), 20, 20, 39, 75, 1.45f, input);
 
 
-        cam = new OrthographicCamera(Box2dConversions.unitsToMetres(600), Box2dConversions.unitsToMetres(500));
+        cam = new OrthographicCamera(Box2dConversions.unitsToMetres(1280), Box2dConversions.unitsToMetres(960));
+
         batch = new SpriteBatch();
-
 
     }
 
@@ -48,10 +50,11 @@ public class GamePlayScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         world.step(delta, 3, 3);
-        cam.update();
 
 
         batch.setProjectionMatrix(cam.combined);
+
+
 
 
         batch.begin();
