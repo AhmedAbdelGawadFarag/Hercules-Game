@@ -15,16 +15,14 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.hercules.HerculesGame;
 
-import javax.swing.*;
-
 public class GamePlayScreen extends ScreenAdapter {
 
-   private World world;
-   private SpriteBatch batch;
-   private GameCharacter car;
-   private Box2DDebugRenderer debug;
-   private OrthographicCamera cam;
-   private UserINputs input;
+    private World world;
+    private SpriteBatch batch;
+    private GameCharacter car;
+    private Box2DDebugRenderer debug;
+    private OrthographicCamera cam;
+    private UserINputs input;
 
     public GamePlayScreen(HerculesGame game) {
         debug = new Box2DDebugRenderer(true, true, true, true, true, true);
@@ -54,7 +52,8 @@ public class GamePlayScreen extends ScreenAdapter {
 
         batch.setProjectionMatrix(cam.combined);
 
-
+        CameraManager.LockOnTarger(cam, new Vector2(car.body.getPosition()));
+//        cam.update();
 
 
         batch.begin();
