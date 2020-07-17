@@ -11,7 +11,6 @@ public abstract class GameCharacter {
     public World world;
     public Body body;
 
-
     TextureAtlas atlas;
     //frames
     TextureRegion currframe;
@@ -32,11 +31,15 @@ public abstract class GameCharacter {
         //making the character
         makeCharacter(x, y, width, height);
 
+
         Sprite temp = new Sprite(currframe);
-        temp.setSize(width / 100f, height / 100f);
+        temp.setSize((width) / (Box2dConversions.ppm/2f), (height) / (Box2dConversions.ppm/2f));
 
         //set the sprite
         body.setUserData(temp);
+
+
+
     }
 
 
@@ -44,10 +47,10 @@ public abstract class GameCharacter {
         BodyDef def = new BodyDef();
         def.type = BodyDef.BodyType.DynamicBody;
 
-        x = Box2dConversions.unitsToMetres(x);//convert x to meters
-        y = Box2dConversions.unitsToMetres(y);// conver y to approprotaie meters
+        float zx = Box2dConversions.unitsToMetres(x);//convert x to meters
+        float zy = Box2dConversions.unitsToMetres(y);// conver y to approprotaie meters
 
-        def.position.set(x, y);
+        def.position.set(zx, zy);
 
         body = world.createBody(def);
 
@@ -60,9 +63,14 @@ public abstract class GameCharacter {
         fdef.filter.categoryBits = Box2dCollisionList.BIT_CHARACTER;
         fdef.filter.maskBits = 0;
 
+
         body.createFixture(fdef);
 
+
+
+
     }
+
 
 
     public void SetFrameFromAnimation(Animation<TextureRegion> animation, boolean looping, float elapsedTime, boolean ReverseFrame) {
@@ -86,12 +94,12 @@ public abstract class GameCharacter {
     public void update(SpriteBatch batch) {
         //get currentframe
 
-            if(currframe == null ) return; // object is removed
+        if (currframe == null) return; // object is removed
 
-            Sprite sprite = (Sprite) body.getUserData();
+        Sprite sprite = (Sprite) body.getUserData();
 
-            sprite.setPosition(body.getPosition().x - sprite.getWidth() / 2f, body.getPosition().y - sprite.getHeight() / 2f);
-            sprite.draw(batch);
+        sprite.setPosition(body.getPosition().x - sprite.getWidth() / 2f, body.getPosition().y - sprite.getHeight() / 2f);
+        sprite.draw(batch);
 
 
     }
@@ -104,7 +112,7 @@ public abstract class GameCharacter {
     }
 
     public void Remove() {
-        if(currframe == null) return;//object is removed from the world
+        if (currframe == null) return;//object is removed from the world
 
         world.destroyBody(body);
         currframe = null;
