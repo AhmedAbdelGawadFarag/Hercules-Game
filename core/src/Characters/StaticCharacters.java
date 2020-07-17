@@ -17,6 +17,8 @@ public class StaticCharacters extends GameCharacter {
 
         Box2dCollisionList.MakeBodyCollideWith(body,Box2dCollisionList.BIT_FLOOR);
 
+        Box2dCollisionList.MakeBodyCollideWith(body,Box2dCollisionList.BIT_CHARACTER);
+
 
 //        System.out.println(body.getFixtureList().get(0).getFilterData().categoryBits);
         System.out.println(body.getFixtureList().get(0).getFilterData().maskBits);

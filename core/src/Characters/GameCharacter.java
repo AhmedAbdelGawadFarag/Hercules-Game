@@ -53,7 +53,7 @@ public abstract class GameCharacter {
         body = world.createBody(def);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(Box2dConversions.unitsToMetres(width), Box2dConversions.unitsToMetres(height));
+        shape.setAsBox(Box2dConversions.unitsToMetres(width-10), Box2dConversions.unitsToMetres(height));
 
 
         FixtureDef fdef = new FixtureDef();
