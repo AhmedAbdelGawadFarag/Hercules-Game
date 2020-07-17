@@ -5,17 +5,33 @@ import com.badlogic.gdx.InputProcessor;
 
 
 public class UserINputs implements InputProcessor {
-    protected boolean running = false;
+    protected boolean runningRight = false;
     protected boolean standing = false;
     protected boolean attacking1 = false;
     protected boolean attacking2 = false;
+    protected boolean runningleft = false;
 
-    public boolean isRunning() {
-        return running;
+
+    public boolean isRunningRight() {
+        return runningRight;
     }
 
-    public void Run() {
-        this.running = true;
+    public boolean isRunningleft() {
+        return runningleft;
+    }
+
+
+    public void RunRight() {
+        this.runningRight = true;
+        this.runningleft = false;
+        this.standing = false;
+        this.attacking1 = false;
+        this.attacking2 = false;
+    }
+
+    public void RunLeft() {
+        this.runningleft = true;
+        this.runningRight = false;
         this.standing = false;
         this.attacking1 = false;
         this.attacking2 = false;
@@ -27,9 +43,10 @@ public class UserINputs implements InputProcessor {
 
     public void Stand() {
         this.standing = true;
-        this.running = false;
+        this.runningRight = false;
         this.attacking1 = false;
         this.attacking2 = false;
+        this.runningleft = false;
     }
 
     public boolean isAttacking1() {
@@ -39,14 +56,19 @@ public class UserINputs implements InputProcessor {
     public void Attack1() {
         this.attacking1 = true;
         this.standing = false;
-        this.running = false;
+        this.runningRight = false;
         this.attacking2 = false;
+        this.runningleft = false;
     }
 
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.RIGHT) {
-            Run();
+            RunRight();
+        }
+
+        if (keycode == Input.Keys.LEFT) {
+            RunLeft();
         }
 
         return false;
@@ -73,8 +95,9 @@ public class UserINputs implements InputProcessor {
     public void Attack2() {
         this.attacking2 = true;
         this.standing = false;
-        this.running = false;
+        this.runningRight = false;
         this.attacking1 = false;
+        this.runningleft = false;
     }
 
     @Override

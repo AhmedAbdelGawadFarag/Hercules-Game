@@ -26,9 +26,9 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
 
     @Override
     public void CharacterState(float dt) {
-        if (inputs.isRunning()) {
-            Move();
-            PlayRunningAnimation(dt);
+        if (inputs.isRunningRight()) {
+            MoveRight();
+            PlayRunningRightAnimation(dt);
         }
 
         if (inputs.isStanding()) {
@@ -59,6 +59,12 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
 
         }
 
+        if (inputs.isRunningleft()) {
+            MoveLeft();
+            PlayRunningLeftAnimation(dt);
+
+        }
+
 
     }
 
@@ -69,17 +75,32 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
 
     }
 
+    public void PlayRunningRightAnimation(float dt) {
+
+        RunningElapsedTime += dt;
+        SetFrame(RunningAnimation, true, RunningElapsedTime,false);
+
+    }
+
+    public void PlayRunningLeftAnimation(float dt) {
+
+        RunningElapsedTime += dt;
+        SetFrame(RunningAnimation, true, RunningElapsedTime,true);
+
+    }
+
     public void PLayAttacking1Animation(float dt) {
         attackingElapsedTime += dt;
-        this.SetFrame(Attacking1Animation, false, attackingElapsedTime);
+        this.SetFrame(Attacking1Animation, false, attackingElapsedTime,false);
 
     }
 
     public void PlayAttacking2Animation(float dt) {
         attacking2ElapsedTime += dt;
-        this.SetFrame(Attack2Animation, false, attacking2ElapsedTime);
+        this.SetFrame(Attack2Animation, false, attacking2ElapsedTime,false);
 
     }
+
 
 
     private void ResetElapsetTimes() {
@@ -91,7 +112,11 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
     }
 
     @Override
-    public void Move() {
-        body.setLinearVelocity(speed,0);
+    public void MoveRight() {
+        body.setLinearVelocity(speed, 0);
+    }
+
+    public void MoveLeft() {
+        body.setLinearVelocity(-speed, 0);
     }
 }

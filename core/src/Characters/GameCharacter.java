@@ -58,25 +58,23 @@ public abstract class GameCharacter {
 
     }
 
-    public void PlayRunningAnimation(float dt) {
 
-        RunningElapsedTime += dt;
-        SetFrame(RunningAnimation, true, RunningElapsedTime);
-
-    }
-
-    public void SetFrame(Animation<TextureRegion> animation, boolean looping, float elapsedTime) {
+    public void SetFrame(Animation<TextureRegion> animation, boolean looping, float elapsedTime, boolean ReverseFrame) {
 
         currframe = animation.getKeyFrame(elapsedTime, looping);
         Sprite s = (Sprite) body.getUserData();
         s.setRegion(currframe);
+
+        if (ReverseFrame == true)//reverse
+            s.flip(true,false);
+
+
 
     }
 
 
     public void update(SpriteBatch batch) {
         //get currentframe
-
 
         Sprite sprite = (Sprite) body.getUserData();
 
@@ -88,7 +86,7 @@ public abstract class GameCharacter {
     public void ResetFrame() {
 
 
-        SetFrame(RunningAnimation, false, RunningElapsedTime);
+        SetFrame(RunningAnimation, false, RunningElapsedTime,false);
 
     }
 

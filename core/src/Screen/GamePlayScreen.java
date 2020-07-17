@@ -5,10 +5,7 @@ import Characters.GameCharacter;
 import Characters.MainCharacter;
 import Characters.UserINputs;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,7 +14,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.hercules.HerculesGame;
-import com.sun.java.swing.plaf.windows.WindowsDesktopPaneUI;
 
 public class GamePlayScreen extends ScreenAdapter {
 
@@ -27,6 +23,7 @@ public class GamePlayScreen extends ScreenAdapter {
     Box2DDebugRenderer debug;
     OrthographicCamera cam;
     UserINputs input;
+
     public GamePlayScreen(HerculesGame game) {
         debug = new Box2DDebugRenderer(true, true, true, true, true, true);
 
@@ -35,7 +32,7 @@ public class GamePlayScreen extends ScreenAdapter {
         input = new UserINputs();
         Gdx.input.setInputProcessor(input);
 
-        car = new MainCharacter(world, new TextureAtlas("main.atlas"), 20, 20,39,75,0.5f,input);
+        car = new MainCharacter(world, new TextureAtlas("main.atlas"), 20, 20, 39, 75, 0.5f, input);
 
 
         cam = new OrthographicCamera(Box2dConversions.unitsToMetres(600), Box2dConversions.unitsToMetres(500));
@@ -54,9 +51,7 @@ public class GamePlayScreen extends ScreenAdapter {
         cam.update();
 
 
-
         batch.setProjectionMatrix(cam.combined);
-
 
 
         batch.begin();
