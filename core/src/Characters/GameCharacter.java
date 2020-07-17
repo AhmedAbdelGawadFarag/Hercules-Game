@@ -38,8 +38,6 @@ public abstract class GameCharacter {
     }
 
 
-
-
     public void makeCharacter(float x, float y, int width, int height) {//dynamic character
         BodyDef def = new BodyDef();
         def.type = BodyDef.BodyType.DynamicBody;
@@ -82,17 +80,27 @@ public abstract class GameCharacter {
     public void update(SpriteBatch batch) {
         //get currentframe
 
-        Sprite sprite = (Sprite) body.getUserData();
+            if(currframe == null ) return; // object is removed
 
-        sprite.setPosition(body.getPosition().x - sprite.getWidth() / 2f, body.getPosition().y - sprite.getHeight() / 2f);
-        sprite.draw(batch);
+            Sprite sprite = (Sprite) body.getUserData();
+
+            sprite.setPosition(body.getPosition().x - sprite.getWidth() / 2f, body.getPosition().y - sprite.getHeight() / 2f);
+            sprite.draw(batch);
+
 
     }
 
     public void ResetFrame(boolean reverse) {
 
         currframe = atlas.findRegion("standing", 0);
-        setSprite(currframe,reverse);
+        setSprite(currframe, reverse);
+    }
+
+    public void Remove() {
+        if(currframe == null) return;//object is removed from the world
+
+        world.destroyBody(body);
+        currframe = null;
     }
 
     public abstract void CharacterState(float dt);

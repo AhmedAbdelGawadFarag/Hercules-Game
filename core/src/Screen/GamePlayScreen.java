@@ -3,8 +3,10 @@ package Screen;
 import Characters.Box2dConversions;
 import Characters.GameCharacter;
 import Characters.MainCharacter;
-import Characters.UserINputs;
+import Characters.StaticCharacters;
+import INPUTS.UserINputs;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -25,6 +27,8 @@ public class GamePlayScreen extends ScreenAdapter {
 
 
     private GameCharacter car;
+    private GameCharacter BunchBag;
+
 
 
     public GamePlayScreen(HerculesGame game) {
@@ -35,10 +39,13 @@ public class GamePlayScreen extends ScreenAdapter {
         input = new UserINputs();
         Gdx.input.setInputProcessor(input);
 
-        car = new MainCharacter(world, new TextureAtlas("MainCharacter/main.atlas"), 20, 20, 39, 75, 1.45f, input);
+        car = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 20, 20, 39, 75, 1.45f, input);
+        BunchBag = new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 50, 70, 39, 76);
 
 
         cam = new OrthographicCamera(Box2dConversions.unitsToMetres(1280), Box2dConversions.unitsToMetres(960));
+
+
 
         batch = new SpriteBatch();
 
@@ -64,7 +71,10 @@ public class GamePlayScreen extends ScreenAdapter {
         car.update(batch);
         car.CharacterState(delta);
 
-//        bunchbag.update(batch);
+
+        BunchBag.update(batch);
+
+
 
         batch.end();
 

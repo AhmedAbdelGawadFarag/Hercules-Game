@@ -1,4 +1,4 @@
-package Characters;
+package INPUTS;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
