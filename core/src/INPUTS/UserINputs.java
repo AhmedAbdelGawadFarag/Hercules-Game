@@ -1,5 +1,6 @@
 package INPUTS;
 
+import Box2dHelpers.Box2dCollideListeners;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
@@ -11,6 +12,8 @@ public class UserINputs implements InputProcessor {
     protected boolean attacking2 = false;
     protected boolean runningleft = false;
 
+    public static boolean jump = false;
+
 
     public boolean isRunningRight() {
         return runningRight;
@@ -18,6 +21,14 @@ public class UserINputs implements InputProcessor {
 
     public boolean isRunningleft() {
         return runningleft;
+    }
+
+    public boolean CanJump() {
+        return (Box2dCollideListeners.playeronGround && jump);
+    }
+
+    public boolean isJumping() {
+        return jump;
     }
 
 
@@ -47,6 +58,8 @@ public class UserINputs implements InputProcessor {
         this.attacking1 = false;
         this.attacking2 = false;
         this.runningleft = false;
+        this.jump = false;
+
     }
 
     public boolean isAttacking1() {
@@ -71,6 +84,7 @@ public class UserINputs implements InputProcessor {
             RunLeft();
         }
 
+
         return false;
     }
 
@@ -82,7 +96,11 @@ public class UserINputs implements InputProcessor {
         if (keycode == Input.Keys.A)
             Attack2();
 
-        if (attacking1 != true && attacking2 != true)//if hero is not stillattacking
+        if (keycode == Input.Keys.UP && Box2dCollideListeners.playeronGround == true) {
+            jump = true;
+        }
+
+        if (attacking1 != true && attacking2 != true && jump != true)//if hero is not stillattacking
             Stand();
 
         return false;

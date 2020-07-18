@@ -21,17 +21,17 @@ import com.hercules.HerculesGame;
 
 public class GamePlayScreen extends ScreenAdapter {
 
-    private World world;
-    private SpriteBatch batch;
-    private Box2DDebugRenderer debug;
-    private OrthographicCamera cam;
-    private UserINputs input;
+    private final World world;
+    private final SpriteBatch batch;
+    private final Box2DDebugRenderer debug;
+    private final OrthographicCamera cam;
+    private final UserINputs input;
 
 
-    private GameCharacter car;
-    private GameCharacter BunchBag;
+    private final GameCharacter car;
+    private final GameCharacter BunchBag;
     
-    private Level1Map lvl1;
+    private final Level1Map lvl1;
     private Body Floor;
 
     public GamePlayScreen(HerculesGame game) {
@@ -42,8 +42,8 @@ public class GamePlayScreen extends ScreenAdapter {
         input = new UserINputs();
         Gdx.input.setInputProcessor(input);
 
-        car = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 400, 400, 30, 60, 1.45f, input);
-        BunchBag = new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 500, 400, 30, 60);
+        car = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 200, 400, 30, 60, 1.45f, input);
+        BunchBag = new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 300, 400, 30, 60);
 
 
         cam = new OrthographicCamera(Box2dConversions.unitsToMetres(1280), Box2dConversions.unitsToMetres(960));
@@ -111,7 +111,7 @@ public class GamePlayScreen extends ScreenAdapter {
 
         Floor.createFixture(fdef);
 
-        Box2dCollisionList.GiveCollisonBitToBody(Floor, Box2dCollisionList.BIT_FLOOR);
+        Box2dCollisionList.GiveCollisonBitToBody(Floor, Box2dCollisionList.BIT_GROUND);
 
     }
 

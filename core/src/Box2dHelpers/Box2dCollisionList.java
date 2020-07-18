@@ -9,11 +9,11 @@ public abstract class Box2dCollisionList {
 
     public static final short BIT_CHARACTER = 2;
 
-    public static final short BIT_STANDING_CHARACTER = 8;
+    public static final short BIT_STATIC_CHARACTER = 8;
 
     public static final short BIT_SWORD = 4;
 
-    public static final short BIT_FLOOR = 16;
+    public static final short BIT_GROUND = 16;
 
 
     public static void GiveCollisonBitToBody(Body body, short bit) {
@@ -44,7 +44,7 @@ public abstract class Box2dCollisionList {
         if (fdef.filter.maskBits == -1)//if there is no colliders
             fdef.filter.maskBits = 0;
 
-        fdef.filter.maskBits |= (short) bit;
+        fdef.filter.maskBits |= bit;
 
         body.createFixture(fdef);
 

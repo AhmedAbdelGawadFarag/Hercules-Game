@@ -1,5 +1,6 @@
 package mapObjects;
 
+import Box2dHelpers.Box2dCollisionList;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
@@ -27,11 +28,19 @@ public class Ground {
 		PolygonShape shape = new PolygonShape();
 		FixtureDef fDef = new FixtureDef();
 		def.type = BodyType.StaticBody;
+
 		Rectangle rectangle = ((RectangleMapObject)object).getRectangle();
+
 		def.position.set(Box2dConversions.unitsToMetres(rectangle.getX() + rectangle.getWidth()/2),Box2dConversions.unitsToMetres( rectangle.getY()+rectangle.getHeight()/2));
 		body = world.createBody(def);
+
 		shape.setAsBox(Box2dConversions.unitsToMetres(rectangle.getWidth()/2),Box2dConversions.unitsToMetres(rectangle.getHeight()/2));
+
 		fDef.shape = shape;
 		body.createFixture(fDef);
+
+		Box2dCollisionList.GiveCollisonBitToBody(body,Box2dCollisionList.BIT_GROUND);
+
+
 	}
 }

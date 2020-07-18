@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class MainCharacter extends GameCharacter implements MovableCharacter {
@@ -20,6 +21,7 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
     float attackingElapsedTime = 0;
     float attacking2ElapsedTime = 0;
     float swordtime = 1.32f;
+    float JumpingTime = 0f;
 
 
     public MainCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height, float speed, UserINputs inputs) {
@@ -30,20 +32,33 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
         Attack2Animation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("secondAttack"));
         RunningAnimation = new Animation<TextureRegion>(1 / 20f, atlas.findRegions("running"));
 
-        Fixture f = body.getFixtureList().get(0);
+       MakeFoot(height);
+
 
         Box2dCollisionList.GiveCollisonBitToBody(body, Box2dCollisionList.BIT_CHARACTER);
 
-//        Box2dCollisionList.MakeBodyCollideWith(body, Box2dCollisionList.);
+    }
 
+    public void MakeFoot(int height){
+        //create foot fixture
+        FixtureDef foot = new FixtureDef();
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(2f / 200f, 3f / 200f,new Vector2(0,-height/200f),0);
+        foot.shape = shape;
+        //make it sensor
+        foot.isSensor = true;
 
+        foot.filter.categoryBits = Box2dCollisionList.BIT_CHARACTER;
+        foot.filter.maskBits = Box2dCollisionList.BIT_GROUND;
+
+        body.createFixture(foot).setUserData("foot");
     }
 
     public void MakeSword() {
         Body sword;
         BodyDef def = new BodyDef();
         def.type = BodyDef.BodyType.DynamicBody;
-        def.position.set(body.getPosition().x + 30/200f, body.getPosition().y);
+        def.position.set(body.getPosition().x + 30 / 200f, body.getPosition().y);
 
         sword = world.createBody(def);
 
@@ -53,11 +68,14 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
 
         FixtureDef fdef = new FixtureDef();
         fdef.shape = shape;
-        sword.createFixture(fdef);
+
+        fdef.isSensor = true;
+
+        sword.createFixture(fdef).setUserData("sword");
 
         Box2dCollisionList.GiveCollisonBitToBody(sword, Box2dCollisionList.BIT_SWORD);
-        Box2dCollisionList.MakeBodyCollideWith(sword, Box2dCollisionList.BIT_STANDING_CHARACTER);
-        Box2dCollisionList.MakeBodyCollideWith(sword, Box2dCollisionList.BIT_FLOOR);
+        Box2dCollisionList.MakeBodyCollideWith(sword, Box2dCollisionList.BIT_STATIC_CHARACTER);
+        Box2dCollisionList.MakeBodyCollideWith(sword, Box2dCollisionList.BIT_GROUND);
 
     }
 
@@ -109,6 +127,11 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
 
         }
 
+        if ( inputs.CanJump() ) {
+            System.out.println(inputs.isJumping());
+            this.Jump();
+
+        }
 
     }
 
@@ -116,7 +139,6 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
     private void Stop() {
 
         body.setLinearVelocity(0, 0);
-
 
 
     }
@@ -154,21 +176,20 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
         this.attackingElapsedTime = 0;
         this.RunningElapsedTime = 0;
         this.attacking2ElapsedTime = 0;
+        this.JumpingTime = 0;
 
     }
 
     @Override
     public void update(SpriteBatch batch) {
         super.update(batch);
-
-//        sword.setLinearVelocity(1,0);
-//        sword.setTransform(body.getPosition().x + 100/200f, body.getPosition().y - 20 / 200f, 1.32f);
-
-
-//        System.out.println(sword.getFixtureList().get(0).getFilterData().categoryBits + " " + sword.getFixtureList().get(0).getFilterData().maskBits);
-
     }
 
+    public void Jump() {
+
+        this.body.applyForceToCenter(0, 1300, true);
+
+    }
 
     @Override
     public void MoveRight() {
