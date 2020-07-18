@@ -44,7 +44,7 @@ public class HighScoreState extends GameState {
 		handleInput();
 	}
 	
-	public void draw() {
+	public void draw(float dt) {
 		
 		sb.setProjectionMatrix(MyGdxGame.cam.combined);
 		

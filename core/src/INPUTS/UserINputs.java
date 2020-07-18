@@ -58,7 +58,7 @@ public class UserINputs implements InputProcessor {
         this.attacking1 = false;
         this.attacking2 = false;
         this.runningleft = false;
-        this.jump = false;
+        jump = false;
 
     }
 

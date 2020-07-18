@@ -54,7 +54,7 @@ public class GameOverState extends GameState {
 		handleInput();
 	}
 	
-	public void draw() {
+	public void draw(float dt) {
 		
 		sb.setProjectionMatrix(MyGdxGame.cam.combined);
 		

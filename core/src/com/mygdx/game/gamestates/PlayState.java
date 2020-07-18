@@ -1,178 +1,115 @@
 package com.mygdx.game.gamestates;
-import com.mygdx.game.*;
 
-import java.util.ArrayList;
+import Box2dHelpers.Box2dCollideListeners;
+import Box2dHelpers.Box2dCollisionList;
+import Box2dHelpers.Box2dConversions;
+import Characters.GameCharacter;
+import Characters.MainCharacter;
+import Characters.StaticCharacters;
+import INPUTS.UserINputs;
+import map.Level1Map;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.*;
+//import com.hercules.HerculesGame;
 
 
 public class PlayState extends GameState {
-	
-	private SpriteBatch batch, b_batch;
-	private TextureAtlas atlas_coin;
-	private Sprite Coin,Coin_1; //update to ArrayList
-	private TextureRegion region_coin;
-	private Rectangle RectangleCoin, RectangleCoin_1; //update to ArrayList
-	private Rectangle RectangleChar;
-	int currframe;
-	float stateTime;
-	
-	private TextureAtlas atlas;
-	private Sprite Characters;
-	private TextureRegion region;
-	int currframe_char;
-	float x_postion=0;
-	float x_position=0;
-	
-	private int score;
-	private String yourScoreName;
-	private BitmapFont yourBitmapFontName;
-	
-	//update to ArrayList
-	boolean b=true,b1=true;
-	boolean b_1=true,b1_1=true;
-	
-	public PlayState(GameStateManager gsm) {
-		super(gsm);
-	}
-	
-	public void init() {
-		
-		atlas_coin = new TextureAtlas(Gdx.files.internal("coins.atlas"));
-		region_coin = atlas_coin.findRegion("0");
-		Coin = new Sprite(region_coin);
-		Coin_1 = new Sprite(region_coin);
-		currframe=1;
+
+    private World world;
+
+    private SpriteBatch batch;
+    private Box2DDebugRenderer debug;
+    private OrthographicCamera cam;
+    private UserINputs input;
+
+
+    private GameCharacter car;
+    private GameCharacter BunchBag;
+
+    private Level1Map lvl1;
+    private Body Floor;
+
+
+    public PlayState(GameStateManager gsm) {
+        super(gsm);
+    }
+
+    public void init() {
+		debug = new Box2DDebugRenderer(true, true, true, true, true, true);
+
+		world = new World(new Vector2(0, -9.8f), true);
+
+		input = new UserINputs();
+		Gdx.input.setInputProcessor(input);
+
+		car = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 30, 60, 1.45f, input);
+		BunchBag = new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 300, 400, 30, 60);
+
+
+		cam = new OrthographicCamera(Box2dConversions.unitsToMetres(1280), Box2dConversions.unitsToMetres(960));
+		cam.translate(640 / 200f, 480 / 200f);
+
+
 		batch = new SpriteBatch();
-		b_batch = new SpriteBatch();
-		stateTime=0f;
-		
-		atlas = new TextureAtlas(Gdx.files.internal("MainCharacter.atlas"));
-		region = atlas.findRegion("001");
-		Characters = new Sprite(region);
-		currframe_char=1;
-		Coin.setPosition(650f, 0f);
-		Coin_1.setPosition(550f, 0f);
-		
-		RectangleCoin = new Rectangle(Coin.getX(), Coin.getY(), 
-			Coin.getWidth(), Coin.getHeight());
-		RectangleCoin_1 = new Rectangle(Coin_1.getX(), Coin_1.getY(), 
-				Coin_1.getWidth(), Coin_1.getHeight());
-		RectangleChar =new Rectangle(0.0f, 0.4f, 0.8f, 0.083f);
-		
-		score = 0;
-	    yourScoreName = "score: 0";
-	    yourBitmapFontName = new BitmapFont();
-	    yourBitmapFontName.setColor(Color.RED);
-	    yourBitmapFontName.getData().setScale(2f, 2f);
-		
+
+		lvl1 = new Level1Map(cam, world);
+		world.setContactListener(new Box2dCollideListeners());
+
+
+
 	}
 
-	
-	public void update(float dt) {
-		handleInput();
-		
-	}
-	
-	
-	public void draw() {
-		
-		batch.setProjectionMatrix(MyGdxGame.cam.combined);
-		batch.setProjectionMatrix(MyGdxGame.cam.combined);
-		
-		boolean isoverlapping = RectangleChar.overlaps(RectangleCoin);
-		boolean isoverlapping_1 = RectangleChar.overlaps(RectangleCoin_1);
-		
-		RectangleChar.setPosition(x_position, 0.4f);
-		Gdx.gl20.glClearColor(1, 1, 1, 1);
-		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		stateTime += 0.25f;
-		if(stateTime>=1) {
-			currframe++;
-			stateTime=0f;
-		}
-        if (currframe > 5)
-        	currframe = 0;
-        
-        String inttostring = Integer.toString(currframe);
-        String index_char = inttostring;
-        
-        Coin.setRegion(atlas_coin.findRegion(index_char));
-        Coin_1.setRegion(atlas_coin.findRegion(index_char));
-        
-        yourScoreName = "score: " + score;
-        b_batch.begin();
-        yourBitmapFontName.setColor(Color.BLACK);
-		yourBitmapFontName.draw(b_batch, yourScoreName, 10, 400);
-		b_batch.end();
-		
+
+    public void update(float dt) {
+        handleInput();
+
+
+    }
+
+
+
+
+	@Override
+	public void draw(float dt) {
+
+		world.step(dt, 3,3);
+
+		lvl1.update();
+		batch.setProjectionMatrix(cam.combined);
+
+//        CameraManager.LockOnTarger(cam, new Vector2(car.body.getPosition()));
+		cam.update();
+
+
 		batch.begin();
-		
-		
-		//Coin.setPosition(650, 0);
-		if(! isoverlapping&&b) {
-			Coin.draw(batch);
-		}
-		else {
-			b=false;
-			if(b1) {
-				score+=20;
-				b1=false;
-				Save.gd.setTenativeScore(score);
-				gsm.setState(GameStateManager.GAMEOVER);
-				return;
-			}
-		}
-		if(! isoverlapping_1&&b_1) {
-			Coin_1.draw(batch);
-		}
-		else {
-			b_1=false;
-			if(b1_1) {
-				score+=20;
-				b1_1=false;
-			}
-		}
-		
-		Characters.draw(batch);
-		
-		batch.end();
-		
-	}
-	
-	public void handleInput() {
-		
-		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			currframe_char++;
 
-	        if (currframe_char > 7) 
-	        	currframe_char = 1;
-	        
-	        String inttostring = Integer.toString(currframe_char);
-	        String index_char = "00"+inttostring;
-	        x_postion+=10;
-	        x_position+=10;
-	        
-	        Characters.setPosition(x_postion, 0);
-	        Characters.setRegion(atlas.findRegion(index_char));
-		}
-	}
-	
-	public void dispose() {
-		batch.dispose();
-	}
+		car.update(batch);
+		car.CharacterState(dt);
+
+
+		BunchBag.update(batch);
+
+
+		batch.end();
+
+		debug.render(world, cam.combined);
+
+
+    }
+
+    public void handleInput() {
+
+
+    }
+
+    public void dispose() {
+
+    }
 }

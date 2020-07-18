@@ -1,6 +1,8 @@
 package com.mygdx.game.gamestates;
 
 
+import com.badlogic.gdx.Gdx;
+
 public class GameStateManager {
 	
 	// current game state
@@ -27,8 +29,8 @@ public class GameStateManager {
 		gameState.update(dt);
 	}
 	
-	public void draw() {
-		gameState.draw();
+	public void draw(float dt) {
+		gameState.draw(dt);
 	}
 	
 }

@@ -46,11 +46,7 @@ public class Box2dCollideListeners implements ContactListener {
             return true;
         }
 
-        if (fb.getUserData() != null && fb.getUserData().equals("foot")) {
-            return true;
-        }
-
-        return false;
+        return fb.getUserData() != null && fb.getUserData().equals("foot");
     }
 
 }

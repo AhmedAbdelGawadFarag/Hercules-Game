@@ -47,7 +47,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		gsm.update(Gdx.graphics.getDeltaTime());
-		gsm.draw();
+		gsm.draw(Gdx.graphics.getDeltaTime());
 		
 	}
 	

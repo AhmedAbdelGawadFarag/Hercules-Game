@@ -64,7 +64,7 @@ public class MenuState extends GameState {
 		handleInput();
 	}
 	
-	public void draw() {
+	public void draw(float dt) {
 		
 		sb.setProjectionMatrix(MyGdxGame.cam.combined);
 		sr.setProjectionMatrix(MyGdxGame.cam.combined);

@@ -7,8 +7,8 @@ public class GameData implements Serializable {
 	private static final long serialVersionUID = 1;
 	
 	private final int MAX_SCORES = 10;
-	private long[] highScores;
-	private String[] names;
+	private final long[] highScores;
+	private final String[] names;
 	
 	private long tentativeScore;
 	
