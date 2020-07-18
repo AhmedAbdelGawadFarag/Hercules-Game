@@ -2,7 +2,7 @@ package Characters;
 
 public interface MovableCharacter {
 
-    void MoveRight();
-    void MoveLeft();
+    void MoveRight(float speedx,float speedy);
+    void MoveLeft(float speed,float speedy);
 
 }

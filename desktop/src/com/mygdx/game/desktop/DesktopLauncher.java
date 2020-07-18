@@ -10,8 +10,8 @@ public class DesktopLauncher {
 		
 		config.title = "Collision Detection";
 		config.useGL30 = false;
-		config.width = 800;
-		config.height = 400;
+		config.width = 1280;
+		config.height = 960;
 		
 		new LwjglApplication(new MyGdxGame(), config);
 	}

@@ -1,7 +1,10 @@
 package Characters;
 
+import Box2dHelpers.Box2dCollideListeners;
 import Box2dHelpers.Box2dCollisionList;
 import INPUTS.UserINputs;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -32,18 +35,18 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
         Attack2Animation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("secondAttack"));
         RunningAnimation = new Animation<TextureRegion>(1 / 20f, atlas.findRegions("running"));
 
-       MakeFoot(height);
+        MakeFoot(height);
 
 
         Box2dCollisionList.GiveCollisonBitToBody(body, Box2dCollisionList.BIT_CHARACTER);
 
     }
 
-    public void MakeFoot(int height){
+    public void MakeFoot(int height) {
         //create foot fixture
         FixtureDef foot = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(2f / 200f, 3f / 200f,new Vector2(0,-height/200f),0);
+        shape.setAsBox(2f / 200f, 3f / 200f, new Vector2(0, -40 / 200f), 0);
         foot.shape = shape;
         //make it sensor
         foot.isSensor = true;
@@ -83,11 +86,16 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
     public void CharacterState(float dt) {
         if (inputs.isRunningRight()) {
             direction = false;
-            MoveRight();
+            if (Box2dCollideListeners.playeronGround == false)//body in the air
+                this.body.applyForceToCenter(1f, 0, true);
+            else
+                MoveRight(speed,0);
+
             PlayRunningRightAnimation(dt, direction);
         }
 
-        if (inputs.isStanding()) {
+        if (inputs.isStanding() && Box2dCollideListeners.playeronGround == true) {
+            System.out.println(inputs.isStanding());
             Stop();
             ResetElapsetTimes();
             ResetFrame(direction);
@@ -121,13 +129,18 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
 
         if (inputs.isRunningleft()) {
             direction = true;
-            MoveLeft();
+
+            if (Box2dCollideListeners.playeronGround == false)//body in the air
+                this.body.applyForceToCenter(1, 0, true);
+            else
+                MoveLeft(speed,0);
+
             PlayRunningLeftAnimation(dt, direction);
 
         }
 
-        if ( inputs.CanJump() ) {
-            System.out.println(inputs.isJumping());
+        if (Box2dCollideListeners.playeronGround == true && Gdx.input.isKeyPressed(Input.Keys.UP)) {
+
             this.Jump();
 
         }
@@ -138,7 +151,6 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
     private void Stop() {
 
         body.setLinearVelocity(0, 0);
-
 
     }
 
@@ -186,16 +198,16 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
 
     public void Jump() {
 
-        this.body.applyForceToCenter(0, 1300, true);
+        this.body.applyForceToCenter(0, 300, true);
 
     }
 
     @Override
-    public void MoveRight() {
+    public void MoveRight(float speedx,float speedy) {
         body.setLinearVelocity(speed, 0);
     }
 
-    public void MoveLeft() {
+    public void MoveLeft(float speedx,float speedy) {
         body.setLinearVelocity(-speed, 0);
     }
 }

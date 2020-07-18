@@ -7,6 +7,8 @@ import Characters.GameCharacter;
 import Characters.MainCharacter;
 import Characters.StaticCharacters;
 import INPUTS.UserINputs;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector3;
 import map.Level1Map;
 
 import com.badlogic.gdx.Gdx;
@@ -49,12 +51,12 @@ public class PlayState extends GameState {
 		input = new UserINputs();
 		Gdx.input.setInputProcessor(input);
 
-		car = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 30, 60, 1.45f, input);
-		BunchBag = new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 300, 400, 30, 60);
+		car = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 20, 80, 1f, input);
+		BunchBag = new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 300, 400, 20, 80);
 
 
-		cam = new OrthographicCamera(Box2dConversions.unitsToMetres(1280), Box2dConversions.unitsToMetres(960));
-		cam.translate(640 / 200f, 480 / 200f);
+		cam = new OrthographicCamera();
+		cam.setToOrtho(false,Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/1);
 
 
 		batch = new SpriteBatch();
@@ -69,8 +71,6 @@ public class PlayState extends GameState {
 
     public void update(float dt) {
         handleInput();
-
-
     }
 
 
@@ -79,19 +79,18 @@ public class PlayState extends GameState {
 	@Override
 	public void draw(float dt) {
 
-		world.step(dt, 3,3);
-
 		lvl1.update();
 		batch.setProjectionMatrix(cam.combined);
 
-//        CameraManager.LockOnTarger(cam, new Vector2(car.body.getPosition()));
 		cam.update();
 
 
 		batch.begin();
+		world.step(1/60f, 12,2);
 
 		car.update(batch);
 		car.CharacterState(dt);
+
 
 
 		BunchBag.update(batch);
@@ -99,10 +98,20 @@ public class PlayState extends GameState {
 
 		batch.end();
 
-		debug.render(world, cam.combined);
+		debug.render(world, cam.combined.scl(200f));
 
 
     }
+
+	public void cameraUpdate(float delta) {
+		Vector3 position = cam.position;
+		position.x = Box2dConversions.metresToUnits(car.body.getPosition().x);
+		position.y = Box2dConversions.metresToUnits(car.body.getPosition().y);
+		cam.position.set(position);
+
+		cam.update();
+	}
+
 
     public void handleInput() {
 

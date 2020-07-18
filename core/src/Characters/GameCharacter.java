@@ -32,7 +32,7 @@ public abstract class GameCharacter {
 
 
         Sprite temp = new Sprite(currframe);
-        temp.setSize((width) / (Box2dConversions.ppm / 2f), (height) / (Box2dConversions.ppm / 2f));
+        temp.setSize((width) / (Box2dConversions.ppm ), (height) / (Box2dConversions.ppm));
 
         //set the sprite
         body.setUserData(temp);
@@ -50,10 +50,13 @@ public abstract class GameCharacter {
 
         def.position.set(zx, zy);
 
+
         body = world.createBody(def);
 
+
+
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(Box2dConversions.unitsToMetres(width-10), Box2dConversions.unitsToMetres(height));
+        shape.setAsBox(Box2dConversions.unitsToMetres(width-10)/2, Box2dConversions.unitsToMetres(height)/2);
 
 
         FixtureDef fdef = new FixtureDef();
