@@ -3,15 +3,16 @@
  <tileset firstgid="1" source="image1-12.tsx"/>
  <layer id="1" name="Tile Layer 1" width="350" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt3FlWE0EYQOHGCU2yCRVEkmzCAYckm1BRIclKcB5WgSKorALFeRXOAgvw8pBHuk86nRRJ3e+c+9RD/n6pl6qTUpIkZaokkqRRqFKN6qEHkaRINKhJrdCDSFIk2tShbuhBJCkSK3SP7oceRJIisUov6GXoQSQpElv0jt6HHkSSIvGdftDP0IOkeEJP6Rk9pwf0kB7R44BzSVIepakkKVNlKvQkB3tNb+gtbdIavaJ12gg4lyTlUWW9rVH9EK+7n+kLfaVvtE0f6CN9CjiXJOXRYL1tUusQr7v/aId2aY9+0W/6Q38DziVJeXiOTJJGK+Q5MvfLJMUo5Dky98skxSjkOTL3yyTFKOQ5MvfLJMVoHM6RSdIkKfocmXtlkpSu6HNk7pVJUrqiz5G5VyZJ6Yo+R+ZemSSlG4f/I5OkSTIO/0cmSZPEc2SSNFrj8H9kkjRJ2qy3Heq67krSSOwvt0foKB2j43SCpukknaISlTPuyXp+0Ou9GSpD/sY875ekfpymM3SWZmiWztEcnad5qlIt456s5we93puhPuRvzPN+SerHBbpIl+gyLdAVukrX6Do1qJlxT9bzg17vzdAa8jfmeb8k9eMG3aRbtEi36Q7dpSVapnbG9SKuZf3+fh3qDvEb875fkvrxH/sdm7I=
+   eJzt3UduFEEYQOEaZ499CTLYvgQZbF+CDLYvQc6YdAFyzlyAnDMXIOfMAXgsZzPqaU13jbrfJ71tq1alkf5fU9UQQh/1B0lSHgZokIZiH0SSSmKYRmg09kEkqSTGaJwmYh9EkkpiB+2kXbEPIkklcZrO0NnYB5GkkrhPD+hh7INIUkl8pi/0NeIZ9tF+OkAHaTftoUnaG/FckpSFaiWEPuqvxDvDJbpMV+gqnaPzdIEuxjuWJGWiFX7vPqPn9IJe0iN6TE/oacRzSVIWWuH37i/6TX/oL32j7/SDfsY7liRlwv1dScpX1vu7zswkqVbW+7vOzCSpVtb7u87MJKlW1vsMzswkqVYr7DNIUpmk3WdwXiZJ6aTdZ3BeJknppN1ncF4mSemk3WdwXiZJ6bTC/zNk5f+osI3aqYM6qYu6qYd6qRp811NSvoq8zzCFptI0mk4zaCbNotk0J/iup6T8DXDfDtJQAe/duTSP5tMCWkiLaDEtoaXBdz0l5W+Y+3aERgt47y6j5bSCVtIqWk1raC2tC/4vkKT8jXHfjtNEAe/d9bSBNtIm2kxbaCtto+3Bdz0l5S/p7CnJbKoZ36g332p0TnaIDtMROkrH6DidoJN0Kviup6T8JZ09JZlNNeMb9eZbjc7JrtF1ukE36Rbdpjt0l+4F3/WUlL+ks6cks6lmfKPefKvROdkrek1v6C29o/f0gT7Sp1DsPTpJrSnp7CnJbKoZ36g332p0TlaphNBG7dRBndRF3dRDvZVi79FJak3/AMpGxFY=
   </data>
  </layer>
  <objectgroup id="2" name="Ground">
-  <object id="1" x="1" y="417" width="717" height="62"/>
-  <object id="2" x="-1" y="0" width="49" height="413"/>
-  <object id="3" x="321" y="272" width="125" height="66"/>
-  <object id="4" x="497" y="191" width="126" height="64"/>
-  <object id="5" x="655" y="112" width="127" height="64"/>
-  <object id="7" x="910.667" y="417.333" width="192" height="62.6667"/>
+  <object id="1" x="1.33333" y="0" width="44" height="416"/>
+  <object id="2" x="0" y="417.333" width="590.667" height="62.6667"/>
+  <object id="3" x="224" y="270.667" width="128" height="64"/>
+  <object id="4" x="382.667" y="189.333" width="128" height="66.6667"/>
+  <object id="5" x="529.333" y="110.667" width="125.333" height="64"/>
+  <object id="6" x="688" y="414.667" width="189.333" height="62.6667"/>
+  <object id="7" x="878.667" y="337.333" width="192" height="140"/>
  </objectgroup>
 </map>
