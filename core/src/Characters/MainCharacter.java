@@ -62,13 +62,13 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
         Body sword;
         BodyDef def = new BodyDef();
         def.type = BodyDef.BodyType.DynamicBody;
-        def.position.set(body.getPosition().x + 30 / 200f, body.getPosition().y);
+        def.position.set(body.getPosition().x + 5 / 200f, body.getPosition().y);
 
         sword = world.createBody(def);
 
         PolygonShape shape = new PolygonShape();
 
-        shape.setAsBox(10 / 200f, 10 / 200f);
+        shape.setAsBox(5 / 200f, 5 / 200f);
 
         FixtureDef fdef = new FixtureDef();
         fdef.shape = shape;
