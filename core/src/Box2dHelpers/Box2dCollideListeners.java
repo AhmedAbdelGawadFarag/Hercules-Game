@@ -4,7 +4,7 @@ import INPUTS.UserINputs;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class Box2dCollideListeners implements ContactListener {
-    public static boolean playeronGround = true;
+    public static boolean playeronGround = false;
 
     @Override
     public void beginContact(Contact contact) {

@@ -42,7 +42,7 @@ public class GamePlayScreen extends ScreenAdapter {
         input = new UserINputs();
         Gdx.input.setInputProcessor(input);
 
-        car = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 200, 400, 30, 60, 1.45f, input);
+        car = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 30, 60, 1.45f, input);
         BunchBag = new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 300, 400, 30, 60);
 
 

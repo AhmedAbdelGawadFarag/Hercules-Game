@@ -36,7 +36,7 @@ public class Level1Map {
 		}
 	}
 	public void update() {
-	//	camera.update();
+//		camera.update();
 		renderer.setView(camera);
 		b2dr.render(world, camera.combined);
 		renderer.render();

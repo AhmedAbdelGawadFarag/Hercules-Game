@@ -85,15 +85,14 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
             direction = false;
             MoveRight();
             PlayRunningRightAnimation(dt, direction);
-
         }
 
         if (inputs.isStanding()) {
             Stop();
             ResetElapsetTimes();
             ResetFrame(direction);
-
         }
+
         if (inputs.isAttacking1()) {
             swordtime += dt;
 //            System.out.println("1");

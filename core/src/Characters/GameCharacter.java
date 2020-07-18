@@ -76,6 +76,7 @@ public abstract class GameCharacter {
 
     public void setSprite(TextureRegion region, boolean reverse) {
         Sprite s = (Sprite) body.getUserData();
+
         s.setRegion(currframe);
 
         if (reverse == true)//reverse
