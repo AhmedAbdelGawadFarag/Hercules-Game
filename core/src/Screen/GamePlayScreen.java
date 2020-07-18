@@ -7,6 +7,8 @@ import Characters.GameCharacter;
 import Characters.MainCharacter;
 import Characters.StaticCharacters;
 import INPUTS.UserINputs;
+import map.Level1Map;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
@@ -28,7 +30,8 @@ public class GamePlayScreen extends ScreenAdapter {
 
     private GameCharacter car;
     private GameCharacter BunchBag;
-
+    
+    private Level1Map lvl1;
     private Body Floor;
 
     public GamePlayScreen(HerculesGame game) {
@@ -46,25 +49,25 @@ public class GamePlayScreen extends ScreenAdapter {
         cam = new OrthographicCamera(Box2dConversions.unitsToMetres(1280), Box2dConversions.unitsToMetres(960));
         cam.translate(640 / 200f, 480 / 200f);
 
-
+        
         batch = new SpriteBatch();
 
-
+       lvl1 = new Level1Map(cam, world);
         world.setContactListener(new Box2dCollideListeners());
 
 
-        MakeFloor();
+       // MakeFloor();
     }
 
     @Override
     public void render(float delta) {
 
-        Gdx.gl.glClearColor(0f, 0f, 0f, 1);
+        Gdx.gl.glClearColor(135/255f, 206/255f, 235/255f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        world.step(delta, 3, 3);
+        world.step(delta, 3,3);
 
-
+        lvl1.update();
         batch.setProjectionMatrix(cam.combined);
 
 //        CameraManager.LockOnTarger(cam, new Vector2(car.body.getPosition()));
