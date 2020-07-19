@@ -3,6 +3,7 @@ package Box2dHelpers;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.gamestates.PlayState;
 
+
 public class Box2dCollideListeners implements ContactListener {
     public static boolean playeronGround = false;
 
@@ -36,7 +37,10 @@ public class Box2dCollideListeners implements ContactListener {
         if (FootCollidedWithGorund(fa, fb)) {
             playeronGround = false;
 
+
             System.out.println("air");
+
+
         }
 
     }
