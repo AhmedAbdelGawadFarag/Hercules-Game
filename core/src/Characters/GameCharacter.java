@@ -28,7 +28,7 @@ public abstract class GameCharacter {
         this.bodyfixture = bodyfixture;
     }
 
-    public GameCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height) {
+    public GameCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height,String FixtureName) {
         currframe = atlas.findRegion("standing", 0);
 
         this.atlas = atlas;
@@ -38,7 +38,7 @@ public abstract class GameCharacter {
 //        RunningAnimation = new Animation<TextureRegion>(1 / 15f, atlas.findRegions("running"));
 
         //making the character
-        makeCharacter(x, y, width, height);
+        makeCharacter(x, y, width, height,FixtureName);
 
 
         Sprite temp = new Sprite(currframe);
@@ -51,7 +51,7 @@ public abstract class GameCharacter {
     }
 
 
-    public void makeCharacter(float x, float y, int width, int height) {//dynamic character
+    public void makeCharacter(float x, float y, int width, int height,String FixtureName) {//dynamic character
         BodyDef def = new BodyDef();
         def.type = BodyDef.BodyType.DynamicBody;
 
@@ -72,7 +72,7 @@ public abstract class GameCharacter {
         fdef.shape = shape;
 
         bodyfixture = body.createFixture(fdef);
-
+        bodyfixture.setUserData(FixtureName);
 
     }
 

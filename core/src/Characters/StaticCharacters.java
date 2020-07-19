@@ -7,8 +7,8 @@ import com.badlogic.gdx.physics.box2d.World;
 public class StaticCharacters extends GameCharacter {
 
 
-    public StaticCharacters(World world, TextureAtlas atlas, float x, float y, int width, int height) {
-        super(world, atlas, x, y, width, height);
+    public StaticCharacters(World world, TextureAtlas atlas, float x, float y, int width, int height,String FixtureName) {
+        super(world, atlas, x, y, width, height,FixtureName);
 
 
         Box2dCollisionList.GiveCollisonBitToBody(this.bodyfixture, Box2dCollisionList.BIT_STATIC_CHARACTER);
@@ -16,6 +16,7 @@ public class StaticCharacters extends GameCharacter {
         Box2dCollisionList.MakeBodyCollideWith(this.bodyfixture, Box2dCollisionList.BIT_SWORD);
         Box2dCollisionList.MakeBodyCollideWith(this.bodyfixture, Box2dCollisionList.BIT_GROUND);
 
+        System.out.println(this.bodyfixture.getUserData());
 
     }
 

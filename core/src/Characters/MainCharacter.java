@@ -30,8 +30,8 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
     private Fixture swordFixture;
     private Fixture footFixture;
 
-    public MainCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height, float speed, UserINputs inputs) {
-        super(world, atlas, x, y, width, height);
+    public MainCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height, float speed, UserINputs inputs,String FixtureName) {
+        super(world, atlas, x, y, width, height,FixtureName);
         this.inputs = inputs;
         this.speed = speed;
         Attacking1Animation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("attacking1"));
