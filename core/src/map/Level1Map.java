@@ -21,7 +21,7 @@ public class Level1Map {
 	public Level1Map(OrthographicCamera camera,World world) {
 		// TODO Auto-generated constructor stub
 		mapLoader = new TmxMapLoader();
-		map = mapLoader.load("lvl1.tmx");
+		map = mapLoader.load("Map/lvl1.tmx");
 		renderer = new OrthogonalTiledMapRenderer(map,1f/200f);
 		this.camera= camera;
 		this.world = world;
@@ -34,6 +34,8 @@ public class Level1Map {
 		for(MapObject object: map.getLayers().get(1).getObjects().getByType(RectangleMapObject.class)) {
 			new Ground(world,object);
 		}
+		
+
 	}
 	public void update() {
 //		camera.update();

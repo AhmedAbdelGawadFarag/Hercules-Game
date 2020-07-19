@@ -3,7 +3,7 @@ package Box2dHelpers;
 import INPUTS.UserINputs;
 import com.badlogic.gdx.physics.box2d.*;
 
-import javax.jws.soap.SOAPBinding;
+//import javax.jws.soap.SOAPBinding;
 
 public class Box2dCollideListeners implements ContactListener {
     public static boolean playeronGround = false;
@@ -30,7 +30,7 @@ public class Box2dCollideListeners implements ContactListener {
         if (FootCollidedWithGorund(fa, fb)) {
             playeronGround = false;
 
-        System.out.println("air");
+        //System.out.println("air");
         }
     }
 

@@ -97,7 +97,7 @@ public class PlayState extends GameState {
 
 
 		batch.end();
-
+		cameraUpdate(dt);
 		debug.render(world, cam.combined.scl(200f));
 
 
