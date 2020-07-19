@@ -4,12 +4,14 @@ import Box2dHelpers.Box2dConversions;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.physics.box2d.*;
 
+
 public abstract class GameCharacter {
+
 
     //world of the attributes
     public World world;
     public Body body;
-
+    protected Fixture bodyfixture;
     TextureAtlas atlas;
     //frames
     TextureRegion currframe;
@@ -17,6 +19,14 @@ public abstract class GameCharacter {
 
     float RunningElapsedTime = 0;
     float speed;
+
+    public Fixture getBodyfixture() {
+        return bodyfixture;
+    }
+
+    public void setBodyfixture(Fixture bodyfixture) {
+        this.bodyfixture = bodyfixture;
+    }
 
     public GameCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height) {
         currframe = atlas.findRegion("standing", 0);
@@ -32,7 +42,7 @@ public abstract class GameCharacter {
 
 
         Sprite temp = new Sprite(currframe);
-        temp.setSize((width) / (Box2dConversions.ppm ), (height) / (Box2dConversions.ppm));
+        temp.setSize((width) / (Box2dConversions.ppm), (height) / (Box2dConversions.ppm));
 
         //set the sprite
         body.setUserData(temp);
@@ -54,19 +64,17 @@ public abstract class GameCharacter {
         body = world.createBody(def);
 
 
-
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(Box2dConversions.unitsToMetres(width-10)/2, Box2dConversions.unitsToMetres(height)/2);
+        shape.setAsBox(Box2dConversions.unitsToMetres(width - 10) / 2, Box2dConversions.unitsToMetres(height) / 2);
 
 
         FixtureDef fdef = new FixtureDef();
         fdef.shape = shape;
 
-        body.createFixture(fdef);
+        bodyfixture = body.createFixture(fdef);
 
 
     }
-
 
 
     public void SetFrameFromAnimation(Animation<TextureRegion> animation, boolean looping, float elapsedTime, boolean ReverseFrame) {
@@ -100,6 +108,7 @@ public abstract class GameCharacter {
 
 
     }
+
 
 
     public void ResetFrame(boolean reverse) {

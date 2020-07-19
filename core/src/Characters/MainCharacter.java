@@ -27,6 +27,8 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
     float swordtime = 1.32f;
     float JumpingTime = 0f;
 
+    private Fixture swordFixture;
+    private Fixture footFixture;
 
     public MainCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height, float speed, UserINputs inputs) {
         super(world, atlas, x, y, width, height);
@@ -36,26 +38,29 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
         Attack2Animation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("secondAttack"));
         RunningAnimation = new Animation<TextureRegion>(1 / 20f, atlas.findRegions("running"));
 
-        MakeFoot(width,height);
+        MakeFoot(width, height);
 
 
-        Box2dCollisionList.GiveCollisonBitToBody(body, Box2dCollisionList.BIT_CHARACTER);
+        Box2dCollisionList.GiveCollisonBitToBody(bodyfixture, Box2dCollisionList.BIT_CHARACTER);
 
     }
 
-    public void MakeFoot(int width,int height) {
+    public void MakeFoot(int width, int height) {
         //create foot fixture
         FixtureDef foot = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(Box2dConversions.unitsToMetres(width)/2, 0, new Vector2(0, -40 / 200f), 0);
+        shape.setAsBox(Box2dConversions.unitsToMetres(width) / 2, 0, new Vector2(0, -50 / 200f), 0);
         foot.shape = shape;
         //make it sensor
         foot.isSensor = true;
-
         foot.filter.categoryBits = Box2dCollisionList.BIT_CHARACTER;
-        foot.filter.maskBits = Box2dCollisionList.BIT_GROUND;
+//        foot.filter.maskBits = Box2dCollisionList.BIT_GROUND;
 
-        body.createFixture(foot).setUserData("foot");
+
+        footFixture = body.createFixture(foot);
+
+        footFixture.setUserData("foot");
+
     }
 
     public void MakeSword() {
@@ -72,15 +77,18 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
 
         FixtureDef fdef = new FixtureDef();
         fdef.shape = shape;
-
         fdef.isSensor = true;
 
-        sword.createFixture(fdef).setUserData("sword");
 
-        Box2dCollisionList.GiveCollisonBitToBody(sword, Box2dCollisionList.BIT_SWORD);
-        Box2dCollisionList.MakeBodyCollideWith(sword, Box2dCollisionList.BIT_STATIC_CHARACTER);
-        Box2dCollisionList.MakeBodyCollideWith(sword, Box2dCollisionList.BIT_GROUND);
+        swordFixture = sword.createFixture(fdef);
+        swordFixture.setUserData("sword");
 
+        Box2dCollisionList.GiveCollisonBitToBody(swordFixture, Box2dCollisionList.BIT_SWORD);
+        Box2dCollisionList.MakeBodyCollideWith(swordFixture,Box2dCollisionList.BIT_STATIC_CHARACTER);
+
+
+//        System.out.println(sword.getFixtureList().get(0).getFilterData().categoryBits);
+//        System.out.println(sword.getFixtureList().get(0).getFilterData().maskBits);
     }
 
     @Override
@@ -90,13 +98,13 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
             if (Box2dCollideListeners.playeronGround == false)//body in the air
                 this.body.applyForceToCenter(1f, 0, true);
             else
-                MoveRight(speed,0);
+                MoveRight(speed, 0);
 
             PlayRunningRightAnimation(dt, direction);
         }
 
+
         if (inputs.isStanding() && Box2dCollideListeners.playeronGround == true) {
-            System.out.println(inputs.isStanding());
             Stop();
             ResetElapsetTimes();
             ResetFrame(direction);
@@ -134,7 +142,7 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
             if (Box2dCollideListeners.playeronGround == false)//body in the air
                 this.body.applyForceToCenter(-1, 0, true);
             else
-                MoveLeft(speed,0);
+                MoveLeft(speed, 0);
 
             PlayRunningLeftAnimation(dt, direction);
 
@@ -204,11 +212,11 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
     }
 
     @Override
-    public void MoveRight(float speedx,float speedy) {
+    public void MoveRight(float speedx, float speedy) {
         body.setLinearVelocity(speed, 0);
     }
 
-    public void MoveLeft(float speedx,float speedy) {
+    public void MoveLeft(float speedx, float speedy) {
         body.setLinearVelocity(-speed, 0);
     }
 }

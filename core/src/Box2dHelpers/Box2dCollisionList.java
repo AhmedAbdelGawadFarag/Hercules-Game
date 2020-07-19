@@ -1,6 +1,7 @@
 package Box2dHelpers;
 
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
@@ -16,57 +17,27 @@ public abstract class Box2dCollisionList {
     public static final short BIT_GROUND = 16;
 
 
-    public static void GiveCollisonBitToBody(Body body, short bit) {
+    public static void GiveCollisonBitToBody(Fixture fixture, short bit) {
+        Filter filter = fixture.getFilterData();
 
-        Fixture f = body.getFixtureList().get(0);
-        FixtureDef fdef = new FixtureDef();
-        fdef.shape = f.getShape();
-
-        fdef.filter.categoryBits = bit;
-        fdef.filter.maskBits = f.getFilterData().maskBits;
-
-        body.createFixture(fdef);
-
-        body.destroyFixture(f);
-    }
-
-    public static void MakeBodyCollideWith(Body body, short bit) {
-
-        Fixture f = body.getFixtureList().get(0);
-        FixtureDef fdef = new FixtureDef();
-
-        fdef.shape = f.getShape();
-
-        fdef.filter.categoryBits = f.getFilterData().categoryBits;
-
-        fdef.filter.maskBits = (f.getFilterData().maskBits);
-
-        if (fdef.filter.maskBits == -1)//if there is no colliders
-            fdef.filter.maskBits = 0;
-
-        fdef.filter.maskBits |= bit;
-
-        body.createFixture(fdef);
-
-        body.destroyFixture(f);
+        filter.categoryBits = bit;
+        fixture.setFilterData(filter);
 
     }
 
-    public static void GiveFriction(Body body,float val) {
+    public static void MakeBodyCollideWith(Fixture fixture, short bit) {
+        Filter filter = fixture.getFilterData();
 
-        Fixture f = body.getFixtureList().get(0);
-        FixtureDef fdef = new FixtureDef();
+        final short temp = filter.maskBits;
+        if (temp == -1)
+            filter.maskBits = bit;
+        else {
+            filter.maskBits |=bit;
+        }
 
-        fdef.shape = f.getShape();
+        fixture.setFilterData(filter);
 
-        fdef.filter.categoryBits = f.getFilterData().categoryBits;
-
-        fdef.filter.maskBits = (f.getFilterData().maskBits);
-        fdef.friction = val;
-
-        body.createFixture(fdef);
-
-        body.destroyFixture(f);
     }
+
 
 }

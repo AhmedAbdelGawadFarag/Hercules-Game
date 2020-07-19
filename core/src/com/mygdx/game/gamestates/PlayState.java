@@ -24,19 +24,19 @@ import com.badlogic.gdx.physics.box2d.*;
 
 public class PlayState extends GameState {
 
-    private World world;
+	public static World world;
 
-    private SpriteBatch batch;
-    private Box2DDebugRenderer debug;
-    private OrthographicCamera cam;
-    private UserINputs input;
+    public static SpriteBatch batch;
+    public static Box2DDebugRenderer debug;
+	public static OrthographicCamera cam;
+	public static UserINputs input;
 
 
-    private GameCharacter car;
-    private GameCharacter BunchBag;
+	public static GameCharacter car;
+	public static GameCharacter BunchBag;
 
-    private Level1Map lvl1;
-    private Body Floor;
+	public static Level1Map lvl1;
+	public static Body Floor;
 
 
     public PlayState(GameStateManager gsm) {
@@ -52,7 +52,7 @@ public class PlayState extends GameState {
 		Gdx.input.setInputProcessor(input);
 
 		car = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 20, 80, 1f, input);
-		BunchBag = new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 300, 400, 20, 80);
+		BunchBag = new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 200, 400, 20, 80);
 
 
 		cam = new OrthographicCamera();

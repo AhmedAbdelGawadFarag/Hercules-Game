@@ -1,9 +1,7 @@
 package Box2dHelpers;
 
-import INPUTS.UserINputs;
 import com.badlogic.gdx.physics.box2d.*;
-
-import javax.jws.soap.SOAPBinding;
+import com.mygdx.game.gamestates.PlayState;
 
 public class Box2dCollideListeners implements ContactListener {
     public static boolean playeronGround = false;
@@ -16,7 +14,15 @@ public class Box2dCollideListeners implements ContactListener {
 
         if (FootCollidedWithGorund(fa, fb)) {
             playeronGround = true;
+            System.out.println("ground");
+        }
 
+        if (fa.getUserData() != null && fa.getUserData() == "sword") {
+            System.out.println("hit");
+        }
+
+        if (fb.getUserData() != null && fb.getUserData() == "sword") {
+            System.out.println("hit");
         }
 
 
@@ -30,8 +36,9 @@ public class Box2dCollideListeners implements ContactListener {
         if (FootCollidedWithGorund(fa, fb)) {
             playeronGround = false;
 
-        System.out.println("air");
+            System.out.println("air");
         }
+
     }
 
     @Override
