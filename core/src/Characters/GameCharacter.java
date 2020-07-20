@@ -18,7 +18,6 @@ public abstract class GameCharacter {
     protected TextureRegion currframe;
 
 
-
     float RunningElapsedTime = 0;
     float speed;
 
@@ -30,11 +29,12 @@ public abstract class GameCharacter {
         this.bodyfixture = bodyfixture;
     }
 
-    public GameCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height, String FixtureName) {
+    public GameCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height, String FixtureName, int health) {
         currframe = atlas.findRegion("standing", 0);
 
         this.atlas = atlas;
         this.world = world;
+
 
         //animation
 //        RunningAnimation = new Animation<TextureRegion>(1 / 15f, atlas.findRegions("running"));
@@ -47,7 +47,7 @@ public abstract class GameCharacter {
         temp.setSize((width) / (Box2dConversions.ppm), (height) / (Box2dConversions.ppm));
 
         //set the sprite
-        body.setUserData(temp);
+        body.setUserData(new BodyData(temp, health));
 
 
     }
@@ -80,15 +80,16 @@ public abstract class GameCharacter {
 
 
     public void SetFrameFromAnimation(Animation<TextureRegion> animation, boolean looping, float elapsedTime, boolean ReverseFrame) {
-
+        if (currframe == null) return;//object is removed
         currframe = animation.getKeyFrame(elapsedTime, looping);
         setSprite(currframe, ReverseFrame);
-
 
     }
 
     public void setSprite(TextureRegion region, boolean reverse) {
-        Sprite s = (Sprite) body.getUserData();
+        if (currframe == null) return;//object is removed
+
+        Sprite s = this.getSpriteFromBody();
 
         s.setRegion(currframe);
 
@@ -101,9 +102,12 @@ public abstract class GameCharacter {
     public void update(SpriteBatch batch) {
         //get currentframe
 
+        if (currframe != null && isDead()) this.Remove();
+
+
         if (currframe == null) return; // object is removed
 
-        Sprite sprite = (Sprite) body.getUserData();
+        Sprite sprite = this.getSpriteFromBody();
 
         sprite.setPosition(body.getPosition().x - sprite.getWidth() / 2f, body.getPosition().y - sprite.getHeight() / 2f);
         sprite.draw(batch);
@@ -125,6 +129,25 @@ public abstract class GameCharacter {
         currframe = null;
     }
 
+    private Sprite getSpriteFromBody() {
+        BodyData bd = (BodyData) body.getUserData();
+        return bd.sprite;
+    }
+
+    private int getHealthFromBody() {
+
+        BodyData bd = (BodyData) body.getUserData();
+
+        return bd.health;
+    }
+
+    private boolean isDead() {
+
+        if (getHealthFromBody() == 0) return true;
+        return false;
+
+    }
+
     public Body getBody() {
         return body;
     }
@@ -133,12 +156,11 @@ public abstract class GameCharacter {
         this.body = body;
     }
 
-    public Vector2 getPosition(){
+    public Vector2 getPosition() {
         return this.body.getPosition();
     }
 
     public abstract void CharacterState(float dt);
-
 
 
 }

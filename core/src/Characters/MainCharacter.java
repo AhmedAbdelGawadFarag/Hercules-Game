@@ -30,8 +30,8 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
     private Fixture swordFixture;
     private Fixture footFixture;
 
-    public MainCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height, float speed, UserINputs inputs,String FixtureName) {
-        super(world, atlas, x, y, width, height,FixtureName);
+    public MainCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height, float speed, UserINputs inputs,String FixtureName,int health) {
+        super(world, atlas, x, y, width, height,FixtureName,health);
         this.inputs = inputs;
         this.speed = speed;
         Attacking1Animation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("attacking1"));
@@ -84,7 +84,7 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
         swordFixture.setUserData("sword");
 
         Box2dCollisionList.GiveCollisonBitToBody(swordFixture, Box2dCollisionList.BIT_SWORD);
-        Box2dCollisionList.MakeBodyCollideWith(swordFixture,Box2dCollisionList.BIT_STATIC_CHARACTER);
+        Box2dCollisionList.MakeBodyCollideWith(swordFixture,Box2dCollisionList.BIT_ENEMY);
 
 
 //        System.out.println(sword.getFixtureList().get(0).getFilterData().categoryBits);

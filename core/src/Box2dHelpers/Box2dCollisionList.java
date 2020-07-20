@@ -10,7 +10,7 @@ public abstract class Box2dCollisionList {
 
     public static final short BIT_CHARACTER = 2;
 
-    public static final short BIT_STATIC_CHARACTER = 8;
+    public static final short BIT_ENEMY = 8;
 
     public static final short BIT_SWORD = 4;
 

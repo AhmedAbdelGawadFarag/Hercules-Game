@@ -1,5 +1,6 @@
 package Box2dHelpers;
 
+import Characters.BodyData;
 import com.badlogic.gdx.physics.box2d.*;
 
 import java.util.ArrayList;
@@ -7,7 +8,6 @@ import java.util.ArrayList;
 
 public class Box2dCollideListeners implements ContactListener {
     public static boolean playeronGround = false;
-    private static ArrayList<Body> BodiesToRemove = new ArrayList<Body>();
 
     @Override
     public void beginContact(Contact contact) {
@@ -22,12 +22,16 @@ public class Box2dCollideListeners implements ContactListener {
 
         if (fa.getUserData() != null && fa.getUserData() == "sword") {
             System.out.println("hit");
-            BodiesToRemove.add(fb.getBody());
+//            System.out.println(this.GetHealth(fb.getBody()));
+            this.decreseHealth(fb.getBody());
+
         }
 
         if (fb.getUserData() != null && fb.getUserData() == "sword") {
             System.out.println("hit");
-            BodiesToRemove.add(fa.getBody());
+//            System.out.println(this.GetHealth(fa.getBody()));
+            this.decreseHealth(fa.getBody());
+
         }
 
 
@@ -67,7 +71,16 @@ public class Box2dCollideListeners implements ContactListener {
         return fb.getUserData() != null && fb.getUserData().equals("foot");
     }
 
-    public static ArrayList<Body> getBodiesToRemove() {
-        return BodiesToRemove;
+
+    public int GetHealth(Body body) {
+
+        BodyData bd = (BodyData) body.getUserData();
+//        System.out.println("healt"+bd.health);
+        return bd.health;
     }
+    public void decreseHealth(Body body){
+        BodyData bd = (BodyData) body.getUserData();
+        bd.decreseHealth();
+    }
+
 }

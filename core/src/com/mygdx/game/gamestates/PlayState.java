@@ -51,7 +51,7 @@ public class PlayState extends GameState {
         input = new UserINputs();
         Gdx.input.setInputProcessor(input);
 
-        Hercules = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 40, 80, 1f, input, "hercules");
+        Hercules = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 40, 80, 1f, input, "hercules",1);
 
 
         cam = new OrthographicCamera(Box2dConversions.unitsToMetres(Gdx.graphics.getWidth()),Box2dConversions.unitsToMetres(Gdx.graphics.getHeight()));
@@ -65,8 +65,8 @@ public class PlayState extends GameState {
 
         //enmies
         enemies = new ArrayList<GameCharacter>();
-        enemies.add(new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 200, 400, 40, 80, "statchar"));
-        enemies.add(new Dragons(world, new TextureAtlas("dragons/Main.atlas"), 500, 400, 40, 80, "statchar",200));
+        enemies.add(new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 200, 400, 40, 80, "statchar",2));
+        enemies.add(new Dragons(world, new TextureAtlas("dragons/Main.atlas"), 500, 120, 40, 80, "statchar",200,2));
 
 
     }
@@ -94,7 +94,6 @@ public class PlayState extends GameState {
         //update enmeis array
         updateEnmies(batch,dt);
 
-        RemoveEnemies();
 
         batch.end();
 
@@ -124,22 +123,7 @@ public class PlayState extends GameState {
         }
     }
 
-    private void RemoveEnemies() {
-        ArrayList<Body> tobeRemoved = Box2dCollideListeners.getBodiesToRemove();
-        for (int i = 0; i < tobeRemoved.size(); i++) {
 
-            //search for the enemies
-            for (int j = 0; j < enemies.size(); j++) {
-                if(enemies.get(j).getBody() == tobeRemoved.get(i) ){
-                    //remove
-                    enemies.get(j).Remove();
-                }
-            }
-
-        }
-
-
-    }
 
     public void handleInput() {
 

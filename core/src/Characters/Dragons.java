@@ -1,5 +1,6 @@
 package Characters;
 
+import Box2dHelpers.Box2dCollisionList;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -10,9 +11,14 @@ public class Dragons extends FlyingCharacters {
     private Animation<TextureRegion> flyingAnimation;
     private float flyingElapsedTime = 0;
 
-    public Dragons(World world, TextureAtlas atlas, float x, float y, int width, int height, String FixtureName, float DistanceTravle) {
-        super(world, atlas, x, y, width, height, FixtureName, DistanceTravle);
+    public Dragons(World world, TextureAtlas atlas, float x, float y, int width, int height, String FixtureName, float DistanceTravle,int health) {
+        super(world, atlas, x, y, width, height, FixtureName, DistanceTravle,health);
         flyingAnimation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("flying"));
+
+        Box2dCollisionList.GiveCollisonBitToBody(this.bodyfixture, Box2dCollisionList.BIT_ENEMY);
+
+        Box2dCollisionList.MakeBodyCollideWith(this.bodyfixture, Box2dCollisionList.BIT_SWORD);
+        Box2dCollisionList.MakeBodyCollideWith(this.bodyfixture, Box2dCollisionList.BIT_GROUND);
 
     }
 
