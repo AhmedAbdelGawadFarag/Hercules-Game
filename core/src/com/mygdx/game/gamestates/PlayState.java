@@ -1,6 +1,7 @@
 package com.mygdx.game.gamestates;
 
 import Box2dHelpers.Box2dCollideListeners;
+import Box2dHelpers.Box2dCollisionList;
 import Box2dHelpers.Box2dConversions;
 import Characters.GameCharacter;
 import Characters.MainCharacter;
@@ -15,8 +16,10 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.bullet.collision.GdxCollisionObjectBridge;
 import map.Level1Map;
 
+import java.lang.reflect.GenericDeclaration;
 import java.util.ArrayList;
 //import com.hercules.HerculesGame;
 
@@ -53,8 +56,8 @@ public class PlayState extends GameState {
         Hercules = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 20, 80, 1f, input, "hercules");
 
 
-        cam = new OrthographicCamera();
-        cam.setToOrtho(false, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 1);
+        cam = new OrthographicCamera(Box2dConversions.unitsToMetres(Gdx.graphics.getWidth()),Box2dConversions.unitsToMetres(Gdx.graphics.getHeight()));
+        cam.translate(Box2dConversions.unitsToMetres(Gdx.graphics.getWidth()/2), Box2dConversions.unitsToMetres(Gdx.graphics.getHeight()/2));
 
 
         batch = new SpriteBatch();
@@ -80,7 +83,7 @@ public class PlayState extends GameState {
         lvl1.update();
         batch.setProjectionMatrix(cam.combined);
 
-        cam.update();
+        cameraUpdate();
 
 
         batch.begin();
@@ -93,22 +96,22 @@ public class PlayState extends GameState {
         RemoveEnemies();
 
         batch.end();
-        cameraUpdate(dt);
+
         Hercules.CharacterState(dt);
 
         //remove bodies
 
 
-        debug.render(world, cam.combined.scl(200f));
+        debug.render(world, cam.combined);
 
 
     }
 
-    private void cameraUpdate(float delta) {
-        Vector3 position = cam.position;
-        position.x = Box2dConversions.metresToUnits(Hercules.body.getPosition().x);
-        position.y = Box2dConversions.metresToUnits(Hercules.body.getPosition().y);
-        cam.position.set(position);
+    private void cameraUpdate() {
+        Vector2 position = Hercules.body.getPosition();
+        position.x = Box2dConversions.unitsToMetres(Hercules.body.getPosition().x);
+        position.y = Box2dConversions.unitsToMetres(Hercules.body.getPosition().y);
+        cam.position.set(position,0);
 
         cam.update();
     }
