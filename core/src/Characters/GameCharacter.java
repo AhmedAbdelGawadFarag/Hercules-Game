@@ -2,6 +2,7 @@ package Characters;
 
 import Box2dHelpers.Box2dConversions;
 import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 
@@ -9,12 +10,13 @@ public abstract class GameCharacter {
 
 
     //world of the attributes
-    public World world;
-    public Body body;
+    protected World world;
+    protected Body body;
     protected Fixture bodyfixture;
-    TextureAtlas atlas;
+    protected TextureAtlas atlas;
     //frames
-    TextureRegion currframe;
+    protected TextureRegion currframe;
+
 
 
     float RunningElapsedTime = 0;
@@ -28,7 +30,7 @@ public abstract class GameCharacter {
         this.bodyfixture = bodyfixture;
     }
 
-    public GameCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height,String FixtureName) {
+    public GameCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height, String FixtureName) {
         currframe = atlas.findRegion("standing", 0);
 
         this.atlas = atlas;
@@ -38,7 +40,7 @@ public abstract class GameCharacter {
 //        RunningAnimation = new Animation<TextureRegion>(1 / 15f, atlas.findRegions("running"));
 
         //making the character
-        makeCharacter(x, y, width, height,FixtureName);
+        makeCharacter(x, y, width, height, FixtureName);
 
 
         Sprite temp = new Sprite(currframe);
@@ -51,7 +53,7 @@ public abstract class GameCharacter {
     }
 
 
-    public void makeCharacter(float x, float y, int width, int height,String FixtureName) {//dynamic character
+    public void makeCharacter(float x, float y, int width, int height, String FixtureName) {//dynamic character
         BodyDef def = new BodyDef();
         def.type = BodyDef.BodyType.DynamicBody;
 
@@ -110,7 +112,6 @@ public abstract class GameCharacter {
     }
 
 
-
     public void ResetFrame(boolean reverse) {
 
         currframe = atlas.findRegion("standing", 0);
@@ -124,6 +125,20 @@ public abstract class GameCharacter {
         currframe = null;
     }
 
+    public Body getBody() {
+        return body;
+    }
+
+    public void setBody(Body body) {
+        this.body = body;
+    }
+
+    public Vector2 getPosition(){
+        return this.body.getPosition();
+    }
+
     public abstract void CharacterState(float dt);
+
+
 
 }

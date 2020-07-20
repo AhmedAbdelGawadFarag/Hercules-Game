@@ -3,6 +3,7 @@ package com.mygdx.game.gamestates;
 import Box2dHelpers.Box2dCollideListeners;
 import Box2dHelpers.Box2dCollisionList;
 import Box2dHelpers.Box2dConversions;
+import Characters.FlyingCharacters;
 import Characters.GameCharacter;
 import Characters.MainCharacter;
 import Characters.StaticCharacters;
@@ -69,6 +70,8 @@ public class PlayState extends GameState {
         enemies = new ArrayList<GameCharacter>();
         enemies.add(new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 200, 400, 40, 80, "statchar"));
 
+        enemies.add(new FlyingCharacters(world, new TextureAtlas("dragons/main.atlas"), 250, 400, 40, 80, "statchar"));
+
     }
 
 
@@ -109,9 +112,9 @@ public class PlayState extends GameState {
     }
 
     private void cameraUpdate() {
-        Vector2 position = Hercules.body.getPosition();
-        position.x = Box2dConversions.unitsToMetres(Hercules.body.getPosition().x);
-        position.y = Box2dConversions.unitsToMetres(Hercules.body.getPosition().y);
+        Vector2 position = Hercules.getPosition();
+        position.x = Box2dConversions.unitsToMetres(Hercules.getPosition().x);
+        position.y = Box2dConversions.unitsToMetres(Hercules.getPosition().y);
         cam.position.set(position,0);
 
         cam.update();
@@ -120,6 +123,7 @@ public class PlayState extends GameState {
     private void updateEnmies(SpriteBatch batch) {
         for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).update(batch);
+            enemies.get(i).CharacterState(1);
         }
     }
 
@@ -129,7 +133,7 @@ public class PlayState extends GameState {
 
             //search for the enemies
             for (int j = 0; j < enemies.size(); j++) {
-                if(enemies.get(j).body == tobeRemoved.get(i) ){
+                if(enemies.get(j).getBody() == tobeRemoved.get(i) ){
                     //remove
                     enemies.get(j).Remove();
                 }
