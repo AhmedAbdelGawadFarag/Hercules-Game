@@ -17,6 +17,11 @@ public abstract class GameCharacter {
     //frames
     protected TextureRegion currframe;
 
+    protected boolean isdead = false;
+
+    public boolean isIsdead() {
+        return isdead;
+    }
 
     float RunningElapsedTime = 0;
     float speed;
@@ -124,7 +129,7 @@ public abstract class GameCharacter {
 
     public void Remove() {
         if (currframe == null) return;//object is removed from the world
-
+        isdead = true;
         world.destroyBody(body);
         currframe = null;
     }

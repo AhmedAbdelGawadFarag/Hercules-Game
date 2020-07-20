@@ -1,23 +1,22 @@
 package com.mygdx.game.gamestates;
 
 import Box2dHelpers.Box2dCollideListeners;
-import Box2dHelpers.Box2dCollisionList;
 import Box2dHelpers.Box2dConversions;
-import Characters.*;
+import Characters.Dragons;
+import Characters.GameCharacter;
+import Characters.MainCharacter;
+import Characters.StaticCharacters;
 import INPUTS.UserINputs;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.bullet.collision.GdxCollisionObjectBridge;
 import map.Level1Map;
 
-import java.lang.reflect.GenericDeclaration;
 import java.util.ArrayList;
 //import com.hercules.HerculesGame;
 
@@ -51,11 +50,11 @@ public class PlayState extends GameState {
         input = new UserINputs();
         Gdx.input.setInputProcessor(input);
 
-        Hercules = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 40, 80, 1f, input, "hercules",1);
+        Hercules = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 40, 80, 1f, input, "hercules", 1);
 
 
-        cam = new OrthographicCamera(Box2dConversions.unitsToMetres(Gdx.graphics.getWidth()),Box2dConversions.unitsToMetres(Gdx.graphics.getHeight()));
-        cam.translate(Box2dConversions.unitsToMetres(Gdx.graphics.getWidth()/2), Box2dConversions.unitsToMetres(Gdx.graphics.getHeight()/2));
+        cam = new OrthographicCamera(Box2dConversions.unitsToMetres(Gdx.graphics.getWidth()), Box2dConversions.unitsToMetres(Gdx.graphics.getHeight()));
+        cam.translate(Box2dConversions.unitsToMetres(Gdx.graphics.getWidth() / 2), Box2dConversions.unitsToMetres(Gdx.graphics.getHeight() / 2));
 
 
         batch = new SpriteBatch();
@@ -65,8 +64,8 @@ public class PlayState extends GameState {
 
         //enmies
         enemies = new ArrayList<GameCharacter>();
-        enemies.add(new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 200, 400, 40, 80, "statchar",2));
-        enemies.add(new Dragons(world, new TextureAtlas("dragons/Main.atlas"), 500, 120, 40, 80, "statchar",200,2));
+        enemies.add(new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 200, 400, 40, 80, "statchar", 2));
+        enemies.add(new Dragons(world, new TextureAtlas("dragons/Main.atlas"), 500, 100, 40, 80, "statchar", 200, 2));
 
 
     }
@@ -92,7 +91,7 @@ public class PlayState extends GameState {
         Hercules.update(batch);
 
         //update enmeis array
-        updateEnmies(batch,dt);
+        updateEnmies(batch, dt);
 
 
         batch.end();
@@ -111,18 +110,23 @@ public class PlayState extends GameState {
         Vector2 position = Hercules.getPosition();
         position.x = Box2dConversions.unitsToMetres(Hercules.getPosition().x);
         position.y = Box2dConversions.unitsToMetres(Hercules.getPosition().y);
-        cam.position.set(position,0);
+        cam.position.set(position, 0);
 
         cam.update();
     }
 
-    private void updateEnmies(SpriteBatch batch,float dt) {
+    private void updateEnmies(SpriteBatch batch, float dt) {
+//        System.out.print(enemies.size());
         for (int i = 0; i < enemies.size(); i++) {
+            if (enemies.get(i).isIsdead()) {
+                enemies.remove(i);
+                continue;
+            }
             enemies.get(i).update(batch);
-            enemies.get(i).CharacterState(dt);
+            if (enemies.get(i).isIsdead() == false)//if he is not dead then check his status
+                enemies.get(i).CharacterState(dt);
         }
     }
-
 
 
     public void handleInput() {
