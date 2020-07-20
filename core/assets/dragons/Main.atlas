@@ -1,13 +1,118 @@
 
 Main.png
-size: 128,64
+size: 1024,256
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-standing
+flying
   rotate: false
-  xy: 2, 2
-  size: 88, 45
-  orig: 88, 45
+  xy: 2, 135
+  size: 152, 119
+  orig: 152, 119
   offset: 0, 0
   index: 0
+standing
+  rotate: false
+  xy: 2, 135
+  size: 152, 119
+  orig: 152, 119
+  offset: 0, 0
+  index: 0
+flying
+  rotate: false
+  xy: 156, 171
+  size: 154, 83
+  orig: 154, 83
+  offset: 0, 0
+  index: 4
+flying
+  rotate: false
+  xy: 312, 171
+  size: 154, 83
+  orig: 154, 83
+  offset: 0, 0
+  index: 11
+flying
+  rotate: false
+  xy: 468, 171
+  size: 153, 83
+  orig: 153, 83
+  offset: 0, 0
+  index: 1
+flying
+  rotate: false
+  xy: 623, 171
+  size: 153, 83
+  orig: 153, 83
+  offset: 0, 0
+  index: 8
+flying
+  rotate: false
+  xy: 778, 175
+  size: 155, 79
+  orig: 155, 79
+  offset: 0, 0
+  index: 10
+flying
+  rotate: false
+  xy: 2, 52
+  size: 152, 81
+  orig: 152, 81
+  offset: 0, 0
+  index: 5
+flying
+  rotate: false
+  xy: 156, 88
+  size: 152, 81
+  orig: 152, 81
+  offset: 0, 0
+  index: 12
+flying
+  rotate: false
+  xy: 156, 2
+  size: 145, 84
+  orig: 145, 84
+  offset: 0, 0
+  index: 14
+flying
+  rotate: false
+  xy: 310, 88
+  size: 151, 81
+  orig: 151, 81
+  offset: 0, 0
+  index: 2
+flying
+  rotate: false
+  xy: 303, 5
+  size: 151, 81
+  orig: 151, 81
+  offset: 0, 0
+  index: 9
+flying
+  rotate: false
+  xy: 463, 90
+  size: 151, 79
+  orig: 151, 79
+  offset: 0, 0
+  index: 3
+flying
+  rotate: false
+  xy: 463, 2
+  size: 139, 86
+  orig: 139, 86
+  offset: 0, 0
+  index: 6
+flying
+  rotate: false
+  xy: 616, 91
+  size: 151, 78
+  orig: 151, 78
+  offset: 0, 0
+  index: 13
+flying
+  rotate: false
+  xy: 778, 95
+  size: 147, 78
+  orig: 147, 78
+  offset: 0, 0
+  index: 7

@@ -3,10 +3,7 @@ package com.mygdx.game.gamestates;
 import Box2dHelpers.Box2dCollideListeners;
 import Box2dHelpers.Box2dCollisionList;
 import Box2dHelpers.Box2dConversions;
-import Characters.FlyingCharacters;
-import Characters.GameCharacter;
-import Characters.MainCharacter;
-import Characters.StaticCharacters;
+import Characters.*;
 import INPUTS.UserINputs;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -69,8 +66,8 @@ public class PlayState extends GameState {
         //enmies
         enemies = new ArrayList<GameCharacter>();
         enemies.add(new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 200, 400, 40, 80, "statchar"));
+        enemies.add(new Dragons(world, new TextureAtlas("dragons/Main.atlas"), 500, 400, 40, 80, "statchar",200));
 
-        enemies.add(new FlyingCharacters(world, new TextureAtlas("dragons/main.atlas"), 250, 400, 40, 80, "statchar"));
 
     }
 
@@ -95,7 +92,7 @@ public class PlayState extends GameState {
         Hercules.update(batch);
 
         //update enmeis array
-        updateEnmies(batch);
+        updateEnmies(batch,dt);
 
         RemoveEnemies();
 
@@ -120,10 +117,10 @@ public class PlayState extends GameState {
         cam.update();
     }
 
-    private void updateEnmies(SpriteBatch batch) {
+    private void updateEnmies(SpriteBatch batch,float dt) {
         for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).update(batch);
-            enemies.get(i).CharacterState(1);
+            enemies.get(i).CharacterState(dt);
         }
     }
 
