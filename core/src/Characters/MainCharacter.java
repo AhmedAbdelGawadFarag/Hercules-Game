@@ -36,7 +36,7 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
         this.speed = speed;
         Attacking1Animation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("attacking1"));
         Attack2Animation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("attacking2"));
-        RunningAnimation = new Animation<TextureRegion>(1 / 20f, atlas.findRegions("running"));
+        RunningAnimation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("running"));
 
         MakeFoot(width, height);
 
@@ -127,7 +127,7 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
         if (inputs.isAttacking2()) {
 
 //            System.out.println("2");
-            if (attacking2ElapsedTime >= 3 / 10f) {
+            if (attacking2ElapsedTime >=5 / 10f) {
                 ResetElapsetTimes();
                 inputs.Stand();
                 ResetFrame(direction);
