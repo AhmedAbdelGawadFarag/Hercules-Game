@@ -35,7 +35,7 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
         this.inputs = inputs;
         this.speed = speed;
         Attacking1Animation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("attacking1"));
-        Attack2Animation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("secondAttack"));
+        Attack2Animation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("attacking2"));
         RunningAnimation = new Animation<TextureRegion>(1 / 20f, atlas.findRegions("running"));
 
         MakeFoot(width, height);
