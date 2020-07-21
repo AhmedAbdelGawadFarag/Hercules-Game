@@ -3,8 +3,6 @@ package Box2dHelpers;
 import Characters.BodyData;
 import com.badlogic.gdx.physics.box2d.*;
 
-import java.util.ArrayList;
-
 
 public class Box2dCollideListeners implements ContactListener {
     public static boolean playeronGround = false;
@@ -20,20 +18,9 @@ public class Box2dCollideListeners implements ContactListener {
             System.out.println("ground");
         }
 
-        if (fa.getUserData() != null && fa.getUserData() == "sword") {
-            System.out.println("hit");
-//            System.out.println(this.GetHealth(fb.getBody()));
-            this.decreseHealth(fb.getBody());
 
-        }
-
-        if (fb.getUserData() != null && fb.getUserData() == "sword") {
-            System.out.println("hit");
-//            System.out.println(this.GetHealth(fa.getBody()));
-            this.decreseHealth(fa.getBody());
-
-        }
-
+        checkEnemy(fa,fb);
+        checkHercules(fa,fb);
 
     }
 
@@ -78,9 +65,36 @@ public class Box2dCollideListeners implements ContactListener {
 //        System.out.println("healt"+bd.health);
         return bd.health;
     }
-    public void decreseHealth(Body body){
+
+    public void decreseHealth(Body body) {
         BodyData bd = (BodyData) body.getUserData();
         bd.decreseHealth();
+    }
+
+    public void checkHercules(Fixture fa,Fixture fb) {
+        if (fa.getUserData() != null && fa.getUserData() == "hercules" && fb.getUserData() != null && fb.getUserData() == "enemy") {
+            decreseHealth(fa.getBody());
+        }
+
+        if (fb.getUserData() != null && fb.getUserData() == "hercules" && fa.getUserData() != null && fa.getUserData() == "enemy") {
+            decreseHealth(fb.getBody());
+        }
+    }
+
+    public void checkEnemy(Fixture fa,Fixture fb){
+        if (fa.getUserData() != null && fa.getUserData() == "sword") {
+            System.out.println("hit");
+//            System.out.println(this.GetHealth(fb.getBody()));
+            this.decreseHealth(fb.getBody());
+
+        }
+
+        if (fb.getUserData() != null && fb.getUserData() == "sword") {
+            System.out.println("hit");
+//            System.out.println(this.GetHealth(fa.getBody()));
+            this.decreseHealth(fa.getBody());
+
+        }
     }
 
 }

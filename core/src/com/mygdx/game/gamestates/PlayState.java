@@ -50,7 +50,7 @@ public class PlayState extends GameState {
         input = new UserINputs();
         Gdx.input.setInputProcessor(input);
 
-        Hercules = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 40, 80, 1f, input, "hercules", 1);
+        Hercules = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 40, 80, 1f, input, "hercules", 2);
 
 
         cam = new OrthographicCamera(Box2dConversions.unitsToMetres(Gdx.graphics.getWidth()), Box2dConversions.unitsToMetres(Gdx.graphics.getHeight()));
@@ -64,8 +64,8 @@ public class PlayState extends GameState {
 
         //enmies
         enemies = new ArrayList<GameCharacter>();
-        enemies.add(new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 200, 400, 40, 80, "statchar", 2));
-        enemies.add(new Dragons(world, new TextureAtlas("dragons/Main.atlas"), 500, 100, 40, 80, "statchar", 200, 2));
+        enemies.add(new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 200, 400, 40, 80, "enemy", 2));
+        enemies.add(new Dragons(world, new TextureAtlas("dragons/Main.atlas"), 500, 100, 40, 80, "enemy", 200, 2));
 
 
     }
