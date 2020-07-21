@@ -6,8 +6,10 @@ import Characters.*;
 import INPUTS.UserINputs;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -35,6 +37,8 @@ public class PlayState extends GameState {
 
     ArrayList<GameCharacter> enemies;
     HealthBar hl;
+
+
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
@@ -66,6 +70,7 @@ public class PlayState extends GameState {
 
 
         hl = new HealthBar(new TextureAtlas("HealthBar/Main.atlas"));
+
 
     }
 
