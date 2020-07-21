@@ -39,6 +39,9 @@ public class PlayState extends GameState {
 
     ArrayList<GameObject> enemies;
     ArrayList<GameObject> coins;
+    ArrayList<GameObject> staticCaracters;
+
+
 
     HealthBar hl;
 
@@ -69,7 +72,6 @@ public class PlayState extends GameState {
 
         //enmies
         enemies = new ArrayList<GameObject>();
-        enemies.add(new StaticObjects(world, new TextureAtlas("BunchBag/Main.atlas"), 200, 100, 40, 80, "stat", 2));
         enemies.add(new Dragons(world, new TextureAtlas("dragons/Main.atlas"), 500, 100, 40, 80, "enemy", 200, 2));
 
 
@@ -79,6 +81,10 @@ public class PlayState extends GameState {
         coins = new ArrayList<GameObject>();
         coins.add(new SilverCoin(world,new TextureAtlas("coins/silverCoins/Main.atlas"),590,100,40,80,"silverCoin",100));
         coins.add(new GoldCoin(world,new TextureAtlas("coins/goldCoins/Main.atlas"),540,100,40,80,"goldCoin",200));
+
+
+        staticCaracters = new ArrayList<GameObject>();
+        staticCaracters.add(new Pillars(world,new TextureAtlas("pillars/Main.atlas"),230,100,30,80,"enemy",3));
 
     }
 
@@ -107,6 +113,8 @@ public class PlayState extends GameState {
 
         //update enmeis array
         updateEnmies(batch, dt);
+
+        updateStaticCharacters(batch,dt);
 
         if (Hercules.isIsdead() == false)//herecules is not dead
             hl.draw(batch, Hercules.getPosition(), Hercules);
@@ -159,6 +167,20 @@ public class PlayState extends GameState {
             coins.get(i).CharacterState(dt);
         }
     }
+
+    private void updateStaticCharacters(SpriteBatch batch, float dt) {
+//        System.out.print(enemies.size());
+        for (int i = 0; i < staticCaracters.size(); i++) {
+            staticCaracters.get(i).update(batch);
+            if (staticCaracters.get(i).isIsdead()) {
+                staticCaracters.remove(i);
+                continue;
+            }
+
+            staticCaracters.get(i).CharacterState(dt);
+        }
+    }
+
 
     public void handleInput() {
 

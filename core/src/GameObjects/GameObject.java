@@ -135,7 +135,7 @@ public abstract class GameObject {
         currframe = null;
     }
 
-    private Sprite getSpriteFromBody() {
+    protected Sprite getSpriteFromBody() {
         BodyData bd = (BodyData) body.getUserData();
         return bd.sprite;
     }
@@ -147,7 +147,7 @@ public abstract class GameObject {
         return bd.health;
     }
 
-    private boolean isDead() {
+    protected boolean isDead() {
 //        System.out.println(currframe);
         return getHealthFromBody() == 0;
 

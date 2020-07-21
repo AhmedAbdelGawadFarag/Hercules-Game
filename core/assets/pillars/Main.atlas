@@ -1,0 +1,48 @@
+
+Main.png
+size: 512,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+pillar
+  rotate: false
+  xy: 2, 2
+  size: 78, 247
+  orig: 78, 247
+  offset: 0, 0
+  index: 0
+standing
+  rotate: false
+  xy: 2, 2
+  size: 78, 247
+  orig: 78, 247
+  offset: 0, 0
+  index: 0
+pillar
+  rotate: false
+  xy: 82, 2
+  size: 78, 247
+  orig: 78, 247
+  offset: 0, 0
+  index: 1
+pillar
+  rotate: false
+  xy: 162, 2
+  size: 78, 247
+  orig: 78, 247
+  offset: 0, 0
+  index: 2
+pillar
+  rotate: false
+  xy: 242, 2
+  size: 78, 247
+  orig: 78, 247
+  offset: 0, 0
+  index: 3
+pillar
+  rotate: false
+  xy: 322, 2
+  size: 78, 247
+  orig: 78, 247
+  offset: 0, 0
+  index: 4
