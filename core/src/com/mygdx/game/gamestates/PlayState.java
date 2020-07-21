@@ -2,13 +2,11 @@ package com.mygdx.game.gamestates;
 
 import Box2dHelpers.Box2dCollideListeners;
 import Box2dHelpers.Box2dConversions;
-import Characters.Dragons;
-import Characters.GameCharacter;
-import Characters.MainCharacter;
-import Characters.StaticCharacters;
+import Characters.*;
 import INPUTS.UserINputs;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
@@ -37,7 +35,7 @@ public class PlayState extends GameState {
     public static Body Floor;
 
     ArrayList<GameCharacter> enemies;
-
+    HealthBar hl;
     public PlayState(GameStateManager gsm) {
         super(gsm);
     }
@@ -50,12 +48,11 @@ public class PlayState extends GameState {
         input = new UserINputs();
         Gdx.input.setInputProcessor(input);
 
-        Hercules = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 40, 80, 1f, input, "hercules", 2);
+        Hercules = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 40, 80, 1f, input, "hercules", 3);
 
 
         cam = new OrthographicCamera(Box2dConversions.unitsToMetres(Gdx.graphics.getWidth()), Box2dConversions.unitsToMetres(Gdx.graphics.getHeight()));
-        cam.translate(Box2dConversions.unitsToMetres(Gdx.graphics.getWidth() / 2), Box2dConversions.unitsToMetres(Gdx.graphics.getHeight() / 2));
-
+        cam.translate(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 
         batch = new SpriteBatch();
 
@@ -67,6 +64,8 @@ public class PlayState extends GameState {
         enemies.add(new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 200, 400, 40, 80, "enemy", 2));
         enemies.add(new Dragons(world, new TextureAtlas("dragons/Main.atlas"), 500, 100, 40, 80, "enemy", 200, 2));
 
+
+         hl = new HealthBar(new TextureAtlas("HealthBar/Main.atlas"));
 
     }
 
@@ -93,6 +92,8 @@ public class PlayState extends GameState {
         //update enmeis array
         updateEnmies(batch, dt);
 
+        if(Hercules.isIsdead()==false)//herecules is not dead
+        hl.draw(batch,Hercules.getPosition(),Hercules);
 
         batch.end();
 

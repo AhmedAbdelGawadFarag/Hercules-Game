@@ -1,0 +1,27 @@
+
+Main.png
+size: 2048,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+health
+  rotate: false
+  xy: 2, 2
+  size: 352, 64
+  orig: 352, 64
+  offset: 0, 0
+  index: 0
+health
+  rotate: false
+  xy: 356, 2
+  size: 314, 70
+  orig: 314, 70
+  offset: 0, 0
+  index: 1
+health
+  rotate: false
+  xy: 710, 2
+  size: 352, 64
+  orig: 352, 64
+  offset: 0, 0
+  index: 2

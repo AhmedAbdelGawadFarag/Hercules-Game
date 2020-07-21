@@ -30,8 +30,8 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
     private Fixture swordFixture;
     private Fixture footFixture;
 
-    public MainCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height, float speed, UserINputs inputs,String FixtureName,int health) {
-        super(world, atlas, x, y, width, height,FixtureName,health);
+    public MainCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height, float speed, UserINputs inputs, String FixtureName, int health) {
+        super(world, atlas, x, y, width, height, FixtureName, health);
         this.inputs = inputs;
         this.speed = speed;
         Attacking1Animation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("attacking1"));
@@ -84,7 +84,7 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
         swordFixture.setUserData("sword");
 
         Box2dCollisionList.GiveCollisonBitToBody(swordFixture, Box2dCollisionList.BIT_SWORD);
-        Box2dCollisionList.MakeBodyCollideWith(swordFixture,Box2dCollisionList.BIT_ENEMY);
+        Box2dCollisionList.MakeBodyCollideWith(swordFixture, Box2dCollisionList.BIT_ENEMY);
 
 
 //        System.out.println(sword.getFixtureList().get(0).getFilterData().categoryBits);
@@ -127,7 +127,7 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
         if (inputs.isAttacking2()) {
 
 //            System.out.println("2");
-            if (attacking2ElapsedTime >=5 / 10f) {
+            if (attacking2ElapsedTime >= 5 / 10f) {
                 ResetElapsetTimes();
                 inputs.Stand();
                 ResetFrame(direction);
@@ -156,6 +156,10 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
 
     }
 
+    @Override
+    public void update(SpriteBatch batch) {
+        super.update(batch);
+    }
 
     private void Stop() {
 
@@ -200,10 +204,7 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
 
     }
 
-    @Override
-    public void update(SpriteBatch batch) {
-        super.update(batch);
-    }
+
 
     public void Jump() {
 

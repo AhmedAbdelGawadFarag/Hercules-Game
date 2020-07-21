@@ -110,6 +110,7 @@ public abstract class GameCharacter {
         if (currframe != null && isDead()) this.Remove();
 
 
+
         if (currframe == null) return; // object is removed
 
         Sprite sprite = this.getSpriteFromBody();
@@ -139,7 +140,7 @@ public abstract class GameCharacter {
         return bd.sprite;
     }
 
-    private int getHealthFromBody() {
+    public int getHealthFromBody() {
 
         BodyData bd = (BodyData) body.getUserData();
 
@@ -147,8 +148,11 @@ public abstract class GameCharacter {
     }
 
     private boolean isDead() {
+        System.out.println(currframe);
+        if (getHealthFromBody() == 0){
 
-        if (getHealthFromBody() == 0) return true;
+            return true;
+        }
         return false;
 
     }
