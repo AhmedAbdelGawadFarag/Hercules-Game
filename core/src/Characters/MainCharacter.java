@@ -15,6 +15,9 @@ import com.badlogic.gdx.physics.box2d.*;
 
 public class MainCharacter extends GameObject implements MovableCharacter {
 
+    private float money = 0;
+
+
     UserINputs inputs;
     Animation<TextureRegion> Attacking1Animation;
     Animation<TextureRegion> Attack2Animation;
@@ -159,6 +162,7 @@ public class MainCharacter extends GameObject implements MovableCharacter {
     @Override
     public void update(SpriteBatch batch) {
         super.update(batch);
+        System.out.println(this.getMoney());
     }
 
     private void Stop() {
@@ -205,7 +209,6 @@ public class MainCharacter extends GameObject implements MovableCharacter {
     }
 
 
-
     public void Jump() {
 
         this.body.applyForceToCenter(0, 230, true);
@@ -219,5 +222,13 @@ public class MainCharacter extends GameObject implements MovableCharacter {
 
     public void MoveLeft(float speedx, float speedy) {
         body.setLinearVelocity(-speed, 0);
+    }
+
+    public float getMoney() {
+        return money;
+    }
+
+    public void increaseMoney(float money) {
+        this.money += money;
     }
 }

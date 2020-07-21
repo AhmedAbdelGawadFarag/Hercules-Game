@@ -1,7 +1,10 @@
 package Box2dHelpers;
 
 import Characters.BodyData;
+import Characters.GameObject;
+import Characters.MainCharacter;
 import com.badlogic.gdx.physics.box2d.*;
+import com.mygdx.game.gamestates.PlayState;
 
 
 public class Box2dCollideListeners implements ContactListener {
@@ -21,7 +24,7 @@ public class Box2dCollideListeners implements ContactListener {
 
         checkEnemy(fa, fb);
         checkHercules(fa, fb);
-        checkCoins(fa,fb);
+        checkCoins(fa, fb);
 
     }
 
@@ -103,30 +106,40 @@ public class Box2dCollideListeners implements ContactListener {
         if (fa.getUserData() != null && fa.getUserData() == "silverCoin" && fb.getUserData() != null && fb.getUserData() == "hercules") {
             System.out.println("silver hit");
             decreseHealth(fa.getBody());
+            increaseMoney(PlayState.Hercules, 100);
 
         }
 
         if (fb.getUserData() != null && fb.getUserData() == "silverCoin" && fa.getUserData() != null && fa.getUserData() == "hercules") {
             System.out.println("silver hit");
             decreseHealth(fb.getBody());
-
+            increaseMoney(PlayState.Hercules, 100);
         }
 
 
         if (fa.getUserData() != null && fa.getUserData() == "goldCoin" && fb.getUserData() != null && fb.getUserData() == "hercules") {
             System.out.println("gold hit");
             decreseHealth(fa.getBody());
+            increaseMoney(PlayState.Hercules, 200);
+
 
         }
 
         if (fb.getUserData() != null && fb.getUserData() == "goldCoin" && fa.getUserData() != null && fa.getUserData() == "hercules") {
             System.out.println("gold hit");
             decreseHealth(fb.getBody());
+            increaseMoney(PlayState.Hercules, 200);
+
 
         }
 
-
-
     }
+
+    void increaseMoney(GameObject object, float money) {
+        MainCharacter m = (MainCharacter) object;
+        m.increaseMoney(money);
+    }
+
+
 
 }
