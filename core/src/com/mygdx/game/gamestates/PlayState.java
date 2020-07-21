@@ -2,7 +2,9 @@ package com.mygdx.game.gamestates;
 
 import Box2dHelpers.Box2dCollideListeners;
 import Box2dHelpers.Box2dConversions;
-import Characters.*;
+import Characters.HealthBar;
+import Characters.MainCharacter;
+import Characters.Pillars;
 import Coins.GoldCoin;
 import Coins.SilverCoin;
 import GameObjects.GameObject;
@@ -69,8 +71,8 @@ public class PlayState extends GameState {
 
         //enmies
         enemies = new ArrayList<GameObject>();
-        enemies.add(new Dragon(world, new TextureAtlas("dragons/Main.atlas"), 500, 100, 40, 80, "enemy", 200, 2));
-        enemies.add(new WoodMonster(world, new TextureAtlas("woodMonster/Main.atlas"), 300, 100, 40, 80, "enemy", 200, 2));
+//        enemies.add(new Dragon(world, new TextureAtlas("dragons/Main.atlas"), 500, 100, 40, 80, "enemy", 200, 2));
+//        enemies.add(new WoodMonster(world, new TextureAtlas("woodMonster/Main.atlas"), 300, 100, 40, 80, "enemy", 200, 2));
 
 
         hl = new HealthBar(new TextureAtlas("HealthBar/Main.atlas"));
@@ -129,9 +131,16 @@ public class PlayState extends GameState {
     }
 
     private void cameraUpdate() {
+
+        System.out.printf("camx:%f camy:%f hx:%f hy:%f\n ", cam.position.x, cam.position.y, Hercules.getPosition().x, Hercules.getPosition().y);
+
         Vector2 position = Hercules.getPosition();
-        position.x = Box2dConversions.unitsToMetres(Hercules.getPosition().x);
-        position.y = Box2dConversions.unitsToMetres(Hercules.getPosition().y);
+
+        position.x = (Hercules.getPosition().x);
+
+        position.y = (Hercules.getPosition().y);
+
+
         cam.position.set(position, 0);
 
         cam.update();
