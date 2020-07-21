@@ -118,13 +118,13 @@ public class PlayState extends GameState {
     private void updateEnmies(SpriteBatch batch, float dt) {
 //        System.out.print(enemies.size());
         for (int i = 0; i < enemies.size(); i++) {
+            enemies.get(i).update(batch);
             if (enemies.get(i).isIsdead()) {
                 enemies.remove(i);
                 continue;
             }
-            enemies.get(i).update(batch);
-            if (enemies.get(i).isIsdead() == false)//if he is not dead then check his status
-                enemies.get(i).CharacterState(dt);
+
+            enemies.get(i).CharacterState(dt);
         }
     }
 
