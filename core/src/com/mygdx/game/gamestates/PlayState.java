@@ -69,7 +69,7 @@ public class PlayState extends GameState {
 
         //enmies
         enemies = new ArrayList<GameObject>();
-        enemies.add(new Dragons(world, new TextureAtlas("dragons/Main.atlas"), 500, 100, 40, 80, "enemy", 200, 2));
+        enemies.add(new Dragon(world, new TextureAtlas("dragons/Main.atlas"), 500, 100, 40, 80, "enemy", 200, 2));
         enemies.add(new WoodMonster(world, new TextureAtlas("woodMonster/Main.atlas"), 300, 100, 40, 80, "enemy", 200, 2));
 
 

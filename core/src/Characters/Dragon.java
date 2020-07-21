@@ -7,12 +7,12 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class Dragons extends MovingObjects {
+public class Dragon extends MovingObjects {
 
     private final Animation<TextureRegion> flyingAnimation;
     private float flyingElapsedTime = 0;
 
-    public Dragons(World world, TextureAtlas atlas, float x, float y, int width, int height, String FixtureName, float DistanceTravle,int health) {
+    public Dragon(World world, TextureAtlas atlas, float x, float y, int width, int height, String FixtureName, float DistanceTravle, int health) {
         super(world, atlas, x, y, width, height, FixtureName, DistanceTravle,health,0);
         flyingAnimation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("flying"));
 
