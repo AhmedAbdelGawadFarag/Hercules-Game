@@ -9,8 +9,10 @@ import Characters.StaticCharacters;
 import INPUTS.UserINputs;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -37,6 +39,8 @@ public class PlayState extends GameState {
     public static Body Floor;
 
     ArrayList<GameCharacter> enemies;
+
+
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
@@ -66,6 +70,7 @@ public class PlayState extends GameState {
         enemies = new ArrayList<GameCharacter>();
         enemies.add(new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 200, 400, 40, 80, "enemy", 2));
         enemies.add(new Dragons(world, new TextureAtlas("dragons/Main.atlas"), 500, 100, 40, 80, "enemy", 200, 2));
+
 
 
     }

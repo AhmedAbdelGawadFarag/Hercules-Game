@@ -9,7 +9,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		
 		config.title = "Collision Detection";
-		config.useGL30 = false;
+		config.useGL30 = true;
 		config.width = 1280;
 		config.height = 960;
 		
