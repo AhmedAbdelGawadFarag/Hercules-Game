@@ -149,11 +149,7 @@ public abstract class GameCharacter {
 
     private boolean isDead() {
         System.out.println(currframe);
-        if (getHealthFromBody() == 0){
-
-            return true;
-        }
-        return false;
+        return getHealthFromBody() == 0;
 
     }
 

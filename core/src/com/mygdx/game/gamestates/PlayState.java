@@ -6,7 +6,6 @@ import Characters.*;
 import INPUTS.UserINputs;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
@@ -36,6 +35,7 @@ public class PlayState extends GameState {
 
     ArrayList<GameCharacter> enemies;
     HealthBar hl;
+
     public PlayState(GameStateManager gsm) {
         super(gsm);
     }
@@ -65,7 +65,7 @@ public class PlayState extends GameState {
         enemies.add(new Dragons(world, new TextureAtlas("dragons/Main.atlas"), 500, 100, 40, 80, "enemy", 200, 2));
 
 
-         hl = new HealthBar(new TextureAtlas("HealthBar/Main.atlas"));
+        hl = new HealthBar(new TextureAtlas("HealthBar/Main.atlas"));
 
     }
 
@@ -92,8 +92,8 @@ public class PlayState extends GameState {
         //update enmeis array
         updateEnmies(batch, dt);
 
-        if(Hercules.isIsdead()==false)//herecules is not dead
-        hl.draw(batch,Hercules.getPosition(),Hercules);
+        if (Hercules.isIsdead() == false)//herecules is not dead
+            hl.draw(batch, Hercules.getPosition(), Hercules);
 
         batch.end();
 

@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class Dragons extends FlyingCharacters {
 
-    private Animation<TextureRegion> flyingAnimation;
+    private final Animation<TextureRegion> flyingAnimation;
     private float flyingElapsedTime = 0;
 
     public Dragons(World world, TextureAtlas atlas, float x, float y, int width, int height, String FixtureName, float DistanceTravle,int health) {
@@ -28,10 +28,7 @@ public class Dragons extends FlyingCharacters {
 
         flyingElapsedTime+=dt;
 
-        if (this.flyingLeft == true)
-            playFlyingAnimation(flyingElapsedTime, true);
-        else
-            playFlyingAnimation(flyingElapsedTime, false);
+        playFlyingAnimation(flyingElapsedTime, this.flyingLeft == true);
 
 
     }
