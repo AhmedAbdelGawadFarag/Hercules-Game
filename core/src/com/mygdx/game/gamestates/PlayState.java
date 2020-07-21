@@ -2,11 +2,13 @@ package com.mygdx.game.gamestates;
 
 import Box2dHelpers.Box2dCollideListeners;
 import Box2dHelpers.Box2dConversions;
-import Characters.*;
+import Characters.Dragons;
+import Characters.HealthBar;
+import Characters.MainCharacter;
+import Characters.Pillars;
 import Coins.GoldCoin;
 import Coins.SilverCoin;
 import GameObjects.GameObject;
-import GameObjects.StaticObjects;
 import INPUTS.UserINputs;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -42,9 +44,7 @@ public class PlayState extends GameState {
     ArrayList<GameObject> staticCaracters;
 
 
-
     HealthBar hl;
-
 
 
     public PlayState(GameStateManager gsm) {
@@ -63,7 +63,7 @@ public class PlayState extends GameState {
 
 
         cam = new OrthographicCamera(Box2dConversions.unitsToMetres(Gdx.graphics.getWidth()), Box2dConversions.unitsToMetres(Gdx.graphics.getHeight()));
-        cam.translate(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+//        cam.translate(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 
         batch = new SpriteBatch();
 
@@ -79,12 +79,12 @@ public class PlayState extends GameState {
 
 
         coins = new ArrayList<GameObject>();
-        coins.add(new SilverCoin(world,new TextureAtlas("coins/silverCoins/Main.atlas"),590,100,40,80,"silverCoin",100));
-        coins.add(new GoldCoin(world,new TextureAtlas("coins/goldCoins/Main.atlas"),540,100,40,80,"goldCoin",200));
+        coins.add(new SilverCoin(world, new TextureAtlas("coins/silverCoins/Main.atlas"), 590, 100, 40, 80, "silverCoin", 100));
+        coins.add(new GoldCoin(world, new TextureAtlas("coins/goldCoins/Main.atlas"), 540, 100, 40, 80, "goldCoin", 200));
 
 
         staticCaracters = new ArrayList<GameObject>();
-        staticCaracters.add(new Pillars(world,new TextureAtlas("pillars/Main.atlas"),230,100,30,80,"enemy",3));
+        staticCaracters.add(new Pillars(world, new TextureAtlas("pillars/Main.atlas"), 230, 100, 30, 80, "stat", 3));
 
     }
 
@@ -96,7 +96,6 @@ public class PlayState extends GameState {
 
     @Override
     public void draw(float dt) {
-
         world.step(1 / 60f, 12, 2);
         lvl1.update();
         batch.setProjectionMatrix(cam.combined);
@@ -109,12 +108,12 @@ public class PlayState extends GameState {
         Hercules.update(batch);
 
 
-        updateCoins(batch,dt);
+        updateCoins(batch, dt);
 
         //update enmeis array
         updateEnmies(batch, dt);
 
-        updateStaticCharacters(batch,dt);
+        updateStaticCharacters(batch, dt);
 
         if (Hercules.isIsdead() == false)//herecules is not dead
             hl.draw(batch, Hercules.getPosition(), Hercules);
@@ -152,7 +151,6 @@ public class PlayState extends GameState {
             enemies.get(i).CharacterState(dt);
         }
     }
-
 
 
     private void updateCoins(SpriteBatch batch, float dt) {

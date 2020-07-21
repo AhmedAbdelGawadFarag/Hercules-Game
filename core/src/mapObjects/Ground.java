@@ -33,7 +33,7 @@ public class Ground {
 
 		fDef.shape = shape;
 		bodyFixture = body.createFixture(fDef);
-
+		bodyFixture.setUserData("ground");
 		Box2dCollisionList.GiveCollisonBitToBody(bodyFixture,Box2dCollisionList.BIT_GROUND);
 
 

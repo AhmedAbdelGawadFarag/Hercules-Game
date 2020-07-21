@@ -22,6 +22,7 @@ public class Pillars extends StaticObjects {
         super.CharacterState(dt);
 
         if (getHealthFromBody() <= 0) {
+            System.out.println(elapsedTime);
             elapsedTime += dt;
             playDistrcutAnimation(elapsedTime, false);
         }

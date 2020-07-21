@@ -1,8 +1,8 @@
 package Box2dHelpers;
 
+import Characters.MainCharacter;
 import GameObjects.BodyData;
 import GameObjects.GameObject;
-import Characters.MainCharacter;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.gamestates.PlayState;
 
@@ -55,11 +55,11 @@ public class Box2dCollideListeners implements ContactListener {
     }
 
     public boolean FootCollidedWithGorund(Fixture fa, Fixture fb) {
-        if (fa.getUserData() != null && fa.getUserData().equals("foot")) {
+        if (fa.getUserData() != null && fa.getUserData().equals("foot") && fb.getUserData() != null && fb.getUserData() == "ground") {
             return true;
         }
 
-        return fb.getUserData() != null && fb.getUserData().equals("foot");
+        return (fb.getUserData() != null && fb.getUserData().equals("foot")&& fa.getUserData() != null && fa.getUserData() == "ground");
     }
 
 
@@ -87,15 +87,15 @@ public class Box2dCollideListeners implements ContactListener {
 
     public void checkEnemy(Fixture fa, Fixture fb) {
         if (fa.getUserData() != null && fa.getUserData() == "sword") {
-            System.out.println("hit");
+//            System.out.println("hit");
 //            System.out.println(this.GetHealth(fb.getBody()));
             this.decreseHealth(fb.getBody());
 
         }
 
         if (fb.getUserData() != null && fb.getUserData() == "sword") {
-            System.out.println("hit");
-//            System.out.println(this.GetHealth(fa.getBody()));
+//            System.out.println("hit");
+//             System.out.println(this.GetHealth(fa.getBody()));
             this.decreseHealth(fa.getBody());
 
         }
@@ -135,11 +135,11 @@ public class Box2dCollideListeners implements ContactListener {
 
     }
 
+
     void increaseMoney(GameObject object, float money) {
         MainCharacter m = (MainCharacter) object;
         m.increaseMoney(money);
     }
-
 
 
 }
