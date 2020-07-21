@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
-public class MainCharacter extends GameCharacter implements MovableCharacter {
+public class MainObject extends GameObject implements MovableCharacter {
 
     UserINputs inputs;
     Animation<TextureRegion> Attacking1Animation;
@@ -30,7 +30,7 @@ public class MainCharacter extends GameCharacter implements MovableCharacter {
     private Fixture swordFixture;
     private Fixture footFixture;
 
-    public MainCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height, float speed, UserINputs inputs, String FixtureName, int health) {
+    public MainObject(World world, TextureAtlas atlas, float x, float y, int width, int height, float speed, UserINputs inputs, String FixtureName, int health) {
         super(world, atlas, x, y, width, height, FixtureName, health);
         this.inputs = inputs;
         this.speed = speed;

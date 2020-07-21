@@ -4,7 +4,7 @@ import Box2dHelpers.Box2dCollisionList;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class StaticCharacters extends GameCharacter {
+public class StaticCharacters extends GameObject {
 
 
     public StaticCharacters(World world, TextureAtlas atlas, float x, float y, int width, int height,String FixtureName,int health) {

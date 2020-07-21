@@ -6,10 +6,8 @@ import Characters.*;
 import INPUTS.UserINputs;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -30,12 +28,12 @@ public class PlayState extends GameState {
     public static UserINputs input;
 
 
-    public static GameCharacter Hercules;
+    public static GameObject Hercules;
 
     public static Level1Map lvl1;
     public static Body Floor;
 
-    ArrayList<GameCharacter> enemies;
+    ArrayList<GameObject> enemies;
     HealthBar hl;
 
 
@@ -52,7 +50,7 @@ public class PlayState extends GameState {
         input = new UserINputs();
         Gdx.input.setInputProcessor(input);
 
-        Hercules = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 40, 80, 1f, input, "hercules", 3);
+        Hercules = new MainObject(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 40, 80, 1f, input, "hercules", 3);
 
 
         cam = new OrthographicCamera(Box2dConversions.unitsToMetres(Gdx.graphics.getWidth()), Box2dConversions.unitsToMetres(Gdx.graphics.getHeight()));
@@ -64,7 +62,7 @@ public class PlayState extends GameState {
         world.setContactListener(new Box2dCollideListeners());
 
         //enmies
-        enemies = new ArrayList<GameCharacter>();
+        enemies = new ArrayList<GameObject>();
         enemies.add(new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 200, 400, 40, 80, "enemy", 2));
         enemies.add(new Dragons(world, new TextureAtlas("dragons/Main.atlas"), 500, 100, 40, 80, "enemy", 200, 2));
 

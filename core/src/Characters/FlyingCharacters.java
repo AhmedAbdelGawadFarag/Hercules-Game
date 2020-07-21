@@ -1,12 +1,10 @@
 package Characters;
 
-import Box2dHelpers.Box2dCollideListeners;
 import Box2dHelpers.Box2dConversions;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class FlyingCharacters extends GameCharacter implements MovableCharacter {
+public class FlyingCharacters extends GameObject implements MovableCharacter {
 
     protected boolean flyingLeft = true;
     protected float firstposotion, secondposition;// two postions that the flying characters go to

@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 
-public abstract class GameCharacter {
+public abstract class GameObject {
 
 
     //world of the attributes
@@ -34,7 +34,7 @@ public abstract class GameCharacter {
         this.bodyfixture = bodyfixture;
     }
 
-    public GameCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height, String FixtureName, int health) {
+    public GameObject(World world, TextureAtlas atlas, float x, float y, int width, int height, String FixtureName, int health) {
         currframe = atlas.findRegion("standing", 0);
 
         this.atlas = atlas;

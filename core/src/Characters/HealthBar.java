@@ -15,7 +15,7 @@ public class HealthBar {
         this.atlas = atlas;
     }
 
-    public void draw(SpriteBatch batch, Vector2 pos, GameCharacter Herecules) {
+    public void draw(SpriteBatch batch, Vector2 pos, GameObject Herecules) {
         sp = new Sprite(atlas.findRegion("health", Math.abs(Herecules.getHealthFromBody() - 3)));
 
         sp.setPosition(pos.x - Box2dConversions.unitsToMetres(600), Box2dConversions.unitsToMetres(Gdx.graphics.getHeight() - 600));
