@@ -1,0 +1,41 @@
+
+Main.png
+size: 512,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+wood
+  rotate: false
+  xy: 2, 2
+  size: 66, 69
+  orig: 66, 69
+  offset: 0, 0
+  index: 0
+standing
+  rotate: false
+  xy: 2, 2
+  size: 66, 69
+  orig: 66, 69
+  offset: 0, 0
+  index: 0
+wood
+  rotate: false
+  xy: 73, 2
+  size: 67, 71
+  orig: 67, 71
+  offset: 0, 0
+  index: 1
+wood
+  rotate: false
+  xy: 144, 2
+  size: 65, 69
+  orig: 65, 69
+  offset: 0, 0
+  index: 2
+wood
+  rotate: false
+  xy: 215, 2
+  size: 69, 69
+  orig: 69, 69
+  offset: 0, 0
+  index: 3

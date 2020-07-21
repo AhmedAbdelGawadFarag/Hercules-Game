@@ -2,10 +2,7 @@ package com.mygdx.game.gamestates;
 
 import Box2dHelpers.Box2dCollideListeners;
 import Box2dHelpers.Box2dConversions;
-import Characters.Dragons;
-import Characters.HealthBar;
-import Characters.MainCharacter;
-import Characters.Pillars;
+import Characters.*;
 import Coins.GoldCoin;
 import Coins.SilverCoin;
 import GameObjects.GameObject;
@@ -73,6 +70,7 @@ public class PlayState extends GameState {
         //enmies
         enemies = new ArrayList<GameObject>();
         enemies.add(new Dragons(world, new TextureAtlas("dragons/Main.atlas"), 500, 100, 40, 80, "enemy", 200, 2));
+        enemies.add(new WoodMonster(world, new TextureAtlas("woodMonster/Main.atlas"), 300, 100, 40, 80, "enemy", 200, 2));
 
 
         hl = new HealthBar(new TextureAtlas("HealthBar/Main.atlas"));
