@@ -1,12 +1,13 @@
 package Characters;
 
 import Box2dHelpers.Box2dCollisionList;
+import GameObjects.FlyingObjects;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class Dragons extends FlyingCharacters {
+public class Dragons extends FlyingObjects {
 
     private final Animation<TextureRegion> flyingAnimation;
     private float flyingElapsedTime = 0;

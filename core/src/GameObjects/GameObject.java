@@ -1,4 +1,4 @@
-package Characters;
+package GameObjects;
 
 import Box2dHelpers.Box2dConversions;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -23,8 +23,8 @@ public abstract class GameObject {
         return isdead;
     }
 
-    float RunningElapsedTime = 0;
-    float speed;
+    protected float RunningElapsedTime = 0;
+    protected float speed;
 
     public Fixture getBodyfixture() {
         return bodyfixture;

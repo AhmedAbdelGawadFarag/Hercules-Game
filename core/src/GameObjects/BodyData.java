@@ -1,4 +1,4 @@
-package Characters;
+package GameObjects;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 

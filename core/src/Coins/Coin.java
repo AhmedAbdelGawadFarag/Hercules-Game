@@ -1,7 +1,7 @@
 package Coins;
 
 import Box2dHelpers.Box2dCollisionList;
-import Characters.GameObject;
+import GameObjects.GameObject;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.World;
 

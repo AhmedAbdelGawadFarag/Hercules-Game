@@ -5,6 +5,8 @@ import Box2dHelpers.Box2dConversions;
 import Characters.*;
 import Coins.GoldCoin;
 import Coins.SilverCoin;
+import GameObjects.GameObject;
+import GameObjects.StaticObjects;
 import INPUTS.UserINputs;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -67,7 +69,7 @@ public class PlayState extends GameState {
 
         //enmies
         enemies = new ArrayList<GameObject>();
-        enemies.add(new StaticCharacters(world, new TextureAtlas("BunchBag/Main.atlas"), 200, 400, 40, 80, "enemy", 2));
+        enemies.add(new StaticObjects(world, new TextureAtlas("BunchBag/Main.atlas"), 200, 100, 40, 80, "stat", 2));
         enemies.add(new Dragons(world, new TextureAtlas("dragons/Main.atlas"), 500, 100, 40, 80, "enemy", 200, 2));
 
 

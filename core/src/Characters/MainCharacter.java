@@ -3,6 +3,7 @@ package Characters;
 import Box2dHelpers.Box2dCollideListeners;
 import Box2dHelpers.Box2dCollisionList;
 import Box2dHelpers.Box2dConversions;
+import GameObjects.GameObject;
 import INPUTS.UserINputs;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;

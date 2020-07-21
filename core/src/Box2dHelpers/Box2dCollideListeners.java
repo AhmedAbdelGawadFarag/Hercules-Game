@@ -1,7 +1,7 @@
 package Box2dHelpers;
 
-import Characters.BodyData;
-import Characters.GameObject;
+import GameObjects.BodyData;
+import GameObjects.GameObject;
 import Characters.MainCharacter;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.gamestates.PlayState;

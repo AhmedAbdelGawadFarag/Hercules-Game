@@ -1,6 +1,7 @@
 package Characters;
 
 import Box2dHelpers.Box2dConversions;
+import GameObjects.GameObject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
