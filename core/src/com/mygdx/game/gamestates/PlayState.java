@@ -3,6 +3,8 @@ package com.mygdx.game.gamestates;
 import Box2dHelpers.Box2dCollideListeners;
 import Box2dHelpers.Box2dConversions;
 import Characters.*;
+import Coins.GoldCoin;
+import Coins.SilverCoin;
 import INPUTS.UserINputs;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -34,6 +36,8 @@ public class PlayState extends GameState {
     public static Body Floor;
 
     ArrayList<GameObject> enemies;
+    ArrayList<GameObject> coins;
+
     HealthBar hl;
 
 
@@ -50,7 +54,7 @@ public class PlayState extends GameState {
         input = new UserINputs();
         Gdx.input.setInputProcessor(input);
 
-        Hercules = new MainObject(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 40, 80, 1f, input, "hercules", 3);
+        Hercules = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 40, 80, 1f, input, "hercules", 3);
 
 
         cam = new OrthographicCamera(Box2dConversions.unitsToMetres(Gdx.graphics.getWidth()), Box2dConversions.unitsToMetres(Gdx.graphics.getHeight()));
@@ -69,6 +73,10 @@ public class PlayState extends GameState {
 
         hl = new HealthBar(new TextureAtlas("HealthBar/Main.atlas"));
 
+
+        coins = new ArrayList<GameObject>();
+        coins.add(new SilverCoin(world,new TextureAtlas("coins/silverCoins/Main.atlas"),590,100,40,80,"silverCoin",100));
+        coins.add(new GoldCoin(world,new TextureAtlas("coins/goldCoins/Main.atlas"),540,100,40,80,"goldCoin",200));
 
     }
 
@@ -91,6 +99,9 @@ public class PlayState extends GameState {
         batch.begin();
 
         Hercules.update(batch);
+
+
+        updateCoins(batch,dt);
 
         //update enmeis array
         updateEnmies(batch, dt);
@@ -132,6 +143,20 @@ public class PlayState extends GameState {
         }
     }
 
+
+
+    private void updateCoins(SpriteBatch batch, float dt) {
+//        System.out.print(enemies.size());
+        for (int i = 0; i < coins.size(); i++) {
+            coins.get(i).update(batch);
+            if (coins.get(i).isIsdead()) {
+                coins.remove(i);
+                continue;
+            }
+
+            coins.get(i).CharacterState(dt);
+        }
+    }
 
     public void handleInput() {
 

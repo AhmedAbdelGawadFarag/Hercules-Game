@@ -1,0 +1,62 @@
+
+Main.png
+size: 512,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+silver
+  rotate: false
+  xy: 2, 2
+  size: 87, 87
+  orig: 87, 87
+  offset: 0, 0
+  index: 6
+silver
+  rotate: false
+  xy: 180, 2
+  size: 63, 87
+  orig: 63, 87
+  offset: 0, 0
+  index: 1
+silver
+  rotate: false
+  xy: 245, 2
+  size: 62, 87
+  orig: 62, 87
+  offset: 0, 0
+  index: 5
+silver
+  rotate: false
+  xy: 309, 2
+  size: 49, 87
+  orig: 49, 87
+  offset: 0, 0
+  index: 2
+silver
+  rotate: false
+  xy: 360, 2
+  size: 49, 87
+  orig: 49, 87
+  offset: 0, 0
+  index: 4
+silver
+  rotate: false
+  xy: 411, 2
+  size: 20, 87
+  orig: 20, 87
+  offset: 0, 0
+  index: 3
+standing
+  rotate: false
+  xy: 91, 2
+  size: 87, 87
+  orig: 87, 87
+  offset: 0, 0
+  index: 0
+silver
+  rotate: false
+  xy: 91, 2
+  size: 87, 87
+  orig: 87, 87
+  offset: 0, 0
+  index: 0

@@ -148,7 +148,7 @@ public abstract class GameObject {
     }
 
     private boolean isDead() {
-        System.out.println(currframe);
+//        System.out.println(currframe);
         return getHealthFromBody() == 0;
 
     }

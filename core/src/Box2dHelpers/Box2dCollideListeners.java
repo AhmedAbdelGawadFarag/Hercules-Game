@@ -19,8 +19,9 @@ public class Box2dCollideListeners implements ContactListener {
         }
 
 
-        checkEnemy(fa,fb);
-        checkHercules(fa,fb);
+        checkEnemy(fa, fb);
+        checkHercules(fa, fb);
+        checkCoins(fa,fb);
 
     }
 
@@ -71,7 +72,7 @@ public class Box2dCollideListeners implements ContactListener {
         bd.decreseHealth();
     }
 
-    public void checkHercules(Fixture fa,Fixture fb) {
+    public void checkHercules(Fixture fa, Fixture fb) {
         if (fa.getUserData() != null && fa.getUserData() == "hercules" && fb.getUserData() != null && fb.getUserData() == "enemy") {
             decreseHealth(fa.getBody());
         }
@@ -81,7 +82,7 @@ public class Box2dCollideListeners implements ContactListener {
         }
     }
 
-    public void checkEnemy(Fixture fa,Fixture fb){
+    public void checkEnemy(Fixture fa, Fixture fb) {
         if (fa.getUserData() != null && fa.getUserData() == "sword") {
             System.out.println("hit");
 //            System.out.println(this.GetHealth(fb.getBody()));
@@ -95,6 +96,37 @@ public class Box2dCollideListeners implements ContactListener {
             this.decreseHealth(fa.getBody());
 
         }
+    }
+
+    public void checkCoins(Fixture fa, Fixture fb) {
+
+        if (fa.getUserData() != null && fa.getUserData() == "silverCoin" && fb.getUserData() != null && fb.getUserData() == "hercules") {
+            System.out.println("silver hit");
+            decreseHealth(fa.getBody());
+
+        }
+
+        if (fb.getUserData() != null && fb.getUserData() == "silverCoin" && fa.getUserData() != null && fa.getUserData() == "hercules") {
+            System.out.println("silver hit");
+            decreseHealth(fb.getBody());
+
+        }
+
+
+        if (fa.getUserData() != null && fa.getUserData() == "goldCoin" && fb.getUserData() != null && fb.getUserData() == "hercules") {
+            System.out.println("gold hit");
+            decreseHealth(fa.getBody());
+
+        }
+
+        if (fb.getUserData() != null && fb.getUserData() == "goldCoin" && fa.getUserData() != null && fa.getUserData() == "hercules") {
+            System.out.println("gold hit");
+            decreseHealth(fb.getBody());
+
+        }
+
+
+
     }
 
 }
