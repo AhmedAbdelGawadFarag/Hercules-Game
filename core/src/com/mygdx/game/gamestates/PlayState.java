@@ -116,7 +116,7 @@ public class PlayState extends GameState {
         if (Hercules.isIsdead() == false)//herecules is not dead
             hl.draw(batch, Hercules.getPosition(), Hercules);
         else {
-            Save.gd.setTenativeScore(100);
+            Save.gd.setTenativeScore(150);
             gsm.setState(GameStateManager.GAMEOVER);
         }
 
