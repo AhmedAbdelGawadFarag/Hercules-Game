@@ -17,10 +17,11 @@ public class HealthBar {
     }
 
     public void draw(SpriteBatch batch, Vector2 pos, GameObject Herecules) {
-        sp = new Sprite(atlas.findRegion("health", Math.abs(Herecules.getHealthFromBody() - 3)));
+        sp = new Sprite(atlas.findRegion("health", Math.abs(Herecules.getHealthFromBody() - 10)));
+//        sp = new Sprite(atlas.findRegion("health", 2));
 
         sp.setPosition(pos.x - Box2dConversions.unitsToMetres(600), Box2dConversions.unitsToMetres(Gdx.graphics.getHeight() - 600));
-        sp.setSize(Box2dConversions.unitsToMetres(50), Box2dConversions.unitsToMetres(30));
+        sp.setSize(Box2dConversions.unitsToMetres(130), Box2dConversions.unitsToMetres(50));
         sp.draw(batch);
     }
 

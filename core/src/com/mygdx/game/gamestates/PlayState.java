@@ -2,14 +2,13 @@ package com.mygdx.game.gamestates;
 
 import Box2dHelpers.Box2dCollideListeners;
 import Box2dHelpers.Box2dConversions;
-import Characters.HealthBar;
-import Characters.MainCharacter;
-import Characters.Pillars;
+import Characters.*;
 import Coins.GoldCoin;
 import Coins.SilverCoin;
 import GameObjects.GameObject;
 import INPUTS.UserINputs;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -45,7 +44,7 @@ public class PlayState extends GameState {
 
     HealthBar hl;
 
-
+    MakeObjects makeObjects;
     public PlayState(GameStateManager gsm) {
         super(gsm);
     }
@@ -58,8 +57,9 @@ public class PlayState extends GameState {
         input = new UserINputs();
         Gdx.input.setInputProcessor(input);
 
-        Hercules = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 40, 80, 1f, input, "hercules", 3);
+        Hercules = new MainCharacter(world, new TextureAtlas("MainCharacter/Main.atlas"), 140, 700, 40, 80, 1f, input, "hercules", 10);
 
+        makeObjects = new MakeObjects(world);
 
         cam = new OrthographicCamera(Box2dConversions.unitsToMetres(Gdx.graphics.getWidth()), Box2dConversions.unitsToMetres(Gdx.graphics.getHeight()));
 //        cam.translate(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
@@ -71,21 +71,19 @@ public class PlayState extends GameState {
 
         //enmies
         enemies = new ArrayList<GameObject>();
-//        enemies.add(new Dragon(world, new TextureAtlas("dragons/Main.atlas"), 500, 100, 40, 80, "enemy", 200, 2));
-//        enemies.add(new WoodMonster(world, new TextureAtlas("woodMonster/Main.atlas"), 300, 100, 40, 80, "enemy", 200, 2));
-
 
         hl = new HealthBar(new TextureAtlas("HealthBar/Main.atlas"));
 
 
         coins = new ArrayList<GameObject>();
-        coins.add(new SilverCoin(world, new TextureAtlas("coins/silverCoins/Main.atlas"), 590, 100, 40, 80, "silverCoin", 100));
-        coins.add(new GoldCoin(world, new TextureAtlas("coins/goldCoins/Main.atlas"), 540, 100, 40, 80, "goldCoin", 200));
 
 
         staticCaracters = new ArrayList<GameObject>();
-        staticCaracters.add(new Pillars(world, new TextureAtlas("pillars/Main.atlas"), 230, 100, 30, 80, "stat", 3));
 
+       makeObjects.MakeCoins(coins);
+       makeObjects.MakeDragons(enemies);
+       makeObjects.MakePillars(staticCaracters);
+       makeObjects.MakeWoodenMonsters(enemies);
     }
 
 
@@ -132,7 +130,6 @@ public class PlayState extends GameState {
 
     private void cameraUpdate() {
 
-        System.out.printf("camx:%f camy:%f hx:%f hy:%f\n ", cam.position.x, cam.position.y, Hercules.getPosition().x, Hercules.getPosition().y);
 
         Vector2 position = Hercules.getPosition();
 
