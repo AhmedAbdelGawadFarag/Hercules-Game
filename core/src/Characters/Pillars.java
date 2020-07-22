@@ -32,7 +32,7 @@ public class Pillars extends StaticObjects {
 
 
     protected boolean isDead() {
-        return (getHealthFromBody() == 0 && isAnimationPlayed());
+        return (getHealthFromBody() <= 0 && isAnimationPlayed());
 
     }
 
