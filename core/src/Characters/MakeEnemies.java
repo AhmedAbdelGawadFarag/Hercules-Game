@@ -5,6 +5,7 @@ import Coins.SilverCoin;
 import GameObjects.GameObject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -34,6 +35,12 @@ public class MakeEnemies {
         if(Gdx.input.isKeyPressed(Input.Keys.S)){
             System.out.printf("coins.add(new SilverCoin(world, new TextureAtlas(\"coins/silverCoins/Main.atlas\"), %f, %f, 40, 80, \"silverCoin\", 100));\n",Herecules.getPosition().x * 200f, Herecules.getPosition().y * 200f);
         }
+        if(Gdx.input.isKeyPressed(Input.Keys.E)){
+            System.out.printf("staticCaracters.add(new EnergyDrink(world, new TextureAtlas(\"EnergyDrink/Main.atlas\"),%f, %f, 30, 50, \\\"drink\\\"));\n",Herecules.getPosition().x * 200f, Herecules.getPosition().y * 200f);
+
+
+        }
+
     }
 
     public void prints(String s) {

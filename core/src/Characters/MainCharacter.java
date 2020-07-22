@@ -34,6 +34,9 @@ public class MainCharacter extends GameObject implements MovableCharacter {
     private Fixture swordFixture;
     private Fixture footFixture;
 
+    boolean showSword = false;
+
+
     public MainCharacter(World world, TextureAtlas atlas, float x, float y, int width, int height, float speed, UserINputs inputs, String FixtureName, int health) {
         super(world, atlas, x, y, width, height, FixtureName, health);
         this.inputs = inputs;
@@ -53,7 +56,7 @@ public class MainCharacter extends GameObject implements MovableCharacter {
         //create foot fixture
         FixtureDef foot = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(Box2dConversions.unitsToMetres(width) / 2, 0, new Vector2(0, -50 / 200f), 0);
+        shape.setAsBox(Box2dConversions.unitsToMetres(width) / 2, 0, new Vector2(0, -45 / 200f), 0);
         foot.shape = shape;
         //make it sensor
         foot.isSensor = true;
@@ -89,7 +92,7 @@ public class MainCharacter extends GameObject implements MovableCharacter {
 
         Box2dCollisionList.GiveCollisonBitToBody(swordFixture, Box2dCollisionList.BIT_SWORD);
         Box2dCollisionList.MakeBodyCollideWith(swordFixture, Box2dCollisionList.BIT_ENEMY);
-
+        this.showSword = true;
 
 //        System.out.println(sword.getFixtureList().get(0).getFilterData().categoryBits);
 //        System.out.println(sword.getFixtureList().get(0).getFilterData().maskBits);
@@ -121,10 +124,15 @@ public class MainCharacter extends GameObject implements MovableCharacter {
                 ResetElapsetTimes();
                 inputs.Stand();//make Character Stands
                 ResetFrame(direction);
-                this.MakeSword();
+                this.showSword = false;
             }
 
-            PLayAttacking1Animation(dt, direction);
+            if (attackingElapsedTime >= 2 / 10f && showSword == false){
+                MakeSword();
+            }
+
+
+                PLayAttacking1Animation(dt, direction);
 
         }
 
@@ -220,6 +228,12 @@ public class MainCharacter extends GameObject implements MovableCharacter {
     @Override
     public void MoveRight(float speedx, float speedy) {
         body.setLinearVelocity(speed, 0);
+    }
+
+    @Override
+    public boolean isIsdead() {
+
+        return (isdead || getPosition().y <= 0 || getPosition().x * 200f >= 15917);
     }
 
     public void MoveLeft(float speedx, float speedy) {

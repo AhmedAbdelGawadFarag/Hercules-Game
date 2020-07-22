@@ -15,7 +15,7 @@ public class Coin extends GameObject {
         super(world, atlas, x, y, width, height, FixtureName, 1);
         this.value = value;
 
-
+        this.bodyfixture.setSensor(false);
         Box2dCollisionList.GiveCollisonBitToBody(this.bodyfixture, Box2dCollisionList.BIT_COIN);
 
         Box2dCollisionList.MakeBodyCollideWith(this.bodyfixture, Box2dCollisionList.BIT_GROUND);

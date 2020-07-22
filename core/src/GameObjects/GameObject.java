@@ -20,7 +20,8 @@ public abstract class GameObject {
     protected boolean isdead = false;
 
     public boolean isIsdead() {
-        return isdead;
+        System.out.println(getPosition().x);
+        return (isdead);
     }
 
     protected float RunningElapsedTime = 0;
@@ -108,7 +109,6 @@ public abstract class GameObject {
         //get currentframe
 
         if (currframe != null && isDead()) this.Remove();
-
 
 
         if (currframe == null) return; // object is removed

@@ -21,6 +21,8 @@ public class WoodMonster extends MovingObjects {
         Box2dCollisionList.MakeBodyCollideWith(this.bodyfixture, Box2dCollisionList.BIT_GROUND);
         Box2dCollisionList.MakeBodyCollideWith(this.bodyfixture, Box2dCollisionList.BIT_CHARACTER);
 
+        System.out.println(this.bodyfixture.getFilterData().maskBits);
+
         movingAnimation = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("wood"));
 
     }

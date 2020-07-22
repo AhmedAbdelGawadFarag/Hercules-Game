@@ -19,7 +19,7 @@ public class HealthBar {
 
     public void draw(SpriteBatch batch, Vector2 pos, GameObject Herecules) {
     	
-     System.out.println(Herecules.getHealthFromBody());
+//     System.out.println(Herecules.getHealthFromBody());
         sp = new Sprite(atlas.findRegion("health", Math.abs( Herecules.getHealthFromBody()  - 10)));
 //        sp = new Sprite(atlas.findRegion("health", 2));
 

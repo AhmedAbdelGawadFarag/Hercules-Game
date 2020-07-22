@@ -2,13 +2,13 @@ package com.mygdx.game.gamestates;
 
 import Box2dHelpers.Box2dCollideListeners;
 import Box2dHelpers.Box2dConversions;
-import Characters.*;
-import Coins.GoldCoin;
-import Coins.SilverCoin;
+import Characters.HealthBar;
+import Characters.MainCharacter;
+import Characters.MakeEnemies;
+import Characters.MakeObjects;
 import GameObjects.GameObject;
 import INPUTS.UserINputs;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -46,6 +46,10 @@ public class PlayState extends GameState {
     HealthBar hl;
 
     MakeObjects makeObjects;
+
+
+    MakeEnemies en;
+
     public PlayState(GameStateManager gsm) {
         super(gsm);
     }
@@ -82,12 +86,14 @@ public class PlayState extends GameState {
 
         staticCaracters = new ArrayList<GameObject>();
 
-       makeObjects.MakeCoins(coins);
-       makeObjects.MakeDragons(enemies);
-       makeObjects.MakePillars(staticCaracters);
-       makeObjects.MakeWoodenMonsters(enemies);
-       makeObjects.MakePunchBag(staticCaracters);
-       makeObjects.MakeEnergyDrink(staticCaracters);
+        makeObjects.MakeCoins(coins);
+        makeObjects.MakeDragons(enemies);
+        makeObjects.MakePillars(staticCaracters);
+        makeObjects.MakeWoodenMonsters(enemies);
+        makeObjects.MakePunchBag(staticCaracters);
+        makeObjects.MakeEnergyDrink(staticCaracters);
+
+        en = new MakeEnemies(world, Hercules);
     }
 
 
@@ -108,7 +114,7 @@ public class PlayState extends GameState {
         batch.begin();
 
         Hercules.update(batch);
-
+        en.update();
 
         updateCoins(batch, dt);
 
