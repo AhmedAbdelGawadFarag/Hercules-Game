@@ -3,8 +3,10 @@ package com.mygdx.game.gamestates;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -12,6 +14,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.mygdx.game.*;
 
 public class GameOverState extends GameState {
+
+	//BackGround
+	public static Texture backgroundTexture;
+	public static Sprite backgroundSprite;
 	
 	private SpriteBatch sb;
 	private ShapeRenderer sr;
@@ -20,7 +26,7 @@ public class GameOverState extends GameState {
 	private char[] newName;
 	private int currentChar;
 	
-	private BitmapFont gameOverFont;
+	//private BitmapFont gameOverFont;
 	private BitmapFont font;
 	
 	public GameOverState(GameStateManager gsm) {
@@ -28,7 +34,12 @@ public class GameOverState extends GameState {
 	}
 	
 	public void init() {
-		
+
+		//BackGround
+		backgroundTexture = new Texture("gameover.png");
+		backgroundSprite =new Sprite(backgroundTexture);
+		backgroundSprite.setSize(1280,960);
+
 		sb = new SpriteBatch();
 		sr = new ShapeRenderer();
 		
@@ -43,9 +54,9 @@ public class GameOverState extends GameState {
 		);
 		FreeTypeFontGenerator.FreeTypeFontParameter params1 = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
-        params1.size = 20;
-        params1.color = Color.WHITE;
-		gameOverFont = gen.generateFont(params1);
+        params1.size = 40;
+        params1.color = Color.GREEN;
+		//gameOverFont = gen.generateFont(params1);
 		font = gen.generateFont(params1);
 		
 	}
@@ -59,15 +70,18 @@ public class GameOverState extends GameState {
 		sb.setProjectionMatrix(MyGdxGame.cam.combined);
 		
 		sb.begin();
-		
+
+		//BackGround
+		backgroundSprite.draw(sb);
+
 		String s;
 		float w;
 		
-		s = "Game Over";
-		GlyphLayout layout = new GlyphLayout();
-		layout.setText(gameOverFont, s);
-		w = layout.width;
-		gameOverFont.draw(sb, s, (MyGdxGame.WIDTH - w) / 2, 220);
+		//s = "Game Over";
+		//GlyphLayout layout = new GlyphLayout();
+		//layout.setText(gameOverFont, s);
+		//w = layout.width;
+		//gameOverFont.draw(sb, s, (MyGdxGame.WIDTH - w) / 2, 700);
 		
 		if(!newHighScore) {
 			sb.end();
@@ -76,28 +90,36 @@ public class GameOverState extends GameState {
 		
 		s = "New High Score: " + Save.gd.getTentativeScore();
 		GlyphLayout layout_1 = new GlyphLayout();
-		layout.setText(font, s);
-		w = layout.width;
-		font.draw(sb, s, (MyGdxGame.WIDTH - w) / 2, 180);
+		layout_1.setText(font, s);
+		w = layout_1.width;
+		font.draw(sb, s, 400, 350);
 		
 		for(int i = 0; i < newName.length; i++) {
 			font.draw(
 				sb,
 				Character.toString(newName[i]),
-				230 + 14 * i,
-				120
+				538 + 37 * i,
+				280
 			);
 		}
 		
 		sb.end();
 		
 		sr.begin(ShapeType.Line);
-		sr.line(
-			230 + 14 * currentChar,
-			100,
-			244 + 14 * currentChar,
-			100
+		sr.setColor(Color.RED);
+		sr.rect(
+				538 + 37 * currentChar,
+				245,
+				21,
+				1
 		);
+		/*
+		sr.line(
+				538 + 37 * currentChar,
+			245,
+				548 + 37 * currentChar,
+			245
+		);*/
 		sr.end();
 		
 	}
@@ -156,7 +178,7 @@ public class GameOverState extends GameState {
 	public void dispose() {
 		sb.dispose();
 		sr.dispose();
-		gameOverFont.dispose();
+		//gameOverFont.dispose();
 		font.dispose();
 	}
 	
