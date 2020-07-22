@@ -16,7 +16,7 @@ import com.badlogic.gdx.physics.box2d.*;
 
 public class MainCharacter extends GameObject implements MovableCharacter {
 
-    private float money = 0;
+    public static long money = 0;
 
 
     UserINputs inputs;

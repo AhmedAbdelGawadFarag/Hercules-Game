@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 public class PlayState extends GameState {
 
+    //private MainCharacter character;
     public static World world;
 
     public static SpriteBatch batch;
@@ -50,6 +51,7 @@ public class PlayState extends GameState {
     }
 
     public void init() {
+        //character = new MainCharacter();
         debug = new Box2DDebugRenderer(true, true, true, true, true, true);
 
         world = new World(new Vector2(0, -9.8f), true);
@@ -116,7 +118,7 @@ public class PlayState extends GameState {
         if (Hercules.isIsdead() == false)//herecules is not dead
             hl.draw(batch, Hercules.getPosition(), Hercules);
         else {
-            Save.gd.setTenativeScore(150);
+            Save.gd.setTenativeScore(MainCharacter.money);
             gsm.setState(GameStateManager.GAMEOVER);
         }
 

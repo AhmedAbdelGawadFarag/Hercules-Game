@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.mygdx.game.*;
+import Characters.MainCharacter;
 
 public class MenuState extends GameState {
 
@@ -166,6 +167,7 @@ public class MenuState extends GameState {
 	private void select() {
 		// play
 		if(currentItem == 0) {
+			MainCharacter.money=0;
 			gsm.setState(GameStateManager.PLAY);
 		}
 		// high scores
