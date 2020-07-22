@@ -74,3 +74,10 @@ health
   orig: 280, 119
   offset: 0, 0
   index: 9
+health
+  rotate: false
+  xy: 1412, 123
+  size: 280, 119
+  orig: 280, 119
+  offset: 0, 0
+  index: 10
