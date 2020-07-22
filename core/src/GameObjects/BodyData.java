@@ -13,5 +13,10 @@ public class BodyData {//the user data that is passed to the body
     public void decreseHealth(){
         this.health--;
     }
-
+    
+    public void increaseHealth() {
+    	
+    	this.health = Math.min(this.health+3, 10);
+    	
+    }
 }

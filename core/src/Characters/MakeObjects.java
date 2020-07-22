@@ -16,10 +16,10 @@ public class MakeObjects {
     }
 
     public void MakePillars(ArrayList<GameObject> staticCaracters) {
-        staticCaracters.add(new Pillars(world, new TextureAtlas("pillars/Main.atlas"), 1209.223877f, 235.138458f, 50, 150, "stat", 3));
-        staticCaracters.add(new Pillars(world, new TextureAtlas("pillars/Main.atlas"), 1201.237061f, 234.999939f, 50, 150, "stat", 3));
-        staticCaracters.add(new Pillars(world, new TextureAtlas("pillars/Main.atlas"), 2935.314453f, 250.999954f, 50, 150, "stat", 3));
-        staticCaracters.add(new Pillars(world, new TextureAtlas("pillars/Main.atlas"), 12737.140625f, 382.610626f, 50, 150, "stat", 3));
+        staticCaracters.add(new Pillars(world, new TextureAtlas("pillars/Main.atlas"), 1209.223877f, 255.138458f, 50, 150, "stat", 3));
+      
+        staticCaracters.add(new Pillars(world, new TextureAtlas("pillars/Main.atlas"), 2935.314453f, 270.999954f, 50, 150, "stat", 3));
+        staticCaracters.add(new Pillars(world, new TextureAtlas("pillars/Main.atlas"), 12737.140625f, 402.610626f, 50, 150, "stat", 3));
 
 
     }
@@ -59,7 +59,11 @@ public class MakeObjects {
         enemies.add(new Dragon(world, new TextureAtlas("dragons/Main.atlas"), 8193.279297f, 107.633575f, 40, 100, "enemy", 120, 2));
     }
     public void MakePunchBag(ArrayList<GameObject> staticCaracters) {
-   	 staticCaracters.add(new PunchBag(world, new TextureAtlas("punchBag/Main.atlas"),200, 100, 50, 80, "stat", 3));
+   	 staticCaracters.add(new PunchBag(world, new TextureAtlas("punchBag/Main.atlas"),200, 100, 50, 80, "stat", 1));
    }
+    public void MakeEnergyDrink(ArrayList<GameObject> staticCaracters) {
+    	staticCaracters.add(new EnergyDrink(world, new TextureAtlas("EnergyDrink/Main.atlas"),400, 90, 30, 50, "drink"));
+    	staticCaracters.add(new EnergyDrink(world, new TextureAtlas("EnergyDrink/Main.atlas"),1000, 100, 30, 50, "drink"));
+    }
 
 }

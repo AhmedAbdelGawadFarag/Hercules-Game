@@ -87,6 +87,7 @@ public class PlayState extends GameState {
        makeObjects.MakePillars(staticCaracters);
        makeObjects.MakeWoodenMonsters(enemies);
        makeObjects.MakePunchBag(staticCaracters);
+       makeObjects.MakeEnergyDrink(staticCaracters);
     }
 
 

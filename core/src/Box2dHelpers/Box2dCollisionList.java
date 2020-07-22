@@ -18,6 +18,7 @@ public abstract class Box2dCollisionList {
 
     public static final short BIT_COIN = 32;
 
+    public static final short BIT_ENERGY = 64;
 
     public static void GiveCollisonBitToBody(Fixture fixture, short bit) {
         Filter filter = fixture.getFilterData();

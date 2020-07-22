@@ -25,7 +25,7 @@ public class Box2dCollideListeners implements ContactListener {
         checkEnemy(fa, fb);
         checkHercules(fa, fb);
         checkCoins(fa, fb);
-
+        checkDrink(fa, fb);
     }
 
     @Override
@@ -75,6 +75,11 @@ public class Box2dCollideListeners implements ContactListener {
         bd.decreseHealth();
     }
 
+    void increaseHealth(Body body) {
+    	BodyData bData = (BodyData) body.getUserData();
+    	bData.increaseHealth();
+    }
+    
     public void checkHercules(Fixture fa, Fixture fb) {
         if (fa.getUserData() != null && fa.getUserData() == "hercules" && fb.getUserData() != null && fb.getUserData() == "enemy") {
             decreseHealth(fa.getBody());
@@ -134,7 +139,19 @@ public class Box2dCollideListeners implements ContactListener {
         }
 
     }
-
+    public void checkDrink(Fixture fa,Fixture fb) {
+    	if(fa.getUserData() != null && fa.getUserData() == "drink" && fb.getUserData() != null && fb.getUserData() == "hercules") {
+    		increaseHealth(fb.getBody());
+    		decreseHealth(fa.getBody());
+    		
+    	}
+    	if(fa.getUserData() != null && fa.getUserData() == "hercules" && fb.getUserData() != null && fb.getUserData() == "drink") {
+    		increaseHealth(fa.getBody());
+    		decreseHealth(fb.getBody());
+    		
+    	}
+    	
+    }
 
     void increaseMoney(GameObject object, float money) {
         MainCharacter m = (MainCharacter) object;
