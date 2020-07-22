@@ -58,5 +58,8 @@ public class MakeObjects {
         enemies.add(new Dragon(world, new TextureAtlas("dragons/Main.atlas"), 5701.878906f, 298.999939f, 40, 100, "enemy", 120, 2));
         enemies.add(new Dragon(world, new TextureAtlas("dragons/Main.atlas"), 8193.279297f, 107.633575f, 40, 100, "enemy", 120, 2));
     }
+    public void MakePunchBag(ArrayList<GameObject> staticCaracters) {
+   	 staticCaracters.add(new PunchBag(world, new TextureAtlas("punchBag/Main.atlas"),200, 100, 50, 80, "stat", 3));
+   }
 
 }

@@ -1,0 +1,13 @@
+
+Main.png
+size: 128,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+standing
+  rotate: false
+  xy: 2, 2
+  size: 109, 186
+  orig: 109, 186
+  offset: 0, 0
+  index: 0
