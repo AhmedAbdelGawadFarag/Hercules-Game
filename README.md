@@ -8,6 +8,9 @@ If you want to exit the page of high score you should click on the button **ESC*
 ## 1. Menu:
 ![1](https://user-images.githubusercontent.com/51880108/88302006-9d8cc380-cd05-11ea-9c19-a33ef6c4a434.PNG)
 
+Use the button **SPACE** to attack with sword.
+Use the button **A** to attack with punch.
+Use the button **arrow keys** to move.
 ## 2. Game play:
 ![2](https://user-images.githubusercontent.com/51880108/88302161-ce6cf880-cd05-11ea-820b-16b1ee556429.png)
 
